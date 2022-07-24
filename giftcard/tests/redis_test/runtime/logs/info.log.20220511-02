@@ -1,0 +1,72 @@
+2022-05-11 02:04:26	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:04:26	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:05:30	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:05:30	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:05:57	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:05:57	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:08:01	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:08:01	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:10:10	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:10:10	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:13:20	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:13:20	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:14:35	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:14:35	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:17:00	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:17:00	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:18:04	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:18:04	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:18:47	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:18:47	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:20:11	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:20:11	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:21:24	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:21:24	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:22:20	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:22:20	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:23:42	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:23:42	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:24:13	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:24:13	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:25:29	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:25:29	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:26:22	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:26:22	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:27:17	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:27:17	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:28:20	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:28:20	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:29:42	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:29:42	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:31:01	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:31:01	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:32:34	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:32:34	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:33:57	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:33:57	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:35:07	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:35:07	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:36:11	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:36:11	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:39:05	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:39:05	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:39:28	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:39:28	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:39:52	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:39:52	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:42:55	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:42:55	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:43:40	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:43:40	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:44:38	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:44:38	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:46:29	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:46:29	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:46:46	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:46:46	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:47:10	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:47:10	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:47:28	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:47:28	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers
+2022-05-11 02:50:15	INFO	datasource/mysql.go:48	连接数据库成功:	{"Dsn": "root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+2022-05-11 02:50:15	INFO	task_actions/handle.go:91	RegisterActionConditionHandlers

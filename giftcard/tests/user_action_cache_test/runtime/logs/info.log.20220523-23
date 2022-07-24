@@ -1,0 +1,21 @@
+{"level":"INFO","ts":"2022-05-23 23:12:09","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:12:09","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:12:09","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}
+{"level":"INFO","ts":"2022-05-23 23:13:16","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:13:16","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:13:16","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}
+{"level":"INFO","ts":"2022-05-23 23:13:35","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:13:35","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:13:35","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}
+{"level":"INFO","ts":"2022-05-23 23:14:49","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:14:49","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:14:49","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}
+{"level":"INFO","ts":"2022-05-23 23:18:33","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:18:33","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:18:33","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}
+{"level":"INFO","ts":"2022-05-23 23:23:17","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:23:17","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:23:17","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}
+{"level":"INFO","ts":"2022-05-23 23:23:49","file":"datasource/mysql.go:48","message":"连接数据库成功:","Dsn":"root:123456@(127.0.0.1:3306)/task?charset=utf8&parseTime=True&loc=Local"}
+{"level":"INFO","ts":"2022-05-23 23:23:49","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-05-23 23:23:49","file":"task_actions/handle.go:90","message":"RegisterActionConditionHandlers"}

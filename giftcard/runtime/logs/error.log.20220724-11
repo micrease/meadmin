@@ -1,0 +1,1 @@
+{"level":"ERROR","ts":"2022-07-24 11:25:54","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}

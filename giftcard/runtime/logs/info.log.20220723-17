@@ -1,0 +1,80 @@
+{"level":"INFO","ts":"2022-07-23 17:00:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:01:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:02:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:03:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:04:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:05:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:06:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:07:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:08:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:09:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:10:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:11:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:12:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:13:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:14:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:15:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:16:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:17:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:18:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:19:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:20:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:21:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:22:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:23:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:24:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:25:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:26:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:27:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:28:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:29:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:30:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:31:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:32:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:33:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:34:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:35:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:36:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:37:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:38:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:39:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:40:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:41:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:42:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:43:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:44:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:45:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:46:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:47:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:48:59","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:52:04","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-07-23 17:52:04","file":"system/systemboot.go:46","message":"Server Run Start"}
+{"level":"INFO","ts":"2022-07-23 17:52:10","file":"middleware/request_log.go:41","message":"Request:","Method":"POST","Path":"/api/system/login","Body":"{\"username\":\"superAdmin\",\"password\":\"admin123\",\"code\":\"zvj4\"}","TraceId":"0bf6e480-b62d-4919-bcf5-9895e9717421"}
+{"level":"INFO","ts":"2022-07-23 17:52:10","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"0bf6e480-b62d-4919-bcf5-9895e9717421\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJEYXRhIjp7IlVzZXJJZCI6MTkxNTE3NjkzNzc0NDAsIlVzZXJuYW1lIjoic3VwZXJBZG1pbiJ9LCJleHAiOjE2NTg2MDU5MzAsImlzcyI6ImV3ZXJ3ZXJ3ZXJ3ZXJ3ZXIiLCJuYmYiOjE2NTg1Njg5MzB9.AP34_BFmaSIdZ-P0YwSw2V_dNwP7Wo1HlRf8WynKgKY\"}}","TraceId":"0bf6e480-b62d-4919-bcf5-9895e9717421"}
+{"level":"INFO","ts":"2022-07-23 17:52:10","file":"middleware/request_log.go:41","message":"Request:","Method":"GET","Path":"/api/system/getInfo","Body":"","TraceId":"590e3f09-813e-40d8-9429-11c4f9297de4"}
+{"level":"INFO","ts":"2022-07-23 17:53:55","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-07-23 17:53:55","file":"system/systemboot.go:46","message":"Server Run Start"}
+{"level":"INFO","ts":"2022-07-23 17:53:59","file":"middleware/request_log.go:41","message":"Request:","Method":"POST","Path":"/api/system/login","Body":"{\"username\":\"superAdmin\",\"password\":\"admin123\",\"code\":\"zvj4\"}","TraceId":"9bda3b3b-a53d-438c-b8e5-6124fdbadad5"}
+{"level":"INFO","ts":"2022-07-23 17:53:59","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"9bda3b3b-a53d-438c-b8e5-6124fdbadad5\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJEYXRhIjp7IlVzZXJJZCI6MSwiVXNlcm5hbWUiOiJzdXBlckFkbWluIn0sImV4cCI6MTY1ODYwNjAzOSwiaXNzIjoiZXdlcndlcndlcndlcndlciIsIm5iZiI6MTY1ODU2OTAzOX0.8JY9s_6-2zSuIxMt2whfXDTjrHM0BglhXZNXeHt4u94\"}}","TraceId":"9bda3b3b-a53d-438c-b8e5-6124fdbadad5"}
+{"level":"INFO","ts":"2022-07-23 17:53:59","file":"middleware/request_log.go:41","message":"Request:","Method":"GET","Path":"/api/system/getInfo","Body":"","TraceId":"372cde5b-c582-4a6d-874d-d5cf76ac4422"}
+{"level":"INFO","ts":"2022-07-23 17:54:24","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"372cde5b-c582-4a6d-874d-d5cf76ac4422\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"codes\":null,\"rules\":null,\"user\":{\"id\":0,\"avatar\":\"\",\"backend_setting\":\"\",\"username\":\"\",\"nickname\":\"\",\"user_type\":\"\",\"dashboard\":\"\",\"dept_id\":0,\"email\":\"\",\"login_ip\":\"\",\"login_time\":\"\",\"phone\":\"\",\"remark\":\"\",\"signed\":\"\",\"status\":0,\"created_by\":0,\"created_at\":\"0001-01-01T00:00:00Z\",\"updated_by\":0,\"updated_at\":\"0001-01-01T00:00:00Z\"}}}","TraceId":"372cde5b-c582-4a6d-874d-d5cf76ac4422"}
+{"level":"INFO","ts":"2022-07-23 17:54:55","file":"schedule/schedule.go:17","message":"NumGoroutine","num":8}
+{"level":"INFO","ts":"2022-07-23 17:55:25","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-07-23 17:55:25","file":"system/systemboot.go:46","message":"Server Run Start"}
+{"level":"INFO","ts":"2022-07-23 17:55:31","file":"middleware/request_log.go:41","message":"Request:","Method":"POST","Path":"/api/system/login","Body":"{\"username\":\"superAdmin\",\"password\":\"admin123\",\"code\":\"zvj4\"}","TraceId":"fa90aa96-ae17-48e0-bfb9-8de192d4e989"}
+{"level":"INFO","ts":"2022-07-23 17:55:31","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"fa90aa96-ae17-48e0-bfb9-8de192d4e989\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJEYXRhIjp7IlVzZXJJZCI6MSwiVXNlcm5hbWUiOiJzdXBlckFkbWluIn0sImV4cCI6MTY1ODYwNjEzMSwiaXNzIjoiZXdlcndlcndlcndlcndlciIsIm5iZiI6MTY1ODU2OTEzMX0.mVjU7iysTb-jWuA1fpmzE9OT_R0RFVKktmG4PLkIVrE\"}}","TraceId":"fa90aa96-ae17-48e0-bfb9-8de192d4e989"}
+{"level":"INFO","ts":"2022-07-23 17:55:31","file":"middleware/request_log.go:41","message":"Request:","Method":"GET","Path":"/api/system/getInfo","Body":"","TraceId":"556e1a9f-0b9f-420a-a457-bcdae11b9b28"}
+{"level":"INFO","ts":"2022-07-23 17:55:56","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-07-23 17:55:56","file":"system/systemboot.go:46","message":"Server Run Start"}
+{"level":"INFO","ts":"2022-07-23 17:56:01","file":"middleware/request_log.go:41","message":"Request:","Method":"POST","Path":"/api/system/login","Body":"{\"username\":\"superAdmin\",\"password\":\"admin123\",\"code\":\"zvj4\"}","TraceId":"53ebb108-1207-4194-846a-7dbb5f0e731f"}
+{"level":"INFO","ts":"2022-07-23 17:56:01","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"53ebb108-1207-4194-846a-7dbb5f0e731f\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJEYXRhIjp7IlVzZXJJZCI6MSwiVXNlcm5hbWUiOiJzdXBlckFkbWluIn0sImV4cCI6MTY1ODYwNjE2MSwiaXNzIjoiZXdlcndlcndlcndlcndlciIsIm5iZiI6MTY1ODU2OTE2MX0.B8hHmnyKokygGK1RRn0mqZ_5Wq27KtDBp7dnaJjWno8\"}}","TraceId":"53ebb108-1207-4194-846a-7dbb5f0e731f"}
+{"level":"INFO","ts":"2022-07-23 17:56:01","file":"middleware/request_log.go:41","message":"Request:","Method":"GET","Path":"/api/system/getInfo","Body":"","TraceId":"efaef749-9981-4408-ad5d-a31615a92eb6"}
+{"level":"INFO","ts":"2022-07-23 17:56:56","file":"migrate/migrate.go:31","message":"Applied Up migrations!","files":0}
+{"level":"INFO","ts":"2022-07-23 17:56:56","file":"system/systemboot.go:46","message":"Server Run Start"}
+{"level":"INFO","ts":"2022-07-23 17:57:00","file":"middleware/request_log.go:41","message":"Request:","Method":"POST","Path":"/api/system/login","Body":"{\"username\":\"superAdmin\",\"password\":\"admin123\",\"code\":\"zvj4\"}","TraceId":"c2a0a3b1-4731-4788-9d6b-260e26e7fb7f"}
+{"level":"INFO","ts":"2022-07-23 17:57:00","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"c2a0a3b1-4731-4788-9d6b-260e26e7fb7f\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJEYXRhIjp7IlVzZXJJZCI6MSwiVXNlcm5hbWUiOiJzdXBlckFkbWluIn0sImV4cCI6MTY1ODYwNjIyMCwiaXNzIjoiZXdlcndlcndlcndlcndlciIsIm5iZiI6MTY1ODU2OTIyMH0.-ET1UeCZkb9lxz-O2YXuxXdj0FVNkdDuNzwukJMBIic\"}}","TraceId":"c2a0a3b1-4731-4788-9d6b-260e26e7fb7f"}
+{"level":"INFO","ts":"2022-07-23 17:57:00","file":"middleware/request_log.go:41","message":"Request:","Method":"GET","Path":"/api/system/getInfo","Body":"","TraceId":"08e647a2-fd00-41f2-8df7-e1f608bc41b6"}
+{"level":"INFO","ts":"2022-07-23 17:57:00","file":"middleware/request_log.go:52","message":"Response:","Body":"{\"code\":200,\"trace_id\":\"08e647a2-fd00-41f2-8df7-e1f608bc41b6\",\"message\":\"成功\",\"detail\":\"\",\"success\":true,\"data\":{\"codes\":null,\"rules\":null,\"user\":{\"id\":1,\"avatar\":\"\",\"backend_setting\":\"\",\"username\":\"superAdmin\",\"nickname\":\"创始人\",\"user_type\":\"100\",\"dashboard\":\"statistics\",\"dept_id\":19151982328992,\"email\":\"admin@adminmine.com\",\"login_ip\":\"\",\"login_time\":\"\",\"phone\":\"16858888988\",\"remark\":\"\",\"signed\":\"\",\"status\":0,\"created_by\":0,\"created_at\":\"2022-07-18T15:07:41+08:00\",\"updated_by\":0,\"updated_at\":\"2022-07-18T15:07:41+08:00\"}}}","TraceId":"08e647a2-fd00-41f2-8df7-e1f608bc41b6"}
+{"level":"INFO","ts":"2022-07-23 17:57:56","file":"schedule/schedule.go:17","message":"NumGoroutine","num":9}
+{"level":"INFO","ts":"2022-07-23 17:58:56","file":"schedule/schedule.go:17","message":"NumGoroutine","num":9}
+{"level":"INFO","ts":"2022-07-23 17:59:56","file":"schedule/schedule.go:17","message":"NumGoroutine","num":9}
