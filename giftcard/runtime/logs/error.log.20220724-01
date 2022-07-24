@@ -1,7 +1,0 @@
-{"level":"ERROR","ts":"2022-07-24 01:04:29","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 01:41:09","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 01:41:45","file":"middleware/recover.go:49","message":"请求错误","TraceId":"879268bb-69f1-4661-86e0-be130cfa40ef","Error":"参数验证失败: json: cannot unmarshal string into Go struct field SystemRoleSaveReq.status of type int"}
-{"level":"ERROR","ts":"2022-07-24 01:42:51","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 01:42:56","file":"middleware/recover.go:49","message":"请求错误","TraceId":"b50ba327-e4bd-4497-baef-6e5bd3a48063","Error":"参数验证失败: json: cannot unmarshal string into Go struct field SystemRoleSaveReq.status of type int"}
-{"level":"ERROR","ts":"2022-07-24 01:43:28","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 01:44:49","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}

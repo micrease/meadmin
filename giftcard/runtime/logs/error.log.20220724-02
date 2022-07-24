@@ -1,5 +1,0 @@
-{"level":"ERROR","ts":"2022-07-24 02:04:47","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 02:12:25","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 02:15:52","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 02:19:49","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
-{"level":"ERROR","ts":"2022-07-24 02:20:53","file":"redis/redis.go:33","message":"Redis Error","error":"dial tcp: address 127.0.0.1: missing port in address"}
