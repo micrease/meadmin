@@ -1,8 +1,8 @@
 package response
 
 import (
+	"admease/library/context/api"
 	"fmt"
-	"giftcard/library/context/api"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"runtime"

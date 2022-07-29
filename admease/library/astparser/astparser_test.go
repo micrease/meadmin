@@ -1,8 +1,8 @@
 package astparser
 
 import (
+	"admease/library/files"
 	"fmt"
-	"giftcard/library/files"
 	"testing"
 )
 

@@ -1,9 +1,9 @@
 package main
 
 import (
+	"admease/system"
+	"admease/system/config"
 	"flag"
-	"giftcard/system"
-	"giftcard/system/config"
 )
 
 var (

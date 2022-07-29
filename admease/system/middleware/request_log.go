@@ -1,9 +1,9 @@
 package middleware
 
 import (
+	"admease/library/logger"
+	"admease/library/strings"
 	"bytes"
-	"giftcard/library/logger"
-	"giftcard/library/strings"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"io/ioutil"

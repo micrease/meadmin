@@ -1,7 +1,7 @@
 package service
 
 import (
-	"giftcard/application/dto"
+	"admease/application/dto"
 	"github.com/micrease/gorme"
 )
 

@@ -1,4 +1,4 @@
-module giftcard
+module admease
 
 go 1.18
 

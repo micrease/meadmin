@@ -1,15 +1,15 @@
 package api
 
 import (
+	"admease/library/apidoc"
+	"admease/library/astparser"
+	"admease/library/context/result"
+	"admease/library/logger"
+	"admease/library/strings"
+	"admease/system/config"
+	"admease/system/consts"
 	"encoding/json"
 	"fmt"
-	"giftcard/library/apidoc"
-	"giftcard/library/astparser"
-	"giftcard/library/context/result"
-	"giftcard/library/logger"
-	"giftcard/library/strings"
-	"giftcard/system/config"
-	"giftcard/system/consts"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cast"
 	"go.uber.org/zap"

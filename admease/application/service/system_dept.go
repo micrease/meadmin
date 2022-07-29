@@ -1,9 +1,9 @@
 package service
 
 import (
-	"giftcard/application/dto"
-	models "giftcard/application/model"
-	"giftcard/application/repo"
+	"admease/application/dto"
+	models "admease/application/model"
+	"admease/application/repo"
 	"github.com/jinzhu/copier"
 )
 

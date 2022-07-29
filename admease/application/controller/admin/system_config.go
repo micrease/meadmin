@@ -1,12 +1,12 @@
 package admin
 
 import (
-	"giftcard/application/controller"
-	"giftcard/application/dto"
-	"giftcard/application/repo"
-	"giftcard/library/context/api"
-	"giftcard/library/context/result"
-	"giftcard/library/validate"
+	"admease/application/controller"
+	"admease/application/dto"
+	"admease/application/repo"
+	"admease/library/context/api"
+	"admease/library/context/result"
+	"admease/library/validate"
 )
 
 //系统管理

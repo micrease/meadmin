@@ -1,8 +1,8 @@
 package structs
 
 import (
+	"admease/library/datetime"
 	"fmt"
-	"giftcard/library/datetime"
 	"reflect"
 	"strconv"
 	"strings"

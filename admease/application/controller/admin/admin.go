@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"giftcard/application/controller"
+	"admease/application/controller"
 )
 
 type Admin struct {

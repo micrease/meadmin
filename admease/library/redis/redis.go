@@ -1,9 +1,9 @@
 package redis
 
 import (
+	"admease/library/logger"
+	"admease/library/structs"
 	"context"
-	"giftcard/library/logger"
-	"giftcard/library/structs"
 	"github.com/go-redis/redis/v8"
 	"go.uber.org/zap"
 	"time"

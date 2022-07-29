@@ -1,10 +1,10 @@
 package admin
 
 import (
-	"giftcard/application/controller"
-	"giftcard/application/service"
-	"giftcard/library/context/api"
-	"giftcard/library/context/result"
+	"admease/application/controller"
+	"admease/application/service"
+	"admease/library/context/api"
+	"admease/library/context/result"
 )
 
 type SystemUploadfile struct {

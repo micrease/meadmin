@@ -1,17 +1,17 @@
 package system
 
 import (
+	"admease/application/schedule"
+	"admease/library/context/api"
+	"admease/library/logger"
+	"admease/library/migrate"
+	redisClient "admease/library/redis"
+	"admease/library/validate"
+	"admease/router"
+	"admease/system/config"
+	"admease/system/datasource"
+	"admease/system/middleware"
 	"fmt"
-	"giftcard/application/schedule"
-	"giftcard/library/context/api"
-	"giftcard/library/logger"
-	"giftcard/library/migrate"
-	redisClient "giftcard/library/redis"
-	"giftcard/library/validate"
-	"giftcard/router"
-	"giftcard/system/config"
-	"giftcard/system/datasource"
-	"giftcard/system/middleware"
 	"github.com/gin-gonic/gin"
 )
 

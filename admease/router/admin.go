@@ -1,8 +1,8 @@
 package router
 
 import (
-	"giftcard/application/controller/admin"
-	"giftcard/library/context/api"
+	"admease/application/controller/admin"
+	"admease/library/context/api"
 )
 
 func AdminApiRouter(router *api.Router) {

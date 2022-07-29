@@ -1,8 +1,8 @@
 package schedule
 
 import (
+	"admease/library/logger"
 	"fmt"
-	"giftcard/library/logger"
 	"github.com/robfig/cron/v3"
 	"go.uber.org/zap"
 	"runtime"

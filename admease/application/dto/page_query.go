@@ -1,6 +1,6 @@
 package dto
 
-import "giftcard/library/logger"
+import "admease/library/logger"
 
 //所有的请求类对象，都要继承一下这个
 type ReqHeader struct {

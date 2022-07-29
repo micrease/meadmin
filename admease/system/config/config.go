@@ -1,8 +1,8 @@
 package config
 
 import (
+	"admease/library/files"
 	"fmt"
-	"giftcard/library/files"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"

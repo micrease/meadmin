@@ -1,8 +1,8 @@
 package structs
 
 import (
+	"admease/library/datetime"
 	"errors"
-	"giftcard/library/datetime"
 	"reflect"
 )
 

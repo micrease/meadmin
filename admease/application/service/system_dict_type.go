@@ -1,7 +1,7 @@
 package service
 
 import (
-	"giftcard/application/repo"
+	"admease/application/repo"
 )
 
 type SystemDictType struct {

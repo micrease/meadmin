@@ -1,9 +1,9 @@
 package middleware
 
 import (
+	"admease/library/logger"
+	"admease/library/response"
 	"errors"
-	"giftcard/library/logger"
-	"giftcard/library/response"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net/http"

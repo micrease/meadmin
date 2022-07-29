@@ -54,7 +54,7 @@ func ParseFunc(projectPath string, fn interface{}) (*FuncInfo, error) {
 	}
 
 	funcInfo := new(FuncInfo)
-	//giftcard/application/controller/admin.(*ActivityBBDepositController).PageList-fm
+	//admease/application/controller/admin.(*ActivityBBDepositController).PageList-fm
 	funcName := NameOfFunction(fn)
 	arr := strings.Split(funcName, ".")
 

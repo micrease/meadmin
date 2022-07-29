@@ -1,10 +1,10 @@
 package router
 
 import (
+	"admease/library/context/api"
+	"admease/system/config"
+	"admease/system/middleware"
 	"fmt"
-	"giftcard/library/context/api"
-	"giftcard/system/config"
-	"giftcard/system/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

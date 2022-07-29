@@ -1,8 +1,8 @@
 package repo
 
 import (
-	models "giftcard/application/model"
-	"giftcard/system/datasource"
+	models "admease/application/model"
+	"admease/system/datasource"
 )
 
 type SystemDictData struct {

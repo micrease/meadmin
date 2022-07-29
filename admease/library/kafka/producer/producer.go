@@ -1,9 +1,9 @@
 package producer
 
 import (
+	"admease/library/logger"
+	"admease/system/config"
 	"fmt"
-	"giftcard/library/logger"
-	"giftcard/system/config"
 	"github.com/Shopify/sarama"
 	"go.uber.org/zap"
 	"log"
