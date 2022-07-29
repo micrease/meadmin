@@ -1,0 +1,19 @@
+# 服务端口
+port: 8005
+# 运行环境
+env: test
+# 服务版本
+version: 1.0.0
+jwt_secret: ewerwerwerwerwer
+database:
+  # 数据库-主库
+  driver: mysql
+  dsn: root:123456@(127.0.0.1)/admease?charset=utf8&parseTime=True&loc=Local
+  max_idle_conns: 10
+  max_open_conns: 50
+redis:
+  net_work: tcp
+  addr: 127.0.0.1
+  prot: 6379
+  password: ''
+  prefix: ''

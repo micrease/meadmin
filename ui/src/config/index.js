@@ -59,7 +59,8 @@ const DEFAULT_CONFIG = {
 
 	// 文件存储URL地址
 	STORAGE_URL: {
-		LOCAL: 'http://127.0.0.1:9501',
+		//	LOCAL: 'http://127.0.0.1:9501',
+		LOCAL: process.env.VUE_APP_UPLOAD_URL,
 		OSS: '',
 		COS: '',
 		QINIU: ''

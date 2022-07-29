@@ -219,6 +219,7 @@ export default {
         this.$message.warning(response.msg || "上传文件未知错误");
       } else {
         this.img = response.src;
+				alert(this.img)
       }
     },
     error(err) {
