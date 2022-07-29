@@ -1,7 +1,7 @@
 package system
 
 import (
-	"admease/application/schedule"
+	"admease/app/schedule"
 	"admease/library/context/api"
 	"admease/library/logger"
 	"admease/library/migrate"
