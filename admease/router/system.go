@@ -27,6 +27,7 @@ func SystemApiRouter(router *api.Router) {
 				systemGroup.POST("/logout", system.Logout)
 				systemAuthGroup.GET("/getInfo", system.GetInfo)
 				systemAuthGroup.GET("/user/index", system.PageList)
+				systemAuthGroup.GET("/user/read/:id", system.ReadInfo)
 
 				dept := handler.SystemDept{}
 				systemAuthGroup.GET("/dept/tree", dept.GetListTree)

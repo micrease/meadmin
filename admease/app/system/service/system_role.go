@@ -57,3 +57,14 @@ func (this SystemRole) GetList(ctx *api.Context) ([]model.SystemRole, error) {
 	}
 	return list, nil
 }
+
+func (this SystemRole) GetRoutersByIds(roleIds []any) ([]model.SystemRole, error) {
+	list, err := this.repo.Order("sort desc").
+		Where("status=?", model.StatusEnable).
+		Where("id in(?)", roleIds).
+		List()
+	if err != nil {
+		return nil, err
+	}
+	return list, nil
+}

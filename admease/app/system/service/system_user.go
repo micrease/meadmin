@@ -124,3 +124,24 @@ func (this SystemUser) PageList() (*dto2.SystemPageListResp[model.SystemUser], *
 	page := ToSystemPage[model.SystemUser](pageList)
 	return &page, nil
 }
+
+func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto2.SystemUserInfoResp, *result.ErrorMessage) {
+	resp := dto2.SystemUserInfoResp{}
+	user, err := this.repo.GetById(cast.ToUint(userId))
+	if err != nil {
+		return resp, result.Error(err)
+	}
+	err = copier.Copy(&resp, &user)
+
+	userRoleRepo := repo2.NewSystemUserRole()
+	builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
+	roleIds := repo2.NewSystemUserRole().Values(builder, "role_id")
+
+	roles, err := NewSystemRole().GetRoutersByIds(roleIds)
+	if err != nil {
+		return resp, result.Error(err)
+	}
+	resp.RoleList = roles
+	resp.PostList = make([]int,0)
+	return resp, nil
+}
