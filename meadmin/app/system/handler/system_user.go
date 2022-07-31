@@ -8,12 +8,12 @@ import (
 	"admease/library/validate"
 )
 
-//登录
+//用户模块
 type SystemUser struct {
 	Handler
 }
 
-//管理员登录
+//用户列表
 func (this *SystemUser) Index(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)

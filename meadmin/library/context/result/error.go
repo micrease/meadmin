@@ -16,9 +16,13 @@ type ErrorMessage struct {
 	error   error  `json:"error"`
 }
 
-func Message(message string) *ErrorMessage {
+func Message(message string, codeArgs ...int32) *ErrorMessage {
+	var code int32 = STATUS_PARAM_ERROR
+	if len(codeArgs) > 0 {
+		code = codeArgs[0]
+	}
 	return &ErrorMessage{
-		Code:    STATUS_PARAM_ERROR,
+		Code:    code,
 		Message: message,
 	}
 }

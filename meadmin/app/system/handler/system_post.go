@@ -22,6 +22,7 @@ func (this *SystemPost) PageList(ctx *api.Context) *result.Result {
 }
 
 func (this *SystemPost) PostList(ctx *api.Context) *result.Result {
+
 	service := service.NewSystemPost()
 	resp, err := service.PostList()
 	if err != nil {
