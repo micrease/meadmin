@@ -15,7 +15,7 @@ type SystemUser struct {
 }
 
 //管理员登录
-func (this *SystemUser) Index(ctx *api.Context) *result.Result {
+func (u *SystemUser) Index(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
 	service := service.NewSystemUser()
@@ -26,7 +26,8 @@ func (this *SystemUser) Index(ctx *api.Context) *result.Result {
 	return result.Success(resp)
 }
 
-func (this *System) ReadInfo(ctx *api.Context) *result.Result {
+// ReadInfo 查看user数据
+func (u *SystemUser) ReadInfo(ctx *api.Context) *result.Result {
 	userId := ctx.GinCtx.Param("id")
 	resp, respErr := service.NewSystemUser().ReadInfoById(ctx, cast.ToUint64(userId))
 
@@ -34,4 +35,23 @@ func (this *System) ReadInfo(ctx *api.Context) *result.Result {
 		return result.Failed(respErr)
 	}
 	return result.Success(resp)
+}
+
+// ClearCache 清理缓存
+func (u *SystemUser) ClearCache(ctx *api.Context) *result.Result {
+	var req dto.SystemUserClearCacheReq
+	validate.BindWithPanic(ctx, &req)
+	// todo 清理缓存逻辑
+	return result.Success()
+}
+
+// ChangeStatus 修改用户状态
+func (u *SystemUser) ChangeStatus(ctx *api.Context) *result.Result {
+	var req dto.SystemUserChangeStatusReq
+	validate.BindWithPanic(ctx, &req)
+	err := service.NewSystemUser().ChangeStatus(req.ID, req.Status)
+	if err != nil {
+		return result.Failed(err)
+	}
+	return result.Success()
 }

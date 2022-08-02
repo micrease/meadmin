@@ -6,6 +6,7 @@ import (
 	repo2 "admease/app/system/repo"
 	"admease/library/context/api"
 	"admease/library/context/result"
+	"admease/library/validate"
 	"admease/system/config"
 	"admease/system/consts"
 	"admease/system/middleware"
@@ -13,6 +14,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/spf13/cast"
+	"time"
 )
 
 type SystemUser struct {
@@ -25,8 +27,8 @@ func NewSystemUser() SystemUser {
 	return service
 }
 
-func (this SystemUser) Login(req dto2.SystemLoginReq) (dto2.SystemLoginResp, *result.ErrorMessage) {
-	model, err := this.repo.Where("username=?", req.Username).First()
+func (u SystemUser) Login(req dto2.SystemLoginReq) (dto2.SystemLoginResp, *result.ErrorMessage) {
+	model, err := u.repo.Where("username=?", req.Username).First()
 	resp := dto2.SystemLoginResp{}
 	if err != nil {
 		return resp, result.Error(err)
@@ -62,10 +64,10 @@ func (this SystemUser) Login(req dto2.SystemLoginReq) (dto2.SystemLoginResp, *re
 	return resp, nil
 }
 
-func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto2.SystemInfoResp, *result.ErrorMessage) {
+func (u SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto2.SystemInfoResp, *result.ErrorMessage) {
 	resp := dto2.SystemInfoResp{}
 
-	user, err := this.repo.GetById(cast.ToUint(userId))
+	user, err := u.repo.GetById(cast.ToUint(userId))
 	if err != nil {
 		result.Error(err)
 	}
@@ -111,13 +113,46 @@ func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto2.SystemIn
 }
 
 //登出
-func (this SystemUser) Logout(ctx *api.Context) error {
+func (u SystemUser) Logout(ctx *api.Context) error {
 
 	return nil
 }
 
-func (this SystemUser) PageList() (*dto2.SystemPageListResp[model.SystemUser], *result.ErrorMessage) {
-	pageList, err := this.repo.Paginate(1, 10)
+func (u SystemUser) PageList(ctx *api.Context) (*dto2.SystemPageListResp[model.SystemUser], *result.ErrorMessage) {
+	var req dto2.SystemUserListReq
+	validate.BindWithPanic(ctx, &req)
+	builder := u.repo.NewQueryBuilder()
+	withBuilder := u.repo.QueryWithBuilder(builder)
+	if req.UserName != "" {
+		withBuilder.Where("username=?", req.UserName)
+	}
+	if req.NickName != "" {
+		withBuilder.Where("nickname=?", req.NickName)
+	}
+	if req.Phone != "" {
+		withBuilder.Where("phone=?", req.Phone)
+	}
+	if req.Email != "" {
+		withBuilder.Where("email=?", req.Email)
+	}
+	if req.Status != "" {
+		withBuilder.Where("status=?", req.Status)
+	}
+
+	if req.MinDate != "" {
+		location, err := time.Parse("2006-01-02", req.MinDate)
+		if err == nil {
+			withBuilder.Where("created_at>?", location)
+		}
+	}
+	if req.MaxDate != "" {
+		location, err := time.Parse("2006-01-02", req.MaxDate)
+		if err == nil {
+			withBuilder.Where("created_at<?", location)
+		}
+	}
+
+	pageList, err := withBuilder.Paginate(req.Page, req.PageSize)
 	if err != nil {
 		return nil, result.Error(err)
 	}
@@ -125,9 +160,9 @@ func (this SystemUser) PageList() (*dto2.SystemPageListResp[model.SystemUser], *
 	return &page, nil
 }
 
-func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto2.SystemUserInfoResp, *result.ErrorMessage) {
+func (u SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto2.SystemUserInfoResp, *result.ErrorMessage) {
 	resp := dto2.SystemUserInfoResp{}
-	user, err := this.repo.GetById(cast.ToUint(userId))
+	user, err := u.repo.GetById(cast.ToUint(userId))
 	if err != nil {
 		return resp, result.Error(err)
 	}
@@ -142,6 +177,16 @@ func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto2.Syste
 		return resp, result.Error(err)
 	}
 	resp.RoleList = roles
-	resp.PostList = make([]int,0)
+	resp.PostList = make([]int, 0)
 	return resp, nil
+}
+
+// ChangeStatus 设置用户状态
+func (u SystemUser) ChangeStatus(userId uint64, status string) *result.ErrorMessage {
+	builder := u.repo.NewQueryBuilder().Where("id=?", userId)
+	err := builder.UpdateColumn("status", status).Error
+	if err != nil {
+		return result.Error(err)
+	}
+	return nil
 }
