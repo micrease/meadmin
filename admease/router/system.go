@@ -32,6 +32,7 @@ func SystemApiRouter(router *api.Router) {
 				systemAuthGroup.GET("/user/read/:id", SystemUser.ReadInfo)
 				systemAuthGroup.POST("/user/clearCache", SystemUser.ClearCache)
 				systemAuthGroup.PUT("/user/changeStatus", SystemUser.ChangeStatus)
+				systemAuthGroup.POST("/user/save", SystemUser.SaveUser)
 
 				dept := handler.SystemDept{}
 				systemAuthGroup.GET("/dept/tree", dept.GetListTree)

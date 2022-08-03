@@ -190,3 +190,55 @@ func (u SystemUser) ChangeStatus(userId uint64, status string) *result.ErrorMess
 	}
 	return nil
 }
+
+func (u SystemUser) Save(ctx *api.Context, req dto2.SystemUserSaveReq) error {
+	userModel := u.repo.NewModel()
+	var err error
+	if req.ID > 0 {
+		userModel, err = u.repo.GetById(cast.ToUint(req.ID))
+		if err != nil {
+			return err
+		}
+		userModel.UpdatedBy = ctx.JwtClaimData.UserId
+	} else {
+		userModel.CreatedBy = ctx.JwtClaimData.UserId
+	}
+	userModel.ID = req.ID
+	userModel.Username = req.UserName
+	password := md5.Sum([]byte(req.Password))
+	userModel.Password = fmt.Sprintf("%x", password)
+	userModel.UserType = "100"
+	userModel.Nickname = req.NickName
+	userModel.Phone = req.Phone
+	userModel.Email = req.Email
+	userModel.Avatar = req.Avatar
+	if len(req.DeptID) != 0 {
+		userModel.DeptId = req.DeptID[0]
+	}
+	userModel.Status = req.Status
+	userModel.Remark = req.Remark
+	userModel.LoginTime = time.Now()
+	resp := u.repo.Save(&userModel)
+
+	userId := userModel.GetID()
+
+	// 保存用户-角色关系
+	roleRepo := repo2.NewSystemUserRole()
+	roleModel := roleRepo.NewModel()
+	for _, id := range req.RoleIds {
+		roleModel.UserId = userId
+		roleModel.RoleId = id
+		resp = roleRepo.NewQueryBuilder().Save(&roleModel)
+	}
+
+	// 保存用户-岗位关系
+	postRepo := repo2.NewSystemUserPost()
+	postModel := postRepo.NewModel()
+	for _, id := range req.PostIds {
+		postModel.UserId = userId
+		postModel.PostId = id
+		resp = postRepo.NewQueryBuilder().Save(&postModel)
+	}
+
+	return resp.Error
+}

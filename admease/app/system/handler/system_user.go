@@ -55,3 +55,13 @@ func (u *SystemUser) ChangeStatus(ctx *api.Context) *result.Result {
 	}
 	return result.Success()
 }
+
+func (u *SystemUser) SaveUser(ctx *api.Context)*result.Result  {
+	var req dto.SystemUserSaveReq
+	validate.BindWithPanic(ctx, &req)
+	err := service.NewSystemUser().Save(ctx, req)
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success()
+}
