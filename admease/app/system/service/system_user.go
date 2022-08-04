@@ -250,8 +250,8 @@ func (u SystemUser) Save(ctx *api.Context, req dto2.SystemUserSaveReq) error {
 	return resp.Error
 }
 
-func (u SystemUser) Delete(id uint64) error {
-	return u.repo.NewQueryBuilder().Delete("id=?", id).Error
+func (u SystemUser) Delete(ids []string) error {
+	return u.repo.NewQueryBuilder().Delete(&model.SystemUser{}, ids).Error
 }
 
 func (u SystemUser) ResetPassword(id uint64) error {

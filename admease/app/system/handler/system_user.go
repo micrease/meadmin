@@ -7,6 +7,7 @@ import (
 	"admease/library/context/result"
 	"admease/library/validate"
 	"github.com/spf13/cast"
+	"strings"
 )
 
 //登录
@@ -68,7 +69,8 @@ func (u *SystemUser) SaveUser(ctx *api.Context) *result.Result {
 
 func (u SystemUser) DeleteUser(ctx *api.Context) *result.Result {
 	id := ctx.GinCtx.Param("id")
-	err := service.NewSystemUser().Delete(cast.ToUint64(id))
+	ids := strings.Split(id, ",")
+	err := service.NewSystemUser().Delete(ids)
 	if err != nil {
 		return result.ServerError(err)
 	}
