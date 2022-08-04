@@ -56,7 +56,45 @@ func (u *SystemUser) ChangeStatus(ctx *api.Context) *result.Result {
 	return result.Success()
 }
 
-func (u *SystemUser) SaveUser(ctx *api.Context)*result.Result  {
+func (u *SystemUser) SaveUser(ctx *api.Context) *result.Result {
+	var req dto.SystemUserSaveReq
+	validate.BindWithPanic(ctx, &req)
+	err := service.NewSystemUser().Save(ctx, req)
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success()
+}
+
+func (u SystemUser) DeleteUser(ctx *api.Context) *result.Result {
+	id := ctx.GinCtx.Param("id")
+	err := service.NewSystemUser().Delete(cast.ToUint64(id))
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success()
+}
+
+func (u SystemUser) InitUserPassword(ctx *api.Context) *result.Result {
+	id := ctx.GinCtx.Param("id")
+	err := service.NewSystemUser().ResetPassword(cast.ToUint64(id))
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success()
+}
+
+func (u SystemUser) SetHomePage(ctx *api.Context) *result.Result {
+	var req dto.SystemUserSetHomePageReq
+	validate.BindWithPanic(ctx, &req)
+	err := service.NewSystemUser().SetHomePage(req)
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success()
+}
+
+func (u *SystemUser) Update(ctx *api.Context) *result.Result {
 	var req dto.SystemUserSaveReq
 	validate.BindWithPanic(ctx, &req)
 	err := service.NewSystemUser().Save(ctx, req)

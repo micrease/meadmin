@@ -45,3 +45,8 @@ type SystemUserSaveReq struct {
 	RoleIds  []uint64 `form:"role_ids" json:"role_ids"`
 	Status   string   `form:"status" json:"status"`
 }
+
+type SystemUserSetHomePageReq struct {
+	ID        uint64 `json:"id"`
+	Dashboard string `json:"dashboard"`
+}

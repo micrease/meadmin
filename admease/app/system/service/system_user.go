@@ -151,7 +151,14 @@ func (u SystemUser) PageList(ctx *api.Context) (*dto2.SystemPageListResp[model.S
 			withBuilder.Where("created_at<?", location)
 		}
 	}
-
+	withBuilder.Where("deleted_at is null")
+	if req.OrderBy != "" {
+		OrderType := "DESC"
+		if req.OrderType == "ascending" {
+			OrderType = "ASC"
+		}
+		withBuilder.Order(req.OrderBy + " " + OrderType)
+	}
 	pageList, err := withBuilder.Paginate(req.Page, req.PageSize)
 	if err != nil {
 		return nil, result.Error(err)
@@ -241,4 +248,19 @@ func (u SystemUser) Save(ctx *api.Context, req dto2.SystemUserSaveReq) error {
 	}
 
 	return resp.Error
+}
+
+func (u SystemUser) Delete(id uint64) error {
+	return u.repo.NewQueryBuilder().Delete("id=?", id).Error
+}
+
+func (u SystemUser) ResetPassword(id uint64) error {
+	password := md5.Sum([]byte("123456"))
+	builder := u.repo.NewQueryBuilder().Where("id=?", id)
+	return builder.UpdateColumn("password", fmt.Sprintf("%x", password)).Error
+}
+
+func (u SystemUser) SetHomePage(req dto2.SystemUserSetHomePageReq) error {
+	builder := u.repo.NewQueryBuilder().Where("id=?", req.ID)
+	return builder.UpdateColumn("dashboard", req.Dashboard).Error
 }
