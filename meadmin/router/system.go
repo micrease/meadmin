@@ -1,9 +1,9 @@
 package router
 
 import (
-	"admease/app/system/handler"
-	"admease/library/context/api"
-	"admease/system/middleware"
+	"meadmin/app/system/handler"
+	"meadmin/library/context/api"
+	"meadmin/system/middleware"
 )
 
 func SystemApiRouter(router *api.Router) {
@@ -27,6 +27,7 @@ func SystemApiRouter(router *api.Router) {
 				systemGroup.POST("/logout", system.Logout)
 				systemAuthGroup.GET("/getInfo", system.GetInfo)
 				systemAuthGroup.GET("/user/index", system.PageList)
+				systemAuthGroup.GET("/user/read/:id", system.ReadInfo)
 
 				dept := handler.SystemDept{}
 				systemAuthGroup.GET("/dept/tree", dept.GetListTree)

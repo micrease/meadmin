@@ -56,7 +56,7 @@ func ParentDir(dirctory string) string {
 
 func ProjectDir() string {
 	dirctory, _ := os.Getwd()
-	//projectName := "admease"
+	//projectName := "meadmin"
 	//arr := strings.Split(dirctory, projectName)
 	//if len(arr) > 0 {
 	//	return arr[0] + projectName

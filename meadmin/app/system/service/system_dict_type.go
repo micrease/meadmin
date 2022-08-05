@@ -1,7 +1,7 @@
 package service
 
 import (
-	"admease/app/system/repo"
+	"meadmin/app/system/repo"
 )
 
 type SystemDictType struct {

@@ -1,15 +1,15 @@
 package validate
 
 import (
-	"admease/library/astparser"
-	"admease/library/context/api"
-	"admease/library/logger"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
+	"meadmin/library/astparser"
+	"meadmin/library/context/api"
+	"meadmin/library/logger"
 	"reflect"
 )
 

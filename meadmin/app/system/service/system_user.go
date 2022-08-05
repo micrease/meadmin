@@ -1,33 +1,33 @@
 package service
 
 import (
-	dto2 "admease/app/system/dto"
-	"admease/app/system/model"
-	repo2 "admease/app/system/repo"
-	"admease/library/context/api"
-	"admease/library/context/result"
-	"admease/system/config"
-	"admease/system/consts"
-	"admease/system/middleware"
 	"crypto/md5"
 	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/spf13/cast"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
+	"meadmin/library/context/result"
+	"meadmin/system/config"
+	"meadmin/system/consts"
+	"meadmin/system/middleware"
 )
 
 type SystemUser struct {
-	repo *repo2.SystemUser
+	repo *repo.SystemUser
 }
 
 func NewSystemUser() SystemUser {
 	service := SystemUser{}
-	service.repo = repo2.NewSystemUser()
+	service.repo = repo.NewSystemUser()
 	return service
 }
 
-func (this SystemUser) Login(req dto2.SystemLoginReq) (dto2.SystemLoginResp, *result.ErrorMessage) {
+func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *result.ErrorMessage) {
 	model, err := this.repo.Where("username=?", req.Username).First()
-	resp := dto2.SystemLoginResp{}
+	resp := dto.SystemLoginResp{}
 	if err != nil {
 		return resp, result.Error(err)
 	}
@@ -62,33 +62,32 @@ func (this SystemUser) Login(req dto2.SystemLoginReq) (dto2.SystemLoginResp, *re
 	return resp, nil
 }
 
-func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto2.SystemInfoResp, *result.ErrorMessage) {
-	resp := dto2.SystemInfoResp{}
+func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto.SystemInfoResp, *result.ErrorMessage) {
+	resp := dto.SystemInfoResp{}
 
 	user, err := this.repo.GetById(cast.ToUint(userId))
 	if err != nil {
 		result.Error(err)
 	}
 
-	resp.User = dto2.UserDTO{}
+	resp.User = dto.User{}
 	err = copier.Copy(&resp.User, &user)
 	if err != nil {
 		result.Error(err)
 	}
 
-	userRoleRepo := repo2.NewSystemUserRole()
+	userRoleRepo := repo.NewSystemUserRole()
 	builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
-	roleIds := repo2.NewSystemUserRole().Values(builder, "role_id")
+	roleIds := repo.NewSystemUserRole().Values(builder, "role_id")
 	var roles []string
 	if len(roleIds) > 0 {
-		roleRepo := repo2.NewSystemRole()
+		roleRepo := repo.NewSystemRole()
 		builder = roleRepo.NewQueryBuilder().Where("id in(?)", roleIds)
 		codes := roleRepo.Values(builder, "code")
 		for _, val := range codes {
 			roles = append(roles, cast.ToString(val))
 		}
 	}
-
 	resp.Roles = roles
 	if IsSuperAdmin {
 		resp.Codes = []string{"*"}
@@ -116,11 +115,32 @@ func (this SystemUser) Logout(ctx *api.Context) error {
 	return nil
 }
 
-func (this SystemUser) PageList() (*dto2.SystemPageListResp[model.SystemUser], *result.ErrorMessage) {
+func (this SystemUser) PageList() (*dto.SystemPageListResp[model.SystemUser], *result.ErrorMessage) {
 	pageList, err := this.repo.Paginate(1, 10)
 	if err != nil {
 		return nil, result.Error(err)
 	}
 	page := ToSystemPage[model.SystemUser](pageList)
 	return &page, nil
+}
+
+func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.SystemUserInfoResp, *result.ErrorMessage) {
+	resp := dto.SystemUserInfoResp{}
+	user, err := this.repo.GetById(cast.ToUint(userId))
+	if err != nil {
+		return resp, result.Error(err)
+	}
+	err = copier.Copy(&resp, &user)
+
+	userRoleRepo := repo.NewSystemUserRole()
+	builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
+	roleIds := repo.NewSystemUserRole().Values(builder, "role_id")
+
+	roles, err := NewSystemRole().GetRoutersByIds(roleIds)
+	if err != nil {
+		return resp, result.Error(err)
+	}
+	resp.RoleList = roles
+	resp.PostList = make([]int, 0)
+	return resp, nil
 }

@@ -1,19 +1,19 @@
 package api
 
 import (
-	"admease/library/apidoc"
-	"admease/library/astparser"
-	"admease/library/context/result"
-	"admease/library/logger"
-	"admease/library/strings"
-	"admease/system/config"
-	"admease/system/consts"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cast"
 	"go.uber.org/zap"
 	"math/rand"
+	"meadmin/library/apidoc"
+	"meadmin/library/astparser"
+	"meadmin/library/context/result"
+	"meadmin/library/logger"
+	"meadmin/library/strings"
+	"meadmin/system/config"
+	"meadmin/system/consts"
 )
 
 //这里我们用自己的context包对gin进行包装。

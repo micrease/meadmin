@@ -1,14 +1,14 @@
 package service
 
 import (
-	"admease/app/system/dto"
-	"admease/app/system/model"
-	"admease/app/system/repo"
-	"admease/library/context/api"
-	"admease/library/files"
-	"admease/system/config"
 	"fmt"
 	"github.com/spf13/cast"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
+	"meadmin/library/files"
+	"meadmin/system/config"
 	"mime/multipart"
 	"strings"
 	"time"

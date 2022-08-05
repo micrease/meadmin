@@ -1,11 +1,11 @@
 package config
 
 import (
-	"admease/library/files"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
+	"meadmin/library/files"
 	"path"
 )
 
@@ -40,6 +40,7 @@ type ServiceConfig struct {
 	Mode        string   `yaml:"mode"`
 	Env         string   `yaml:"env"`
 	Version     string   `yaml:"version"`
+	KafkaBroker string   `yaml:"kafka_broker"`
 	DocEnable   bool     `yaml:"doc_enable"`
 	Database    Database `yaml:"database"`
 	JwtSecret   string   `yaml:"jwt_secret"`

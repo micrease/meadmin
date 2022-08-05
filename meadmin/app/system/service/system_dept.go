@@ -1,10 +1,10 @@
 package service
 
 import (
-	"admease/app/system/dto"
-	"admease/app/system/model"
-	"admease/app/system/repo"
 	"github.com/jinzhu/copier"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
 )
 
 type SystemDept struct {
@@ -17,14 +17,14 @@ func NewSystemDept() SystemDept {
 	return service
 }
 
-func (this SystemDept) GetListTree() ([]dto.DeptTreeDTO, error) {
+func (this SystemDept) GetListTree() ([]dto.DeptTree, error) {
 	deptList, err := this.repo.Where("status=?", model.StatusEnable).List()
 	if err != nil {
 		return nil, err
 	}
-	var treeList []dto.DeptTreeDTO
+	var treeList []dto.DeptTree
 	for _, dept := range deptList {
-		deptTree := dto.DeptTreeDTO{
+		deptTree := dto.DeptTree{
 			ID:       dept.ID,
 			Label:    dept.Name,
 			ParentId: dept.ParentId,
@@ -70,8 +70,8 @@ func (this SystemDept) ToModelTree(data []dto.DeptModelTree, parentId uint64) []
 	return tree
 }
 
-func (this SystemDept) ToTree(data []dto.DeptTreeDTO, parentId uint64) []dto.DeptTreeDTO {
-	var tree []dto.DeptTreeDTO
+func (this SystemDept) ToTree(data []dto.DeptTree, parentId uint64) []dto.DeptTree {
+	var tree []dto.DeptTree
 	if len(data) == 0 {
 		return tree
 	}
@@ -83,7 +83,7 @@ func (this SystemDept) ToTree(data []dto.DeptTreeDTO, parentId uint64) []dto.Dep
 			if len(child) > 0 {
 				value.Children = child
 			} else {
-				value.Children = []dto.DeptTreeDTO{}
+				value.Children = []dto.DeptTree{}
 			}
 			tree = append(tree, value)
 		}

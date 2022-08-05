@@ -1,6 +1,6 @@
 package dto
 
-import "admease/library/logger"
+import "meadmin/library/logger"
 
 //所有的请求类对象，都要继承一下这个
 type ReqHeader struct {

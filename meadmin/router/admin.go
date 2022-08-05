@@ -1,9 +1,9 @@
 package router
 
 import (
-	"admease/library/context/api"
+	"meadmin/library/context/api"
 )
 
 func AdminApiRouter(router *api.Router) {
-	
+
 }

@@ -1,10 +1,10 @@
 package schedule
 
 import (
-	"admease/library/logger"
 	"fmt"
 	"github.com/robfig/cron/v3"
 	"go.uber.org/zap"
+	"meadmin/library/logger"
 	"runtime"
 	"runtime/debug"
 )

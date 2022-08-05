@@ -1,8 +1,8 @@
 package service
 
 import (
-	"admease/app/system/dto"
 	"github.com/micrease/gorme"
+	"meadmin/app/system/dto"
 )
 
 func ToSystemPage[T any](result *gorme.PageResult[T]) dto.SystemPageListResp[T] {

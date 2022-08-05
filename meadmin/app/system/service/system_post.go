@@ -1,11 +1,11 @@
 package service
 
 import (
-	"admease/app/system/dto"
-	"admease/app/system/model"
-	"admease/app/system/repo"
-	"admease/library/context/api"
 	"github.com/spf13/cast"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
 )
 
 type SystemPost struct {

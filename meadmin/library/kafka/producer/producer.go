@@ -1,12 +1,12 @@
 package producer
 
 import (
-	"admease/library/logger"
-	"admease/system/config"
 	"fmt"
 	"github.com/Shopify/sarama"
 	"go.uber.org/zap"
 	"log"
+	"meadmin/library/logger"
+	"meadmin/system/config"
 	"strings"
 	"time"
 )
@@ -19,7 +19,7 @@ func GetProducer() sarama.SyncProducer {
 	}
 	conf := config.GetConfig()
 	//kafka地址
-	addrArr := strings.Split(conf.Kafka.YuanbaoAddrs, ",")
+	addrArr := strings.Split(conf.KafkaBroker, ",")
 	config := sarama.NewConfig()
 	config.Producer.RequiredAcks = sarama.WaitForAll
 	config.Producer.Return.Successes = true
