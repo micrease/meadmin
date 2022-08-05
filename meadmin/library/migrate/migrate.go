@@ -1,12 +1,12 @@
 package migrate
 
 import (
-	"admease/library/logger"
-	"admease/system/config"
 	"database/sql"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/rubenv/sql-migrate"
 	"go.uber.org/zap"
+	"meadmin/library/logger"
+	"meadmin/system/config"
 )
 
 func Install() {

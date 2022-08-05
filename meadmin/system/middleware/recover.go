@@ -1,11 +1,11 @@
 package middleware
 
 import (
-	"admease/library/logger"
-	"admease/library/response"
 	"errors"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"meadmin/library/logger"
+	"meadmin/library/response"
 	"net/http"
 	"strings"
 )

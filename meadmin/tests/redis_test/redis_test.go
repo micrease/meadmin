@@ -1,14 +1,14 @@
 package redis_test
 
 import (
-	"admease/library/datetime"
-	"admease/library/logger"
-	redisClient "admease/library/redis"
-	"admease/library/structs"
-	"admease/system/config"
 	"context"
 	"fmt"
 	"github.com/go-redis/redis/v8"
+	"meadmin/library/datetime"
+	"meadmin/library/logger"
+	redisClient "meadmin/library/redis"
+	"meadmin/library/structs"
+	"meadmin/system/config"
 	"testing"
 	"time"
 )

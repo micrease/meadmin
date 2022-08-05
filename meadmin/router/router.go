@@ -1,11 +1,11 @@
 package router
 
 import (
-	"admease/library/context/api"
-	"admease/system/config"
-	"admease/system/middleware"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"meadmin/library/context/api"
+	"meadmin/system/config"
+	"meadmin/system/middleware"
 	"net/http"
 )
 

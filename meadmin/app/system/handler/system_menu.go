@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"admease/app/system/service"
-	"admease/library/context/api"
-	"admease/library/context/result"
+	"meadmin/app/system/service"
+	"meadmin/library/context/api"
+	"meadmin/library/context/result"
 )
 
 type SystemMenu struct {

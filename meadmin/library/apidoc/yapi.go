@@ -1,11 +1,11 @@
 package apidoc
 
 import (
-	yapi "admease/library/apidoc/yapiclient"
-	"admease/library/astparser"
 	"encoding/json"
 	"errors"
 	"fmt"
+	yapi "meadmin/library/apidoc/yapiclient"
+	"meadmin/library/astparser"
 	"strings"
 )
 

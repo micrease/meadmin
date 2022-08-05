@@ -1,10 +1,10 @@
 package service
 
 import (
-	"admease/app/system/dto"
-	"admease/app/system/model"
-	"admease/app/system/repo"
-	"admease/library/context/api"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
 )
 
 type SystemDictData struct {

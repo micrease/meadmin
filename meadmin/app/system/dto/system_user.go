@@ -1,9 +1,9 @@
 package dto
 
-import "admease/app/system/model"
+import "meadmin/app/system/model"
 
 type SystemUserInfoResp struct {
-	UserDTO
+	User
 	RoleList []model.SystemRole `json:"roleList"`
 	PostList []int              `json:"postList"`
 }

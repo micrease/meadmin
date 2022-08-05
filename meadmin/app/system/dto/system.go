@@ -16,7 +16,7 @@ type SystemLoginResp struct {
 	Token string `json:"token"` //token
 }
 
-type UserDTO struct {
+type User struct {
 	ID             uint      `json:"id"`
 	Avatar         string    `json:"avatar"`
 	BackendSetting string    `json:"backend_setting"`
@@ -38,7 +38,7 @@ type UserDTO struct {
 	UpdatedAt      time.Time `json:"updated_at"`
 }
 
-type RouterMetaDTO struct {
+type RouterMeta struct {
 	Hidden           bool   `json:"hidden"`
 	HiddenBreadcrumb bool   `json:"hiddenBreadcrumb"`
 	Icon             string `json:"icon"`
@@ -46,46 +46,46 @@ type RouterMetaDTO struct {
 	Type             string `json:"type"`
 }
 
-type RouterTreeDTO struct {
-	ID        uint            `json:"id"`
-	ParentId  uint            `json:"parent_id"`
-	Path      string          `json:"path"`
-	Component string          `json:"component"`
-	Name      string          `json:"name"`
-	Redirect  string          `json:"redirect"`
-	Meta      RouterMetaDTO   `json:"meta"`
-	Children  []RouterTreeDTO `json:"children"`
+type RouterTree struct {
+	ID        uint         `json:"id"`
+	ParentId  uint         `json:"parent_id"`
+	Path      string       `json:"path"`
+	Component string       `json:"component"`
+	Name      string       `json:"name"`
+	Redirect  string       `json:"redirect"`
+	Meta      RouterMeta   `json:"meta"`
+	Children  []RouterTree `json:"children"`
 }
 
-type MenuTreeDTO struct {
-	ID        uint64        `json:"id"`         // 主键
-	ParentId  uint64        `json:"parent_id"`  // 父ID
-	Level     string        `json:"level"`      // 组级集合
-	Name      string        `json:"name"`       // 菜单名称
-	Code      string        `json:"code"`       // 菜单标识代码
-	Icon      string        `json:"icon"`       // 菜单图标
-	Route     string        `json:"route"`      // 路由地址
-	Component string        `json:"component"`  // 组件路径
-	Redirect  string        `json:"redirect"`   // 跳转地址
-	IsHidden  int           `json:"is_hidden"`  // 是否隐藏 (0是 1否)
-	Type      string        `json:"type"`       // 菜单类型, (M菜单 B按钮 L链接 I iframe)
-	Status    string        `json:"status"`     // 状态 (0正常 1停用)
-	Sort      int           `json:"sort"`       // 排序
-	CreatedBy uint64        `json:"created_by"` // 创建者
-	UpdatedBy uint64        `json:"updated_by"` // 更新者
-	CreatedAt time.Time     `json:"created_at"` // 创建时间
-	UpdatedAt time.Time     `json:"updated_at"` // 更新时间
-	DeletedAt time.Time     `json:"deleted_at"` // 删除时间
-	Remark    string        `json:"remark"`     // 备注
-	Children  []MenuTreeDTO `json:"children"`
+type MenuTree struct {
+	ID        uint64     `json:"id"`         // 主键
+	ParentId  uint64     `json:"parent_id"`  // 父ID
+	Level     string     `json:"level"`      // 组级集合
+	Name      string     `json:"name"`       // 菜单名称
+	Code      string     `json:"code"`       // 菜单标识代码
+	Icon      string     `json:"icon"`       // 菜单图标
+	Route     string     `json:"route"`      // 路由地址
+	Component string     `json:"component"`  // 组件路径
+	Redirect  string     `json:"redirect"`   // 跳转地址
+	IsHidden  int        `json:"is_hidden"`  // 是否隐藏 (0是 1否)
+	Type      string     `json:"type"`       // 菜单类型, (M菜单 B按钮 L链接 I iframe)
+	Status    string     `json:"status"`     // 状态 (0正常 1停用)
+	Sort      int        `json:"sort"`       // 排序
+	CreatedBy uint64     `json:"created_by"` // 创建者
+	UpdatedBy uint64     `json:"updated_by"` // 更新者
+	CreatedAt time.Time  `json:"created_at"` // 创建时间
+	UpdatedAt time.Time  `json:"updated_at"` // 更新时间
+	DeletedAt time.Time  `json:"deleted_at"` // 删除时间
+	Remark    string     `json:"remark"`     // 备注
+	Children  []MenuTree `json:"children"`
 }
 
-type DeptTreeDTO struct {
-	ID       uint64        `json:"id"`
-	Label    string        `json:"label"`
-	ParentId uint64        `json:"parent_id"`
-	Value    uint64        `json:"value"`
-	Children []DeptTreeDTO `json:"children"`
+type DeptTree struct {
+	ID       uint64     `json:"id"`
+	Label    string     `json:"label"`
+	ParentId uint64     `json:"parent_id"`
+	Value    uint64     `json:"value"`
+	Children []DeptTree `json:"children"`
 }
 
 type DeptModelTree struct {
@@ -106,8 +106,8 @@ type DeptModelTree struct {
 }
 
 type SystemInfoResp struct {
-	Roles   []string        `json:"roles"`
-	Codes   []string        `json:"codes"`
-	User    UserDTO         `json:"user"`
-	Routers []RouterTreeDTO `json:"routers"`
+	Roles   []string     `json:"roles"`
+	Codes   []string     `json:"codes"`
+	User    User         `json:"user"`
+	Routers []RouterTree `json:"routers"`
 }

@@ -1,8 +1,8 @@
 package repo
 
 import (
-	"admease/app/system/model"
-	"admease/system/datasource"
+	"meadmin/app/system/model"
+	"meadmin/system/datasource"
 )
 
 type SystemDictType struct {

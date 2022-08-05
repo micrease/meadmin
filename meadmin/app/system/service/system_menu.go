@@ -1,25 +1,25 @@
 package service
 
 import (
-	"admease/app/system/dto"
-	"admease/app/system/model"
-	repo2 "admease/app/system/repo"
-	"admease/library/context/api"
 	"github.com/jinzhu/copier"
 	"github.com/spf13/cast"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
 )
 
 type SystemMenu struct {
-	repo *repo2.SystemMenu
+	repo *repo.SystemMenu
 }
 
 func NewSystemMenu() SystemMenu {
 	service := SystemMenu{}
-	service.repo = repo2.NewSystemMenu()
+	service.repo = repo.NewSystemMenu()
 	return service
 }
 
-func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTreeDTO, error) {
+func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
 	var menuList []model.SystemMenu
 	var err error
 	if ctx.JwtClaimData.IsSuperAdmin {
@@ -29,9 +29,9 @@ func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTreeDTO, error) 
 		}
 	} else {
 		userId := ctx.JwtClaimData.UserId
-		userRoleRepo := repo2.NewSystemUserRole()
+		userRoleRepo := repo.NewSystemUserRole()
 		builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
-		roleIds := repo2.NewSystemUserRole().Values(builder, "role_id")
+		roleIds := repo.NewSystemUserRole().Values(builder, "role_id")
 		menuIds := this.GetMenuIdsByRoleIds(roleIds)
 		menuList, err = this.repo.Order("sort desc").
 			Where("status=?", model.StatusEnable).
@@ -42,9 +42,9 @@ func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTreeDTO, error) 
 		}
 	}
 
-	var menuTreeList []dto.MenuTreeDTO
+	var menuTreeList []dto.MenuTree
 	for _, menu := range menuList {
-		var menuTree dto.MenuTreeDTO
+		var menuTree dto.MenuTree
 		err = copier.Copy(&menuTree, &menu)
 		if err != nil {
 			return nil, err
@@ -54,8 +54,8 @@ func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTreeDTO, error) 
 	return this.ToMenuTree(menuTreeList, 0), nil
 }
 
-func (this SystemMenu) ToMenuTree(data []dto.MenuTreeDTO, parentId uint64) []dto.MenuTreeDTO {
-	var tree []dto.MenuTreeDTO
+func (this SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.MenuTree {
+	var tree []dto.MenuTree
 	if len(data) == 0 {
 		return tree
 	}
@@ -65,7 +65,7 @@ func (this SystemMenu) ToMenuTree(data []dto.MenuTreeDTO, parentId uint64) []dto
 			if len(child) > 0 {
 				value.Children = child
 			} else {
-				value.Children = []dto.MenuTreeDTO{}
+				value.Children = []dto.MenuTree{}
 			}
 			tree = append(tree, value)
 		}
@@ -73,7 +73,7 @@ func (this SystemMenu) ToMenuTree(data []dto.MenuTreeDTO, parentId uint64) []dto
 	return tree
 }
 
-func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTreeDTO, error) {
+func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
 		Where("status=?", model.StatusEnable).
 		List()
@@ -83,7 +83,7 @@ func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTreeDTO, error) {
 	return this.SysMenuToRouterTree(list), nil
 }
 
-func (this SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTreeDTO, error) {
+func (this SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
 		Where("status=?", model.StatusEnable).
 		Where("id in(?)", menuIds).
@@ -103,12 +103,12 @@ func (this SystemMenu) GetMenuCode(menuIds []any) []any {
 	return this.repo.Values(builder, "code")
 }
 
-func (this SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.RouterTreeDTO {
-	var routerTree []dto.RouterTreeDTO
+func (this SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.RouterTree {
+	var routerTree []dto.RouterTree
 	if len(menuList) == 0 {
 		return routerTree
 	}
-	routers := []dto.RouterTreeDTO{}
+	routers := []dto.RouterTree{}
 	for _, menu := range menuList {
 		router := this.SetRouter(menu)
 		routers = append(routers, router)
@@ -120,7 +120,7 @@ func (this SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
 	if len(roleIds) == 0 {
 		return []any{}
 	}
-	roleRepo := repo2.NewSystemRoleMenu()
+	roleRepo := repo.NewSystemRoleMenu()
 	builder := roleRepo.NewQueryBuilder().Where("role_id in(?)", roleIds)
 	menuIds := roleRepo.Values(builder, "menu_id")
 
@@ -128,8 +128,8 @@ func (this SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
 	return this.repo.Values(builder, "id")
 }
 
-func (this SystemMenu) ToTree(data []dto.RouterTreeDTO, parentId uint) []dto.RouterTreeDTO {
-	var tree []dto.RouterTreeDTO
+func (this SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.RouterTree {
+	var tree []dto.RouterTree
 	if len(data) == 0 {
 		return tree
 	}
@@ -140,7 +140,7 @@ func (this SystemMenu) ToTree(data []dto.RouterTreeDTO, parentId uint) []dto.Rou
 			if len(child) > 0 {
 				value.Children = child
 			} else {
-				value.Children = []dto.RouterTreeDTO{}
+				value.Children = []dto.RouterTree{}
 			}
 			tree = append(tree, value)
 		}
@@ -148,19 +148,19 @@ func (this SystemMenu) ToTree(data []dto.RouterTreeDTO, parentId uint) []dto.Rou
 	return tree
 }
 
-func (this SystemMenu) SetRouter(menu model.SystemMenu) dto.RouterTreeDTO {
+func (this SystemMenu) SetRouter(menu model.SystemMenu) dto.RouterTree {
 	route := "/" + menu.Route
 	if menu.Type == "L" {
 		route = menu.Route
 	}
-	routerDTO := dto.RouterTreeDTO{
+	router := dto.RouterTree{
 		ID:        cast.ToUint(menu.ID),
 		ParentId:  cast.ToUint(menu.ParentId),
 		Name:      menu.Code,
 		Component: menu.Component,
 		Path:      route,
 		Redirect:  menu.Redirect,
-		Meta: dto.RouterMetaDTO{
+		Meta: dto.RouterMeta{
 			Type:             menu.Type,
 			Icon:             menu.Icon,
 			Title:            menu.Name,
@@ -168,5 +168,5 @@ func (this SystemMenu) SetRouter(menu model.SystemMenu) dto.RouterTreeDTO {
 			HiddenBreadcrumb: false,
 		},
 	}
-	return routerDTO
+	return router
 }

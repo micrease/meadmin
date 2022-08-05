@@ -1,9 +1,9 @@
 package router
 
 import (
-	"admease/app/system/handler"
-	"admease/library/context/api"
-	"admease/system/middleware"
+	"meadmin/app/system/handler"
+	"meadmin/library/context/api"
+	"meadmin/system/middleware"
 )
 
 func SystemApiRouter(router *api.Router) {

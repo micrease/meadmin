@@ -1,4 +1,4 @@
-module admease
+module meadmin
 
 go 1.18
 

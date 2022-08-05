@@ -1,12 +1,12 @@
 package middleware
 
 import (
-	"admease/library/logger"
-	"admease/library/strings"
 	"bytes"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"io/ioutil"
+	"meadmin/library/logger"
+	"meadmin/library/strings"
 )
 
 type bodyLogWriter struct {

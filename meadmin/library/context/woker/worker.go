@@ -1,9 +1,9 @@
 package woker
 
 import (
-	"admease/library/context/api"
 	"fmt"
 	"math/rand"
+	"meadmin/library/context/api"
 )
 
 //定时任务或者kafka队列中

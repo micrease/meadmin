@@ -1,11 +1,11 @@
 package service
 
 import (
-	dto2 "admease/app/system/dto"
-	"admease/app/system/model"
-	"admease/app/system/repo"
-	"admease/library/context/api"
 	"github.com/spf13/cast"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
 )
 
 type SystemRole struct {
@@ -18,7 +18,7 @@ func NewSystemRole() SystemRole {
 	return service
 }
 
-func (this SystemRole) Save(ctx *api.Context, req dto2.SystemRoleSaveReq) error {
+func (this SystemRole) Save(ctx *api.Context, req dto.SystemRoleSaveReq) error {
 	model := this.repo.NewModel()
 	var err error
 	if req.ID > 0 {
@@ -41,7 +41,7 @@ func (this SystemRole) Save(ctx *api.Context, req dto2.SystemRoleSaveReq) error 
 	return this.repo.Save(&model).Error
 }
 
-func (this SystemRole) GetPageList(ctx *api.Context) (*dto2.SystemPageListResp[model.SystemRole], error) {
+func (this SystemRole) GetPageList(ctx *api.Context) (*dto.SystemPageListResp[model.SystemRole], error) {
 	pageList, err := this.repo.Paginate(1, 10)
 	if err != nil {
 		return nil, err

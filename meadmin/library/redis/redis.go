@@ -1,11 +1,11 @@
 package redis
 
 import (
-	"admease/library/logger"
-	"admease/library/structs"
 	"context"
 	"github.com/go-redis/redis/v8"
 	"go.uber.org/zap"
+	"meadmin/library/logger"
+	"meadmin/library/structs"
 	"time"
 )
 

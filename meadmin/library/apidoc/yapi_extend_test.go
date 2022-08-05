@@ -1,10 +1,10 @@
 package apidoc
 
 import (
-	yapi "admease/library/apidoc/yapiclient"
-	"admease/library/astparser"
-	"admease/library/files"
 	"fmt"
+	yapi "meadmin/library/apidoc/yapiclient"
+	"meadmin/library/astparser"
+	"meadmin/library/files"
 	"reflect"
 	"testing"
 )

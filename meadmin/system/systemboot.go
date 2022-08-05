@@ -1,18 +1,18 @@
 package system
 
 import (
-	"admease/app/schedule"
-	"admease/library/context/api"
-	"admease/library/logger"
-	"admease/library/migrate"
-	redisClient "admease/library/redis"
-	"admease/library/validate"
-	"admease/router"
-	"admease/system/config"
-	"admease/system/datasource"
-	"admease/system/middleware"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"meadmin/app/schedule"
+	"meadmin/library/context/api"
+	"meadmin/library/logger"
+	"meadmin/library/migrate"
+	redisClient "meadmin/library/redis"
+	"meadmin/library/validate"
+	"meadmin/router"
+	"meadmin/system/config"
+	"meadmin/system/datasource"
+	"meadmin/system/middleware"
 )
 
 //1,初始化服务

@@ -1,12 +1,12 @@
 package consumer
 
 import (
-	"admease/library/logger"
 	"context"
 	"fmt"
 	"github.com/Shopify/sarama"
 	"go.uber.org/zap"
 	"log"
+	"meadmin/library/logger"
 	"os"
 	"os/signal"
 	"sync"

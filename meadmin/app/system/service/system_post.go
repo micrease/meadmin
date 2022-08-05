@@ -1,11 +1,11 @@
 package service
 
 import (
-	dto2 "admease/app/system/dto"
-	model2 "admease/app/system/model"
-	"admease/app/system/repo"
-	"admease/library/context/api"
 	"github.com/spf13/cast"
+	"meadmin/app/system/dto"
+	"meadmin/app/system/model"
+	"meadmin/app/system/repo"
+	"meadmin/library/context/api"
 )
 
 type SystemPost struct {
@@ -18,21 +18,21 @@ func NewSystemPost() SystemPost {
 	return service
 }
 
-func (this SystemPost) PageList() (*dto2.SystemPageListResp[model2.SystemPost], error) {
-	postPageList, err := this.repo.Where("status=?", model2.StatusEnable).Paginate(1, 10)
+func (this SystemPost) PageList() (*dto.SystemPageListResp[model.SystemPost], error) {
+	postPageList, err := this.repo.Where("status=?", model.StatusEnable).Paginate(1, 10)
 	if err != nil {
 		return nil, err
 	}
-	respPage := ToSystemPage[model2.SystemPost](postPageList)
+	respPage := ToSystemPage[model.SystemPost](postPageList)
 	return &respPage, nil
 }
 
-func (this SystemPost) PostList() ([]model2.SystemPost, error) {
-	postList, err := this.repo.Where("status=?", model2.StatusEnable).List()
+func (this SystemPost) PostList() ([]model.SystemPost, error) {
+	postList, err := this.repo.Where("status=?", model.StatusEnable).List()
 	return postList, err
 }
 
-func (this SystemPost) Save(ctx *api.Context, req dto2.SystemPostSaveReq) error {
+func (this SystemPost) Save(ctx *api.Context, req dto.SystemPostSaveReq) error {
 	model := this.repo.NewModel()
 	var err error
 	if req.ID > 0 {
