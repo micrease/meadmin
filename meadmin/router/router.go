@@ -33,7 +33,8 @@ func InitGinRouter() *gin.Engine {
 	router.Use(middleware.Cors())
 	router.Use(middleware.RequestLog())
 
-	SystemApiRouter(router)
+	systemGroup := SystemApiRouter(router)
+	GiftCardRouter(systemGroup)
 	AdminApiRouter(router)
 	staticRouter(router)
 	return router.GinEngin

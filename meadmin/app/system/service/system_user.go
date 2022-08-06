@@ -16,34 +16,36 @@ import (
 )
 
 type SystemUser struct {
+	Service
 	repo *repo.SystemUser
 }
 
-func NewSystemUser() SystemUser {
+func NewSystemUser(ctx *api.Context) SystemUser {
 	service := SystemUser{}
+	service.Init(ctx)
 	service.repo = repo.NewSystemUser()
 	return service
 }
 
-func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *result.ErrorMessage) {
+func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *result.Error) {
 	model, err := this.repo.Where("username=?", req.Username).First()
 	resp := dto.SystemLoginResp{}
 	if err != nil {
-		return resp, result.Error(err)
+		return resp, this.Error(err)
 	}
 
 	if model.ID == 0 {
-		return resp, result.Message("帐号不存在")
+		return resp, this.Message("帐号不存在")
 	}
 
 	if model.Status == "1" {
-		return resp, result.Message("帐号已停用")
+		return resp, this.Message("帐号已停用")
 	}
 
 	password := md5.Sum([]byte(req.Password))
 	passwordStr := fmt.Sprintf("%x", password)
 	if passwordStr != model.Password {
-		return resp, result.Message("密码不正确" + passwordStr)
+		return resp, this.Message("密码不正确" + passwordStr)
 	}
 
 	conf := config.GetConfig()
@@ -56,24 +58,27 @@ func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *resu
 
 	token, err := middleware.GenerateToken(jwtSecret, jwtClaimData)
 	if err != nil {
-		return resp, result.Error(err, "生成Token失败")
+		return resp, this.Error(err, "生成Token失败")
 	}
 	resp.Token = token
 	return resp, nil
 }
 
-func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto.SystemInfoResp, *result.ErrorMessage) {
+func (this SystemUser) GetIInfo() (dto.SystemInfoResp, *result.Error) {
 	resp := dto.SystemInfoResp{}
+
+	userId := this.ctx.JwtClaimData.UserId
+	IsSuperAdmin := this.ctx.JwtClaimData.IsSuperAdmin
 
 	user, err := this.repo.GetById(cast.ToUint(userId))
 	if err != nil {
-		result.Error(err)
+		return resp, this.Error(err)
 	}
 
 	resp.User = dto.User{}
 	err = copier.Copy(&resp.User, &user)
 	if err != nil {
-		result.Error(err)
+		return resp, this.Error(err)
 	}
 
 	userRoleRepo := repo.NewSystemUserRole()
@@ -93,7 +98,7 @@ func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto.SystemInf
 		resp.Codes = []string{"*"}
 		resp.Routers, err = NewSystemMenu().GetSuperAdminRouters()
 		if err != nil {
-			result.Error(err)
+			return resp, this.Error(err)
 		}
 	} else {
 		menuService := NewSystemMenu()
@@ -110,25 +115,25 @@ func (this SystemUser) GetIInfo(userId uint64, IsSuperAdmin bool) (dto.SystemInf
 }
 
 //登出
-func (this SystemUser) Logout(ctx *api.Context) error {
+func (this SystemUser) Logout() error {
 
 	return nil
 }
 
-func (this SystemUser) PageList() (*dto.SystemPageListResp[model.SystemUser], *result.ErrorMessage) {
+func (this SystemUser) PageList(req dto.SystemLoginReq) (*dto.SystemPageListResp[model.SystemUser], *result.Error) {
 	pageList, err := this.repo.Paginate(1, 10)
 	if err != nil {
-		return nil, result.Error(err)
+		return nil, this.Error(err)
 	}
 	page := ToSystemPage[model.SystemUser](pageList)
 	return &page, nil
 }
 
-func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.SystemUserInfoResp, *result.ErrorMessage) {
+func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.SystemUserInfoResp, *result.Error) {
 	resp := dto.SystemUserInfoResp{}
 	user, err := this.repo.GetById(cast.ToUint(userId))
 	if err != nil {
-		return resp, result.Error(err)
+		return resp, this.Error(err)
 	}
 	err = copier.Copy(&resp, &user)
 
@@ -138,7 +143,7 @@ func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.System
 
 	roles, err := NewSystemRole().GetRoutersByIds(roleIds)
 	if err != nil {
-		return resp, result.Error(err)
+		return resp, this.Error(err)
 	}
 	resp.RoleList = roles
 	resp.PostList = make([]int, 0)

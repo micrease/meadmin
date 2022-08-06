@@ -14,7 +14,7 @@ func (this *SystemMenu) Index(ctx *api.Context) *result.Result {
 	service := service.NewSystemMenu()
 	resp, err := service.GetMenuList(ctx)
 	if err != nil {
-		return result.ServerError(err)
+		return result.ErrorMessage(err)
 	}
 	return result.Success(resp)
 }

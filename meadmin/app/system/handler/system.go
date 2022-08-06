@@ -17,17 +17,17 @@ type System struct {
 func (this *System) Login(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
-	resp, respErr := service.NewSystemUser().Login(req)
+	resp, respErr := service.NewSystemUser(ctx).Login(req)
 	if respErr != nil {
-		return result.Failed(respErr)
+		return result.ErrorResult(respErr)
 	}
 	return result.Success(resp)
 }
 
 func (this *System) Logout(ctx *api.Context) *result.Result {
-	err := service.NewSystemUser().Logout(ctx)
+	err := service.NewSystemUser(ctx).Logout()
 	if err != nil {
-		return result.ServerError(err)
+		return result.ErrorMessage(err)
 	}
 	return result.Success()
 }
@@ -37,9 +37,9 @@ func (this *System) GetInfo(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
 
-	resp, respErr := service.NewSystemUser().GetIInfo(ctx.JwtClaimData.UserId, ctx.JwtClaimData.IsSuperAdmin)
+	resp, respErr := service.NewSystemUser(ctx).GetIInfo()
 	if respErr != nil {
-		return result.Failed(respErr)
+		return result.ErrorResult(respErr)
 	}
 	return result.Success(resp)
 }
@@ -48,9 +48,10 @@ func (this *System) GetInfo(ctx *api.Context) *result.Result {
 func (this *System) PageList(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
-	resp, respErr := service.NewSystemUser().PageList()
+
+	resp, respErr := service.NewSystemUser(ctx).PageList(req)
 	if respErr != nil {
-		return result.Failed(respErr)
+		return result.ErrorResult(respErr)
 	}
 	return result.Success(resp)
 }

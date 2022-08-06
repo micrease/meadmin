@@ -20,7 +20,7 @@ func (this *SystemDictData) List(ctx *api.Context) *result.Result {
 	service := service.NewSystemDictData()
 	resp, err := service.List(ctx, req)
 	if err != nil {
-		return result.ServerError(err)
+		return result.ErrorMessage(err)
 	}
 	return result.Success(resp)
 }

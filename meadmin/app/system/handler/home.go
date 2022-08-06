@@ -17,7 +17,7 @@ type Home struct {
  */
 func (ctrl *Home) Index(ctx *api.Context) *result.Result {
 	ctx.Log.Info("Check Health")
-	err := result.Error(errors.New("ffff"), "test error")
+	err := result.ErrorMessage(errors.New("ffff"), "test error")
 	return result.Success(err)
 }
 

@@ -35,8 +35,6 @@
 			</el-row>
 
 			<el-row :gutter="20">
-
-
 				<el-col :span="12">
 					<el-form-item label="登录帐号" prop="username">
 						<el-input v-model="form.username" placeholder="用于登录系统" clearable :disabled="mode!='add'" />
@@ -56,7 +54,7 @@
 
 				<el-col :span="12">
 					<el-form-item label="资金密码" prop="fund_password" >
-						<el-input type="password" v-model="form.password" v-if="mode=='add'" clearable show-password />
+						<el-input type="fund_password" v-model="form.fund_password" v-if="mode=='add'" clearable show-password />
 						<el-input v-else placeholder="密码不可修改" :disabled="true" />
 					</el-form-item>
 				</el-col>
@@ -117,7 +115,7 @@ export default {
 			isSaveing: false,
 			//表单数据
 			form: {
-				id: null,
+				id: 0,
 				merchant_name: '',
 				username: '',
 				nickname: '',
@@ -126,7 +124,6 @@ export default {
 				fund_password: '123456',
 				role_ids: '',
 				email: '',
-				status: '0',
 				remark: ''
 			},
 			//验证规则,merchant_name
@@ -161,7 +158,7 @@ export default {
 					this.isSaveing = true;
 					let res = null
 					if (this.mode == 'add') {
-						res = await this.$API.user.save(this.form)
+						res = await this.$API.merchant.save(this.form)
 					} else {
 						res = await this.$API.user.update(this.form.id, this.form)
 					}
@@ -203,7 +200,6 @@ export default {
 			this.form.post_ids = data.post_ids
 			this.form.role_ids = data.role_ids
 			this.form.email = data.email
-			this.form.status = data.status
 			this.form.remark = data.remark
 
 			await this.$API.user.read(data.id).then(res => {
