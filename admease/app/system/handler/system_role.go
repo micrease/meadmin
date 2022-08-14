@@ -6,6 +6,7 @@ import (
 	"admease/library/context/api"
 	"admease/library/context/result"
 	"admease/library/validate"
+	"strings"
 )
 
 type SystemRole struct {
@@ -48,4 +49,29 @@ func (this SystemRole) List(ctx *api.Context) *result.Result {
 		return result.ServerError(err)
 	}
 	return result.Success(resp)
+}
+
+func (r SystemRole) ChangeStatus(ctx *api.Context) *result.Result {
+	var req dto.SystemUserChangeStatusReq
+	validate.BindWithPanic(ctx, &req)
+	err := service.NewSystemRole().ChangeStatus(req.ID, req.Status)
+	if err != nil {
+		return result.Failed(err)
+	}
+	return result.Success()
+}
+
+func (r SystemRole) GetMenuByRole(ctx *api.Context) *result.Result {
+	var data []int = make([]int, 0)
+	return result.Success(data)
+}
+
+func (r SystemRole) Delete(ctx *api.Context) *result.Result {
+	id := ctx.GinCtx.Param("id")
+	ids := strings.Split(id, ",")
+	err := service.NewSystemRole().Delete(ids)
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success()
 }

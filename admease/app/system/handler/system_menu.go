@@ -10,7 +10,7 @@ type SystemMenu struct {
 	Handler
 }
 
-func (this *SystemMenu) Index(ctx *api.Context) *result.Result {
+func (m *SystemMenu) Index(ctx *api.Context) *result.Result {
 	service := service.NewSystemMenu()
 	resp, err := service.GetMenuList(ctx)
 	if err != nil {
@@ -18,3 +18,13 @@ func (this *SystemMenu) Index(ctx *api.Context) *result.Result {
 	}
 	return result.Success(resp)
 }
+
+func (m *SystemMenu) Tree(ctx *api.Context) *result.Result {
+	service := service.NewSystemMenu()
+	resp, err := service.GetMenuList(ctx)
+	if err != nil {
+		return result.ServerError(err)
+	}
+	return result.Success(resp)
+}
+

@@ -105,3 +105,7 @@ func (u *SystemUser) Update(ctx *api.Context) *result.Result {
 	}
 	return result.Success()
 }
+
+func (u *SystemUser) setHomePage(ctx *api.Context) *result.Result {
+	return result.Success()
+}

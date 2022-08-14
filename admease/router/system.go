@@ -48,9 +48,14 @@ func SystemApiRouter(router *api.Router) {
 				systemAuthGroup.GET("/role/index", role.Index)
 				systemAuthGroup.GET("/role/list", role.List)
 				systemAuthGroup.PUT("/role/update/:id", role.Update)
+				systemAuthGroup.PUT("/role/changeStatus", role.ChangeStatus)
+				systemAuthGroup.GET("/role/getMenuByRole/:id", role.GetMenuByRole)
+				systemAuthGroup.DELETE("/role/delete/:id", role.Delete)
+
 				//menu
 				menu := handler.SystemMenu{}
 				systemAuthGroup.GET("/menu/index", menu.Index)
+				systemAuthGroup.GET("/menu/tree", menu.Tree)
 
 				//post
 				post := handler.SystemPost{}

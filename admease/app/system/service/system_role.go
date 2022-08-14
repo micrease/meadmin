@@ -5,7 +5,10 @@ import (
 	"admease/app/system/model"
 	"admease/app/system/repo"
 	"admease/library/context/api"
+	"admease/library/context/result"
+	"admease/library/validate"
 	"github.com/spf13/cast"
+	"time"
 )
 
 type SystemRole struct {
@@ -42,6 +45,42 @@ func (this SystemRole) Save(ctx *api.Context, req dto2.SystemRoleSaveReq) error 
 }
 
 func (this SystemRole) GetPageList(ctx *api.Context) (*dto2.SystemPageListResp[model.SystemRole], error) {
+	var req dto2.SystemRoleListReq
+	validate.BindWithPanic(ctx, &req)
+	builder := this.repo.NewQueryBuilder()
+	withBuilder := this.repo.QueryWithBuilder(builder)
+	if req.Name != "" {
+		withBuilder.Where("name=?", req.Name)
+	}
+
+	if req.Code != "" {
+		withBuilder.Where("code=?", req.Code)
+	}
+	if req.Status != "" {
+		withBuilder.Where("status=?", req.Status)
+	}
+
+	if req.MinDate != "" {
+		location, err := time.Parse("2006-01-02", req.MinDate)
+		if err == nil {
+			withBuilder.Where("created_at>?", location)
+		}
+	}
+	if req.MaxDate != "" {
+		location, err := time.Parse("2006-01-02", req.MaxDate)
+		if err == nil {
+			withBuilder.Where("created_at<?", location)
+		}
+	}
+	withBuilder.Where("deleted_at is null")
+	if req.OrderBy != "" {
+		OrderType := "DESC"
+		if req.OrderType == "ascending" {
+			OrderType = "ASC"
+		}
+		withBuilder.Order(req.OrderBy + " " + OrderType)
+	}
+
 	pageList, err := this.repo.Paginate(1, 10)
 	if err != nil {
 		return nil, err
@@ -67,4 +106,18 @@ func (this SystemRole) GetRoutersByIds(roleIds []any) ([]model.SystemRole, error
 		return nil, err
 	}
 	return list, nil
+}
+
+// ChangeStatus 设置用户状态
+func (r SystemRole) ChangeStatus(userId uint64, status string) *result.ErrorMessage {
+	builder := r.repo.NewQueryBuilder().Where("id=?", userId)
+	err := builder.UpdateColumn("status", status).Error
+	if err != nil {
+		return result.Error(err)
+	}
+	return nil
+}
+
+func (r SystemRole) Delete(ids []string) error {
+	return r.repo.NewQueryBuilder().Delete(&model.SystemUser{}, ids).Error
 }

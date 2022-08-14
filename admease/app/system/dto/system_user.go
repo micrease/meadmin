@@ -47,6 +47,6 @@ type SystemUserSaveReq struct {
 }
 
 type SystemUserSetHomePageReq struct {
-	ID        uint64 `json:"id"`
-	Dashboard string `json:"dashboard"`
+	ID        uint64 `form:"id" json:"id"`
+	Dashboard string `form:"dashboard" json:"dashboard"`
 }
