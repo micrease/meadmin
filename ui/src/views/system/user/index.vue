@@ -363,9 +363,9 @@
             this.$API.user.deletes(ids.join(',')).then(res => {
               res.success && this.$message.success(res.message)
               res.success || this.$message.error(res.message)
-            })
+							this.$refs.table.upData(this.queryParams)
+						})
           }
-          this.$refs.table.upData(this.queryParams)
           loading.close();
         })
       },
@@ -387,10 +387,10 @@
             this.$API.user.deletes(id).then(res => {
               res.success && this.$message.success(res.message)
               res.success || this.$message.error(res.message)
-            })
+							this.$refs.table.upData(this.queryParams)
+						})
           }
           loading.close();
-          this.$refs.table.upData(this.queryParams)
         }).catch(()=>{})
       },
 
