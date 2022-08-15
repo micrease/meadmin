@@ -6,16 +6,16 @@
 
 					<el-button
 						icon="el-icon-plus"
-						v-auth="['merchant:save']"
+						v-auth="['giftcard:save']"
 						type="primary"
 						@click="add"
-					>创建商户</el-button>
+					>创建</el-button>
 
 					<el-button
 						type="danger"
 						plain
 						icon="el-icon-delete"
-						v-auth="['merchant:delete']"
+						v-auth="['giftcard:delete']"
 						:disabled="selection.length==0"
 						@click="batchDel"
 					>删除</el-button>
@@ -23,7 +23,7 @@
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
-						<el-input v-model="queryParams.name" placeholder="搜索商户名" clearable></el-input>
+						<el-input v-model="queryParams.name" placeholder="搜索礼品卡" clearable></el-input>
 
 						<el-tooltip class="item" effect="dark" content="搜索" placement="top">
 							<el-button type="primary" icon="el-icon-search" @click="handlerSearch"></el-button>
@@ -194,7 +194,7 @@ import menuDialog from './menuForm'
 import dataDialog from './dataForm'
 
 export default {
-	name: 'merchant:index',
+	name: 'giftcard:index',
 	components: {
 		saveDialog,
 		menuDialog,

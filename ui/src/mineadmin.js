@@ -6,6 +6,7 @@ import hasPermission from './utils/permission'
 import hasRole from './utils/role'
 
 import maTable from './components/maTable'          // 原scTable，进行了系统适配优化，与原版scTable并存
+import meTable from './components/meTable'
 import maPhoto from './components/maPhoto'
 import maImport from './components/maImport'
 import maDictTag from './components/maDictTag'
@@ -66,6 +67,7 @@ export default {
 
     //注册全局组件
     app.component('maTable', maTable)
+		app.component('meTable', meTable)
     app.component('maDictTag', maDictTag)
     app.component('maImport', maImport)
     app.component('maPhoto', maPhoto)

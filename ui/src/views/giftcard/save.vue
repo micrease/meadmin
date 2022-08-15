@@ -21,77 +21,76 @@
 
 			<el-row :gutter="20">
 				<el-col :span="12">
-					<el-form-item label="商户名称" prop="merchant_name">
+					<el-form-item label="名称" prop="name">
 						<!--	<el-input v-model="form.merchant_name" placeholder="商户名称" clearable :disabled="mode!='add'" />-->
-						<el-input v-model="form.merchant_name" placeholder="商户名称" clearable  />
+						<el-input v-model="form.name" placeholder="礼品卡名称" clearable  />
 					</el-form-item>
 				</el-col>
 
 				<el-col :span="12">
-					<el-form-item label="登录帐号" prop="username">
-						<el-input v-model="form.username" placeholder="用于登录系统" clearable  />
+					<el-form-item label="卡号" prop="card_no">
+						<el-input v-model="form.card_no" placeholder="卡号" clearable  />
 					</el-form-item>
 				</el-col>
-
-
 			</el-row>
 
-			<el-row :gutter="20">
-
-				<el-col :span="12">
-					<el-form-item label="登录密码" prop="password" >
-						<el-input type="password" v-model="form.password" clearable show-password />
-						<!--
-							<el-input type="password" v-model="form.password" v-if="mode=='add'" clearable show-password />
-						<el-input v-else placeholder="密码不可修改" :disabled="true" />
-						-->
-					</el-form-item>
-				</el-col>
-
-
-				<el-col :span="12">
-					<el-form-item label="资金密码" prop="fund_password" >
-						<el-input type="fund_password" v-model="form.fund_password" clearable show-password />
-						<!--
-						<el-input type="fund_password" v-model="form.fund_password" v-if="mode=='add'" clearable show-password />
-						<el-input v-else placeholder="密码不可修改" :disabled="true" />
-						-->
-					</el-form-item>
-				</el-col>
-
-			</el-row>
 
 			<el-row :gutter="20">
 				<el-col :span="12">
-					<el-form-item label="角色" prop="role_ids">
-						<el-select v-model="form.role_ids" clearable style="width:100%" multiple placeholder="请选择用户角色">
-							<el-option v-for="item in roleData" :key="item.id" :label="item.name" :value="item.id">
+					<el-form-item label="种类" prop="cate_id">
+						<el-select v-model="form.cate_id" clearable style="width:100%"  placeholder="种类">
+							<el-option v-for="item in cateList" :key="item.id" :label="item.cate_name" :value="item.id">
 							</el-option>
 						</el-select>
 					</el-form-item>
 				</el-col>
+
+
+				<el-col :span="12">
+					<el-form-item label="卡头" prop="card_prefix">
+						<el-select v-model="form.card_prefix" clearable style="width:100%"  placeholder="卡头">
+							<el-option v-for="item in catePrefixs" :key="item.id" :label="item.name" :value="item.name">
+							</el-option>
+						</el-select>
+					</el-form-item>
+				</el-col>
+
+
+			</el-row>
+
+
+			<el-row :gutter="20">
+				<el-col :span="12">
+					<el-form-item label="币种" prop="currency">
+						<el-select v-model="form.currency" clearable style="width:100%"  placeholder="币种">
+							<el-option v-for="item in currencies" :key="item.code" :label="item.name" :value="item.code">
+							</el-option>
+						</el-select>
+					</el-form-item>
+				</el-col>
+
+				<el-col :span="12">
+					<el-form-item label="过期时间" prop="expire_time">
+						<el-date-picker type="expire_time" placeholder="过期时间" style="width:100%" v-model="form.expire_time"></el-date-picker>
+					</el-form-item>
+				</el-col>
 			</el-row>
 
 			<el-row :gutter="20">
 				<el-col :span="12">
-					<el-form-item label="邮箱" prop="email">
-						<el-input v-model="form.email" placeholder="请输入电子邮箱" clearable />
+					<el-form-item label="地区" prop="region">
+						<el-input v-model="form.region" placeholder="地区" clearable  />
 					</el-form-item>
 				</el-col>
+
 				<el-col :span="12">
-					<el-form-item label="手机 " prop="phone">
-						<el-input v-model="form.phone" placeholder="请输入手机" />
+					<el-form-item label="CVV" prop="cvv">
+						<!--	<el-input v-model="form.merchant_name" placeholder="商户名称" clearable :disabled="mode!='add'" />-->
+						<el-input v-model="form.cvv" placeholder="CVV" clearable  />
 					</el-form-item>
 				</el-col>
 			</el-row>
 
-			<el-row :gutter="20">
-				<el-col :span="24">
-					<el-form-item label="备注" prop="remark">
-						<el-input type="textarea" :rows="3" placeholder="用户备注信息" v-model="form.remark" maxlength="255" show-word-limit />
-					</el-form-item>
-				</el-col>
-			</el-row>
 		</el-form>
 		<template #footer>
 			<el-button @click="visible=false" >取 消</el-button>
@@ -108,18 +107,22 @@ export default {
 			mode: "add",
 			loading: false,
 			titleMap: {
-				add: '新增商户',
-				edit: '编辑商户',
+				add: '新增',
+				edit: '编辑',
 				show: '查看'
 			},
 			// 用户选择器数据
 			roleData: [],
+			currencies:[],
+			cateList:[],
+			catePrefixs:[],
 			visible: false,
 			isSaveing: false,
 			//表单数据
 			form: {
 				id: 0,
-				merchant_name: '',
+				cate_id: 1,
+				currency:"USD",
 				username: '',
 				phone: '',
 				password: '123456',
@@ -184,8 +187,10 @@ export default {
 
 		// 请求部门、角色、岗位数据
 		async initData () {
-			await this.$API.role.getList().then(res => {
-				this.roleData = res.data
+			await this.$API.giftcard.attrOptions().then(res => {
+				this.currencies = res.data.currencies
+				this.cateList = res.data.cate_list
+				this.catePrefixs = res.data.card_prefixs
 			})
 		},
 

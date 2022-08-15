@@ -11,7 +11,7 @@ type Repository[T gorme.Model] struct {
 }
 
 //默认不使用缓存
-func (this *Repository[T]) GetById(id uint) (T, error) {
+func (this *Repository[T]) FindById(id uint) (T, error) {
 	return this.Where("id=?", id).First()
 }
 

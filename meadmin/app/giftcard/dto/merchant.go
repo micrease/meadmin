@@ -5,7 +5,7 @@ import "meadmin/app/system/dto"
 type MerchantSaveReq struct {
 	ID           uint   `json:"id"`
 	Username     string `json:"username"`
-	Nickname     string `json:"nickname"`
+	MerchantName string `json:"merchant_name"`
 	Password     string `json:"password"`
 	FundPassword string `json:"fund_password"`
 	Email        string `json:"email"`
@@ -16,11 +16,16 @@ type MerchantSaveReq struct {
 	Status       int    `json:"status"`
 }
 
+type MerchantStatusReq struct {
+	ID     uint `json:"id"`
+	Status int  `json:"status"`
+}
+
 type MerchantPageListReq struct {
 	dto.PageQuery
-	ID       uint   `json:"id"`
-	Username string `json:"username"`
-	Nickname string `json:"nickname"`
-	Phone    string `json:"phone"`
-	Status   int    `json:"status"`
+	ID           uint   `json:"id"`
+	Username     string `json:"username"`
+	MerchantName string `json:"merchant_name"`
+	Phone        string `json:"phone"`
+	Status       int    `json:"status"`
 }

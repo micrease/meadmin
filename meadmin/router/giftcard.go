@@ -11,5 +11,11 @@ func GiftCardRouter(systemApiGroup *api.RouterGroup) {
 	{
 		merchant := handler.Merchant{}
 		giftcardGroup.POST("/merchant/save", merchant.Save)
+		giftcardGroup.GET("/merchant/index", merchant.PageList)
+		giftcardGroup.PUT("/merchant/change_status", merchant.ChangeStatus)
+		giftcardGroup.GET("/merchant/detail/:id", merchant.Detail)
+
+		giftcard := handler.GiftCard{}
+		giftcardGroup.GET("/attr_options", giftcard.AttrOptions)
 	}
 }

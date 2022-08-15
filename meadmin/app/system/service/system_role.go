@@ -36,7 +36,7 @@ func (this SystemRole) Save(ctx *api.Context, req dto.SystemRoleSaveReq) error {
 	model.Sort = req.Sort
 	model.Code = req.Code
 	model.Remark = req.Remark
-	model.Status = req.Status
+	model.Status = cast.ToInt(req.Status)
 	model.DataScope = "0"
 	return this.repo.Save(&model).Error
 }
