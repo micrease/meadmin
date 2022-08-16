@@ -23,7 +23,7 @@
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
-						<el-input v-model="queryParams.name" placeholder="搜索礼品卡" clearable></el-input>
+						<el-input v-model="queryParams.card_no" placeholder="搜索礼品卡" clearable></el-input>
 
 						<el-tooltip class="item" effect="dark" content="搜索" placement="top">
 							<el-button type="primary" icon="el-icon-search" @click="handlerSearch"></el-button>
@@ -43,8 +43,8 @@
 			<el-card class="filter-panel" shadow="never">
 				<el-form label-width="80px" :inline="true">
 
-					<el-form-item label="标识" prop="code">
-						<el-input v-model="queryParams.code" placeholder="角色标识" clearable></el-input>
+					<el-form-item label="标识" prop="currency">
+						<el-input v-model="queryParams.currency" placeholder="角色标识" clearable></el-input>
 					</el-form-item>
 
 					<el-form-item label="状态" prop="status">
@@ -92,15 +92,15 @@
 
 
 				<el-table-column
-					label="商户名称"
-					prop="merchant_name"
+					label="礼品卡号"
+					prop="card_no"
 					sortable='custom'
 					width="260"
 				></el-table-column>
 
 				<el-table-column
-					label="管理员帐号"
-					prop="username"
+					label="币种"
+					prop="currency"
 					width="220"
 				></el-table-column>
 
@@ -212,13 +212,13 @@ export default {
 			deptFilterText: '',
 			dept: [],
 			api: {
-				list: this.$API.merchant.pageList,
+				list: this.$API.giftcard.pageList,
 				recycleList: this.$API.role.getRecyclePageList,
 			},
 			selection: [],
 			queryParams: {
-				name: undefined,
-				code: undefined,
+				card_no: undefined,
+				currency: undefined,
 				maxDate: undefined,
 				minDate: undefined,
 				status: undefined

@@ -55,7 +55,6 @@
 					</el-form-item>
 				</el-col>
 
-
 			</el-row>
 
 
@@ -123,21 +122,20 @@ export default {
 				id: 0,
 				cate_id: 1,
 				currency:"USD",
-				username: '',
+				order_no: '',
+				expire_time:'',
 				phone: '',
 				password: '123456',
 				fund_password: '123456',
-				role_ids: '',
 				email: '',
 				remark: ''
 			},
 			//验证规则,merchant_name
 			rules: {
-				merchant_name: [{ required: true, message: '请输入商户名称', trigger: 'blur' }],
-				username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+				card_no: [{ required: true, message: '请输入礼品卡号', trigger: 'blur' }],
+				currency: [{ required: true, message: '请选译币种', trigger: 'blur' }],
 				password: [{ required: true, message: '请输入用户密码', trigger: 'blur' }],
 				fund_password: [{ required: true, message: '请输入资金密码', trigger: 'blur' }],
-				role_ids: [{ required: true, message: '请选择角色', trigger: 'blur' }],
 				email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
 				phone: [{ pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号码', trigger: ['blur'] }]
 			}
@@ -162,9 +160,9 @@ export default {
 					this.isSaveing = true;
 					let res = null
 					if (this.mode == 'add') {
-						res = await this.$API.merchant.save(this.form)
+						res = await this.$API.giftcard.save(this.form)
 					} else {
-						res = await this.$API.merchant.update(this.form.id, this.form)
+						res = await this.$API.giftcard.update(this.form.id, this.form)
 					}
 					this.isSaveing = false;
 					if(res.success){
@@ -198,14 +196,14 @@ export default {
 		async setData(data){
 			this.loading = true
 			this.form.id = data.id
-			this.form.merchant_name = data.merchant_name
-			this.form.username = data.username
+			this.form.card_no = data.card_no
+			this.form.currency = data.currency
+			this.form.expire_time = data.expire_time
 			this.form.phone = data.phone
-			this.form.role_ids = data.role_ids
 			this.form.email = data.email
 			this.form.remark = data.remark
 
-			await this.$API.merchant.detail(data.id).then(res => {
+			await this.$API.giftcard.detail(data.id).then(res => {
 				/*
 				this.form.role_ids = res.data.roleList.map(item => {
 					return item.id

@@ -17,5 +17,9 @@ func GiftCardRouter(systemApiGroup *api.RouterGroup) {
 
 		giftcard := handler.GiftCard{}
 		giftcardGroup.GET("/attr_options", giftcard.AttrOptions)
+		giftcardGroup.GET("/index", giftcard.PageList)
+		giftcardGroup.POST("/save", giftcard.Save)
+		giftcardGroup.PUT("/change_status", giftcard.ChangeStatus)
+		giftcardGroup.GET("/detail/:id", giftcard.Detail)
 	}
 }
