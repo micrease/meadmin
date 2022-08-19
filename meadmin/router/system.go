@@ -29,6 +29,16 @@ func SystemApiRouter(router *api.Router) *api.RouterGroup {
 				systemAuthGroup.GET("/user/index", system.PageList)
 				//systemAuthGroup.GET("/user/read/:id", system.ReadInfo)
 
+				SystemUser := handler.SystemUser{}
+				systemAuthGroup.GET("/user/read/:id", SystemUser.ReadInfo)
+				systemAuthGroup.POST("/user/clearCache", SystemUser.ClearCache)
+				systemAuthGroup.PUT("/user/changeStatus", SystemUser.ChangeStatus)
+				systemAuthGroup.POST("/user/save", SystemUser.SaveUser)
+				systemAuthGroup.DELETE("/user/delete/:id", SystemUser.DeleteUser)
+				systemAuthGroup.PUT("/user/initUserPassword/:id",SystemUser.InitUserPassword)
+				systemAuthGroup.POST("/user/setHomePage", SystemUser.SetHomePage)
+				systemAuthGroup.PUT("/user/update/:id", SystemUser.Update)
+
 				dept := handler.SystemDept{}
 				systemAuthGroup.GET("/dept/tree", dept.GetListTree)
 				systemAuthGroup.GET("/dept/index", dept.Index)
@@ -39,9 +49,14 @@ func SystemApiRouter(router *api.Router) *api.RouterGroup {
 				systemAuthGroup.GET("/role/index", role.Index)
 				systemAuthGroup.GET("/role/list", role.List)
 				systemAuthGroup.PUT("/role/update/:id", role.Update)
+				systemAuthGroup.PUT("/role/changeStatus", role.ChangeStatus)
+				systemAuthGroup.GET("/role/getMenuByRole/:id", role.GetMenuByRole)
+				systemAuthGroup.DELETE("/role/delete/:id", role.Delete)
+
 				//menu
 				menu := handler.SystemMenu{}
 				systemAuthGroup.GET("/menu/index", menu.Index)
+				//systemAuthGroup.GET("/menu/tree", menu.Tree)
 
 				//post
 				post := handler.SystemPost{}

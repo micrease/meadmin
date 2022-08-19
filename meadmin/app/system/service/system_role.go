@@ -6,9 +6,11 @@ import (
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
 	"meadmin/library/context/api"
+	"meadmin/library/context/result"
 )
 
 type SystemRole struct {
+	Service
 	repo *repo.SystemRole
 }
 
@@ -67,4 +69,22 @@ func (this SystemRole) GetRoutersByIds(roleIds []any) ([]model.SystemRole, error
 		return nil, err
 	}
 	return list, nil
+}
+
+// ChangeStatus 设置用户状态
+func (r SystemRole) ChangeStatus(userId uint64, status string) *result.Error {
+	builder := r.repo.NewQueryBuilder().Where("id=?", userId)
+	err := builder.UpdateColumn("status", status).Error
+	if err != nil {
+		return r.Error(err)
+	}
+	return nil
+}
+
+func (r SystemRole) Delete(ids []string) *result.Error {
+	err := r.repo.NewQueryBuilder().Delete(&model.SystemUser{}, ids).Error
+	if err != nil {
+		return r.Error(err)
+	}
+	return nil
 }

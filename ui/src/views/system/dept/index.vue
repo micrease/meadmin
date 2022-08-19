@@ -62,7 +62,7 @@
           <el-form-item label="创建时间">
             <el-date-picker
               clearable
-              
+
               v-model="dateRange"
               type="daterange"
               range-separator="至"
@@ -92,14 +92,14 @@
         remoteSort
       >
         <el-table-column type="selection" width="50"></el-table-column>
-        
+
         <el-table-column
           label="部门名称"
           prop="name"
           sortable='custom'
           width="260"
         ></el-table-column>
-        
+
         <el-table-column
           label="负责人"
           prop="leader"
@@ -147,25 +147,25 @@
 
             <el-button
               type="primary" link
-              
+
               @click="tableShow(scope.row, scope.$index)"
               v-auth="['system:dept:read']"
             >查看</el-button>
 
             <el-button
               type="primary" link
-              
+
               @click="tableEdit(scope.row, scope.$index)"
               v-auth="['system:dept:update']"
             >编辑</el-button>
 
             <el-button
               type="primary" link
-              
+
               @click="deletes(scope.row.id)"
               v-auth="['system:dept:delete']"
             >删除</el-button>
-            
+
           </template>
         </el-table-column>
 
@@ -290,7 +290,7 @@
           } else {
             res = await this.$API.dept.deletes(id).then()
           }
-          this.$refs.table.upData(this.queryParams)
+          // this.$refs.table.upData(this.queryParams)
           loading.close();
           if (res.success) {
             this.$message.success(res.message)

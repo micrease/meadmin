@@ -42,7 +42,7 @@
       </div>
       <el-card class="filter-panel" shadow="never">
         <el-form label-width="80px" :inline="true">
-                
+
           <el-form-item label="标识" prop="code">
             <el-input v-model="queryParams.code" placeholder="角色标识" clearable></el-input>
           </el-form-item>
@@ -57,7 +57,7 @@
           <el-form-item label="创建时间">
             <el-date-picker
               clearable
-              
+
               v-model="dateRange"
               type="daterange"
               range-separator="至"
@@ -83,7 +83,7 @@
         remoteFilter
       >
         <el-table-column type="selection" width="50"></el-table-column>
-        
+
         <el-table-column
           label="角色名称"
           prop="name"
@@ -131,7 +131,7 @@
 
             <el-button
               type="primary" link
-              
+
               @click="show(scope.row, scope.$index)"
             >查看</el-button>
 
@@ -147,12 +147,12 @@
                     v-if="$AUTH('system:role:update')"
                   >编辑</el-dropdown-item>
 
-                  <el-dropdown-item 
+                  <el-dropdown-item
                     @click="$refs.menuDialog.open().setData(scope.row)"
                     v-if="$AUTH('system:role:menuPermission')"
                   >菜单权限</el-dropdown-item>
 
-                  <el-dropdown-item 
+                  <el-dropdown-item
                     @click="$refs.dataDialog.open().setData(scope.row)"
                     v-if="$AUTH('system:role:dataPermission')"
                   >数据权限</el-dropdown-item>
@@ -167,7 +167,7 @@
               </template>
 
             </el-dropdown>
-            
+
           </template>
         </el-table-column>
 
@@ -272,11 +272,14 @@
           let ids = []
           this.selection.map(item => ids.push(item.id))
           if (this.isRecycle) {
-            this.$API.role.realDeletes(ids.join(',')).then()
+            this.$API.role.realDeletes(ids.join(',')).then(() => {
+							this.$refs.table.upData(this.queryParams)
+						})
           } else {
-            this.$API.role.deletes(ids.join(',')).then()
+            this.$API.role.deletes(ids.join(',')).then(() => {
+							this.$refs.table.upData(this.queryParams)
+						})
           }
-          this.$refs.table.upData(this.queryParams)
           loading.close();
           this.$message.success("操作成功")
         })
