@@ -182,9 +182,8 @@ func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Er
 	userModel.Phone = req.Phone
 	userModel.Email = req.Email
 	userModel.Avatar = req.Avatar
-	if len(req.DeptID) != 0 {
-		userModel.DeptId = req.DeptID[0]
-	}
+	userModel.DeptId = req.DeptID
+
 	userModel.Status = req.Status
 	userModel.Remark = req.Remark
 	userModel.LoginTime = time.Now()

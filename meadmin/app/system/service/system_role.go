@@ -38,7 +38,7 @@ func (this SystemRole) Save(ctx *api.Context, req dto.SystemRoleSaveReq) error {
 	model.Sort = req.Sort
 	model.Code = req.Code
 	model.Remark = req.Remark
-	model.Status = cast.ToInt(req.Status)
+	model.Status = req.Status
 	model.DataScope = "0"
 	return this.repo.Save(&model).Error
 }
@@ -61,10 +61,7 @@ func (this SystemRole) GetList(ctx *api.Context) ([]model.SystemRole, error) {
 }
 
 func (this SystemRole) GetRoutersByIds(roleIds []any) ([]model.SystemRole, error) {
-	list, err := this.repo.Order("sort desc").
-		Where("status=?", model.StatusEnable).
-		Where("id in(?)", roleIds).
-		List()
+	list, err := this.repo.Where("status=0").Where("id in(?)", roleIds).Order("sort desc").List()
 	if err != nil {
 		return nil, err
 	}

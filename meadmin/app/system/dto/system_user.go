@@ -34,7 +34,7 @@ type SystemUserListReq struct {
 type SystemUserSaveReq struct {
 	ID       uint64   `form:"id" json:"id"`
 	Avatar   string   `form:"avatar" json:"avatar"`
-	DeptID   []uint64 `form:"dept_id" json:"dept_id"`
+	DeptID   uint64   `form:"dept_id" json:"dept_id"`
 	Email    string   `form:"email" json:"email"`
 	NickName string   `form:"nickname" json:"nickname"`
 	UserName string   `form:"username" json:"username"`
