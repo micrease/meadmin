@@ -75,7 +75,7 @@
         </div>
         <el-card class="filter-panel" shadow="never">
           <el-form label-width="80px" :inline="true">
-            
+
             <el-form-item label="手机" prop="phone">
               <el-input v-model="queryParams.phone" placeholder="用户手机" clearable />
             </el-form-item>
@@ -131,7 +131,7 @@
               </el-avatar>
             </template>
           </el-table-column>
-          
+
           <el-table-column
             label="登录账号"
             prop="username"
@@ -211,17 +211,17 @@
                       v-if="$AUTH('system:user:update')"
                     >编辑</el-dropdown-item>
 
-                    <el-dropdown-item 
+                    <el-dropdown-item
                       @click="setHomepage(scope.row)"
                       v-if="$AUTH('system:user:homePage')"
                     >设置首页</el-dropdown-item>
 
-                    <el-dropdown-item 
+                    <el-dropdown-item
                       @click="clearCache(scope.row)"
                       v-if="$AUTH('system:user:cache')"
                     >更新缓存</el-dropdown-item>
 
-                    <el-dropdown-item 
+                    <el-dropdown-item
                       @click="initUserPassword(scope.row.id)"
                       v-if="$AUTH('system:user:initUserPassword')"
                     >初始化密码</el-dropdown-item>
@@ -236,7 +236,7 @@
                 </template>
 
               </el-dropdown>
-              
+
             </template>
           </el-table-column>
 
@@ -358,14 +358,15 @@
             this.$API.user.realDeletes(ids.join(',')).then(res => {
               res.success && this.$message.success(res.message)
               res.success || this.$message.error(res.message)
+							this.$refs.table.upData(this.queryParams)
             })
           } else {
             this.$API.user.deletes(ids.join(',')).then(res => {
               res.success && this.$message.success(res.message)
               res.success || this.$message.error(res.message)
+							this.$refs.table.upData(this.queryParams)
             })
           }
-          this.$refs.table.upData(this.queryParams)
           loading.close();
         })
       },
@@ -382,15 +383,17 @@
             this.$API.user.realDeletes(id).then(res => {
               res.success && this.$message.success(res.message)
               res.success || this.$message.error(res.message)
+							this.$refs.table.upData(this.queryParams)
             })
           } else {
             this.$API.user.deletes(id).then(res => {
               res.success && this.$message.success(res.message)
               res.success || this.$message.error(res.message)
+							this.$refs.table.upData(this.queryParams)
             })
           }
           loading.close();
-          this.$refs.table.upData(this.queryParams)
+
         }).catch(()=>{})
       },
 
@@ -432,7 +435,7 @@
           this.queryParams.dept_id = data.id
         } else {
           let ids = [ data.id ]
-          
+
           let filterNode = (nodes) => {
             nodes.map(item => {
               if (item.children && item.children.length > 0) {
