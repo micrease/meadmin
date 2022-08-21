@@ -84,3 +84,11 @@ func (this *GiftCard) Save(req dto.GiftCardSaveReq) *result.Error {
 	}
 	return nil
 }
+
+func (g *GiftCard) Delete(ids []string) *result.Error {
+	err := g.repo.NewQueryBuilder().Delete(&model.GiftCard{}, ids).Error
+	if err != nil {
+		return g.Error(err)
+	}
+	return nil
+}

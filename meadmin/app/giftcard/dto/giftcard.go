@@ -1,6 +1,9 @@
 package dto
 
-import "meadmin/app/system/dto"
+import (
+	"meadmin/app/system/dto"
+	"time"
+)
 
 type CardCate struct {
 	ID       int    `json:"id"`
@@ -24,17 +27,19 @@ type CardAttrs struct {
 }
 
 type GiftCardSaveReq struct {
-	ID           uint   `json:"id"`
-	CardNo       string `json:"card_no"`
-	CardPrefix   string `json:"card_prefix"`
-	CateId       int    `json:"cate_id"`
-	Currency     string `json:"currency"`
-	CVV          string `json:"cvv"`
-	Email        string `json:"email"`
-	FundPassword string `json:"fund_password"`
-	Password     string `json:"password"`
-	Phone        string `json:"phone"`
-	Remark       string `json:"remark"` //备注
+	ID           uint      `json:"id"`
+	CardNo       string    `json:"card_no"`
+	CardPrefix   string    `json:"card_prefix"`
+	CateId       int       `json:"cate_id"`
+	Currency     string    `json:"currency"`
+	CVV          string    `json:"cvv"`
+	Email        string    `json:"email"`
+	FundPassword string    `json:"fund_password"`
+	Password     string    `json:"password"`
+	Phone        string    `json:"phone"`
+	Remark       string    `json:"remark"`      //备注
+	ExpireTime   time.Time `json:"expire_time"` // 过期时间
+
 }
 
 type GiftCardPageListReq struct {

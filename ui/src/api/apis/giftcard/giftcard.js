@@ -54,4 +54,39 @@ export default {
 			method: 'get'
 		})
 	},
+
+
+	/**
+	 * 移到回收站
+	 * @returns
+	 */
+	deletes (ids) {
+		return request({
+			url: 'giftcard/delete/' + ids,
+			method: 'delete'
+		})
+	},
+
+	/**
+	 * 恢复数据
+	 * @returns
+	 */
+	recoverys (ids) {
+		return request({
+			url: 'giftcard/recovery/' + ids,
+			method: 'put'
+		})
+	},
+
+	/**
+	 * 真实删除
+	 * @returns
+	 */
+	realDeletes (ids) {
+		return request({
+			url: 'giftcard/realDelete/' + ids,
+			method: 'delete'
+		})
+	},
+
 }

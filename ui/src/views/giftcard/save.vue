@@ -6,6 +6,7 @@
 		:width="800"
 		destroy-on-close
 		@closed="$emit('closed')"
+		:close-on-click-modal="false"
 	>
 		<el-form
 			:model="form"
@@ -20,12 +21,12 @@
 		>
 
 			<el-row :gutter="20">
-				<el-col :span="12">
-					<el-form-item label="名称" prop="name">
-						<!--	<el-input v-model="form.merchant_name" placeholder="商户名称" clearable :disabled="mode!='add'" />-->
-						<el-input v-model="form.name" placeholder="礼品卡名称" clearable  />
-					</el-form-item>
-				</el-col>
+<!--				<el-col :span="12">-->
+<!--					<el-form-item label="名称" prop="name">-->
+<!--						&lt;!&ndash;	<el-input v-model="form.merchant_name" placeholder="商户名称" clearable :disabled="mode!='add'" />&ndash;&gt;-->
+<!--						<el-input v-model="form.name" placeholder="礼品卡名称" clearable  />-->
+<!--					</el-form-item>-->
+<!--				</el-col>-->
 
 				<el-col :span="12">
 					<el-form-item label="卡号" prop="card_no">
@@ -203,16 +204,16 @@ export default {
 			this.form.email = data.email
 			this.form.remark = data.remark
 
-			await this.$API.giftcard.detail(data.id).then(res => {
-				/*
-				this.form.role_ids = res.data.roleList.map(item => {
-					return item.id
-				})
-				this.form.post_ids = res.data.postList.map(item => {
-					return item.id
-				})
-				 */
-			})
+			// await this.$API.giftcard.detail(data.id).then(res => {
+			// 	/*
+			// 	this.form.role_ids = res.data.roleList.map(item => {
+			// 		return item.id
+			// 	})
+			// 	this.form.post_ids = res.data.postList.map(item => {
+			// 		return item.id
+			// 	})
+			// 	 */
+			// })
 
 			this.loading = false
 
