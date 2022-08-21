@@ -49,8 +49,8 @@
 
 					<el-form-item label="状态" prop="status">
 						<el-select  v-model="queryParams.status" clearable placeholder="状态">
-							<el-option label="启用" value="0">启用</el-option>
-							<el-option label="停用" value="1">停用</el-option>
+							<el-option label="启用" value="1">启用</el-option>
+							<el-option label="停用" value="2">停用</el-option>
 						</el-select>
 					</el-form-item>
 
@@ -120,8 +120,8 @@
 				</el-table-column>
 
 				<el-table-column
-					label="最后登录时间"
-					prop="login_time"
+					label="过期时间"
+					prop="expire_time"
 					width="260"
 				></el-table-column>
 
@@ -339,7 +339,7 @@ export default {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消'
 			}).then(() => {
-				this.$API.merchant.changeStatus({ id: row.id, status }).then(() => {
+				this.$API.giftcard.changeStatus({ id: row.id, status }).then(() => {
 					this.$message.success(text + '成功')
 				})
 			}).catch(() => {

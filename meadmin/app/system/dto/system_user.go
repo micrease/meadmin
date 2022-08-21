@@ -18,8 +18,7 @@ type SystemUserChangeStatusReq struct {
 }
 
 type SystemUserListReq struct {
-	Page      int    `form:"page"`
-	PageSize  int    `form:"pageSize"`
+	PageQuery
 	OrderBy   string `form:"orderBy"`
 	OrderType string `form:"orderType"`
 	UserName  string `form:"username"`

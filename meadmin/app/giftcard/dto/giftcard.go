@@ -39,19 +39,17 @@ type GiftCardSaveReq struct {
 	Phone        string    `json:"phone"`
 	Remark       string    `json:"remark"`      //备注
 	ExpireTime   time.Time `json:"expire_time"` // 过期时间
-
 }
 
 type GiftCardPageListReq struct {
 	dto.PageQuery
-	ID         uint64 `json:"id"`
-	Username   string `json:"username"`
-	CardNo     string `json:"card_no"`
-	CardPrefix string `json:"card_prefix"`
-	CateId     int    `json:"cate_id"`
-	Currency   string `json:"currency"`
-	Phone      string `json:"phone"`
-	Status     int    `json:"status"`
+	OrderBy   string `form:"order_by"`
+	OrderType     string `form:"order_type"`
+	CardNo string `form:"card_no"`
+	Currency   string `form:"currency"`
+	Status     int    `form:"status"`
+	MaxDate   string `form:"maxDate"`
+	MinDate   string `form:"minDate"`
 }
 
 type GiftCardStatusReq struct {

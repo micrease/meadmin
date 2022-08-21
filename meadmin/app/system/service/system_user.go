@@ -10,6 +10,7 @@ import (
 	"meadmin/app/system/repo"
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
+	"meadmin/library/validate"
 	"meadmin/system/config"
 	"meadmin/system/consts"
 	"meadmin/system/middleware"
@@ -121,10 +122,50 @@ func (this SystemUser) Logout() error {
 	return nil
 }
 
-func (this SystemUser) PageList(req dto.SystemLoginReq) (*dto.SystemPageListResp[model.SystemUser], *result.Error) {
-	pageList, err := this.repo.Paginate(1, 10)
+func (u SystemUser) PageList(ctx *api.Context) (*dto.SystemPageListResp[model.SystemUser], *result.Error) {
+	var req dto.SystemUserListReq
+	validate.BindWithPanic(ctx, &req)
+	builder := u.repo.NewQueryBuilder()
+	withBuilder := u.repo.QueryWithBuilder(builder)
+	if req.UserName != "" {
+		withBuilder.Where("username=?", req.UserName)
+	}
+	if req.NickName != "" {
+		withBuilder.Where("nickname=?", req.NickName)
+	}
+	if req.Phone != "" {
+		withBuilder.Where("phone=?", req.Phone)
+	}
+	if req.Email != "" {
+		withBuilder.Where("email=?", req.Email)
+	}
+	if req.Status != "" {
+		withBuilder.Where("status=?", req.Status)
+	}
+
+	if req.MinDate != "" {
+		location, err := time.Parse("2006-01-02", req.MinDate)
+		if err == nil {
+			withBuilder.Where("created_at>?", location)
+		}
+	}
+	if req.MaxDate != "" {
+		location, err := time.Parse("2006-01-02", req.MaxDate)
+		if err == nil {
+			withBuilder.Where("created_at<?", location)
+		}
+	}
+	withBuilder.Where("deleted_at is null")
+	if req.OrderBy != "" {
+		OrderType := "DESC"
+		if req.OrderType == "ascending" {
+			OrderType = "ASC"
+		}
+		withBuilder.Order(req.OrderBy + " " + OrderType)
+	}
+	pageList, err := withBuilder.Paginate(req.PageNo, req.PageSize)
 	if err != nil {
-		return nil, this.Error(err)
+		return nil, u.Error(err)
 	}
 	page := ToSystemPage[model.SystemUser](pageList)
 	return &page, nil
