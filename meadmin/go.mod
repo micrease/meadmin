@@ -13,7 +13,7 @@ require (
 	github.com/google/go-querystring v1.0.0
 	github.com/jinzhu/copier v0.0.0-20190924061706-b57f9002281a
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
-	github.com/micrease/gorme v1.0.9
+	github.com/micrease/gorme v1.1.0
 	github.com/panjf2000/ants/v2 v2.4.6
 	github.com/pkg/errors v0.8.1
 	github.com/robfig/cron/v3 v3.0.1
@@ -24,8 +24,8 @@ require (
 	github.com/spf13/cast v1.4.1
 	go.uber.org/zap v1.18.1
 	gopkg.in/yaml.v2 v2.4.0
-	gorm.io/driver/mysql v1.3.5
-	gorm.io/gorm v1.23.8
+	gorm.io/driver/mysql v1.4.3
+	gorm.io/gorm v1.24.1
 )
 
 require (

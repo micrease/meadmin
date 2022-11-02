@@ -21,7 +21,7 @@ type GiftCard struct {
 	UpdatedAt    time.Time `json:"updated_at"` // 更新时间
 }
 
-func (model GiftCard) GetID() uint64 {
+func (model GiftCard) GetID() any {
 	return model.ID
 }
 

@@ -6,7 +6,7 @@ type SystemRoleMenu struct {
 	MenuId uint64 `json:"menu_id"` // 菜单主键
 }
 
-func (model SystemRoleMenu) GetID() uint64 {
+func (model SystemRoleMenu) GetID() any {
 	return model.ID
 }
 

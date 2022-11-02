@@ -19,7 +19,7 @@ type SystemDept struct {
 	Remark    string    `json:"remark"`     // 备注
 }
 
-func (model SystemDept) GetID() uint64 {
+func (model SystemDept) GetID() any {
 	return model.ID
 }
 

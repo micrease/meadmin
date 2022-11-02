@@ -15,7 +15,7 @@ type SystemDictType struct {
 	Remark    string    `json:"remark"`     // 备注
 }
 
-func (model SystemDictType) GetID() uint64 {
+func (model SystemDictType) GetID() any {
 	return model.ID
 }
 

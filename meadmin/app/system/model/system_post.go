@@ -15,7 +15,7 @@ type SystemPost struct {
 	Remark    string    `json:"remark"`     // 备注
 }
 
-func (model SystemPost) GetID() uint64 {
+func (model SystemPost) GetID() any {
 	return model.ID
 }
 

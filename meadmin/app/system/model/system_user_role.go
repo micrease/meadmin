@@ -6,7 +6,7 @@ type SystemUserRole struct {
 	RoleId uint64 `json:"role_id"` // 角色主键
 }
 
-func (model SystemUserRole) GetID() uint64 {
+func (model SystemUserRole) GetID() any {
 	return model.ID
 }
 

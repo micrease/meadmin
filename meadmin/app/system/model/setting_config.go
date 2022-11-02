@@ -11,7 +11,7 @@ type SettingConfig struct {
 	Remark    string `json:"remark"`     // 备注
 }
 
-func (model SettingConfig) GetID() uint64 {
+func (model SettingConfig) GetID() any {
 	return model.ID
 }
 

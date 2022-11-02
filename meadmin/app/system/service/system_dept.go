@@ -75,9 +75,7 @@ func (this SystemDept) ToTree(data []dto.DeptTree, parentId uint64) []dto.DeptTr
 	if len(data) == 0 {
 		return tree
 	}
-
 	for _, value := range data {
-
 		if value.ParentId == parentId {
 			child := this.ToTree(data, value.ID)
 			if len(child) > 0 {

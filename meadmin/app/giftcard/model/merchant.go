@@ -19,7 +19,7 @@ type Merchant struct {
 	Remark       string    `json:"remark"`        // 备注
 }
 
-func (model Merchant) GetID() uint64 {
+func (model Merchant) GetID() any {
 	return model.ID
 }
 

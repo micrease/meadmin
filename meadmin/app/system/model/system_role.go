@@ -16,7 +16,7 @@ type SystemRole struct {
 	Remark    string    `json:"remark"`     // 备注
 }
 
-func (model SystemRole) GetID() uint64 {
+func (model SystemRole) GetID() any {
 	return model.ID
 }
 

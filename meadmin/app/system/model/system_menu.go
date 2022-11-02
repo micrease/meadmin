@@ -29,7 +29,7 @@ type SystemMenu struct {
 	Remark    string    `json:"remark"`     // 备注
 }
 
-func (model SystemMenu) GetID() uint64 {
+func (model SystemMenu) GetID() any {
 	return model.ID
 }
 

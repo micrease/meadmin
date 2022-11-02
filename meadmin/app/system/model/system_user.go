@@ -26,7 +26,7 @@ type SystemUser struct {
 	Remark         string    `json:"remark"`          // 备注
 }
 
-func (model SystemUser) GetID() uint64 {
+func (model SystemUser) GetID() any {
 	return model.ID
 }
 

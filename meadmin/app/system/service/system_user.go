@@ -81,14 +81,11 @@ func (this SystemUser) GetIInfo() (dto.SystemInfoResp, *result.Error) {
 		return resp, this.Error(err)
 	}
 
-	userRoleRepo := repo.NewSystemUserRole()
-	builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
-	roleIds := repo.NewSystemUserRole().Values(builder, "role_id")
+	roleIds, _ := repo.NewSystemUserRole().Where("user_id=?", userId).Values("role_id")
 	var roles []string
 	if len(roleIds) > 0 {
 		roleRepo := repo.NewSystemRole()
-		builder = roleRepo.NewQueryBuilder().Where("id in(?)", roleIds)
-		codes := roleRepo.Values(builder, "code")
+		codes, _ := roleRepo.Where("id in(?)", roleIds).Values("code")
 		for _, val := range codes {
 			roles = append(roles, cast.ToString(val))
 		}
@@ -114,7 +111,7 @@ func (this SystemUser) GetIInfo() (dto.SystemInfoResp, *result.Error) {
 	return resp, nil
 }
 
-//登出
+// 登出
 func (this SystemUser) Logout() error {
 
 	return nil
@@ -136,11 +133,7 @@ func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.System
 		return resp, this.Error(err)
 	}
 	err = copier.Copy(&resp, &user)
-
-	userRoleRepo := repo.NewSystemUserRole()
-	builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
-	roleIds := repo.NewSystemUserRole().Values(builder, "role_id")
-
+	roleIds, _ := repo.NewSystemUserRole().Where("user_id=?", userId).Values("role_id")
 	roles, err := NewSystemRole().GetRoutersByIds(roleIds)
 	if err != nil {
 		return resp, this.Error(err)

@@ -20,7 +20,7 @@ type SystemUploadfile struct {
 	Remark      string    `json:"remark"`       // 备注
 }
 
-func (model SystemUploadfile) GetID() uint64 {
+func (model SystemUploadfile) GetID() any {
 	return model.ID
 }
 

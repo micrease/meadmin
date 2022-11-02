@@ -29,9 +29,7 @@ func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
 		}
 	} else {
 		userId := ctx.JwtClaimData.UserId
-		userRoleRepo := repo.NewSystemUserRole()
-		builder := userRoleRepo.NewQueryBuilder().Where("user_id=?", userId)
-		roleIds := repo.NewSystemUserRole().Values(builder, "role_id")
+		roleIds, err := repo.NewSystemUserRole().Where("user_id", userId).Values("role_id")
 		menuIds := this.GetMenuIdsByRoleIds(roleIds)
 		menuList, err = this.repo.Order("sort desc").
 			Where("status=?", model.StatusEnable).
@@ -75,7 +73,7 @@ func (this SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.Me
 
 func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
-		Where("status=?", model.StatusEnable).
+		Where("status", model.StatusEnable).
 		List()
 	if err != nil {
 		return nil, err
@@ -85,8 +83,8 @@ func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
 
 func (this SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
-		Where("status=?", model.StatusEnable).
-		Where("id in(?)", menuIds).
+		Where("status", model.StatusEnable).
+		WhereIn("id", menuIds).
 		List()
 	if err != nil {
 		return nil, err
@@ -94,13 +92,13 @@ func (this SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) 
 	return this.SysMenuToRouterTree(list), nil
 }
 
-//getMenuCode
+// getMenuCode
 func (this SystemMenu) GetMenuCode(menuIds []any) []any {
 	if len(menuIds) == 0 {
 		return []any{}
 	}
-	builder := this.repo.NewQueryBuilder().Where("id in(?)", menuIds)
-	return this.repo.Values(builder, "code")
+	ids, _ := this.repo.WhereIn("id", menuIds).Values("code")
+	return ids
 }
 
 func (this SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.RouterTree {
@@ -121,11 +119,9 @@ func (this SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
 		return []any{}
 	}
 	roleRepo := repo.NewSystemRoleMenu()
-	builder := roleRepo.NewQueryBuilder().Where("role_id in(?)", roleIds)
-	menuIds := roleRepo.Values(builder, "menu_id")
-
-	builder = this.repo.NewQueryBuilder().Where("id in(?)", menuIds)
-	return this.repo.Values(builder, "id")
+	menuIds, _ := roleRepo.WhereIn("role_id", roleIds).Values("menu_id")
+	ids, _ := this.repo.WhereIn("id", menuIds).Values("id")
+	return ids
 }
 
 func (this SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.RouterTree {
