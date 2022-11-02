@@ -6,9 +6,11 @@ import (
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
 	"meadmin/library/context/api"
+	"meadmin/library/context/result"
 )
 
 type SystemRole struct {
+	Service
 	repo *repo.SystemRole
 }
 
@@ -36,7 +38,7 @@ func (this SystemRole) Save(ctx *api.Context, req dto.SystemRoleSaveReq) error {
 	model.Sort = req.Sort
 	model.Code = req.Code
 	model.Remark = req.Remark
-	model.Status = cast.ToInt(req.Status)
+	model.Status = req.Status
 	model.DataScope = "0"
 	return this.repo.Save(&model).Error
 }
@@ -59,12 +61,27 @@ func (this SystemRole) GetList(ctx *api.Context) ([]model.SystemRole, error) {
 }
 
 func (this SystemRole) GetRoutersByIds(roleIds []any) ([]model.SystemRole, error) {
-	list, err := this.repo.Order("sort desc").
-		Where("status=?", model.StatusEnable).
-		Where("id in(?)", roleIds).
-		List()
+	list, err := this.repo.Where("status=0").Where("id in(?)", roleIds).Order("sort desc").List()
 	if err != nil {
 		return nil, err
 	}
 	return list, nil
+}
+
+// ChangeStatus 设置用户状态
+func (r SystemRole) ChangeStatus(userId uint64, status string) *result.Error {
+	builder := r.repo.NewQueryBuilder().Where("id=?", userId)
+	err := builder.UpdateColumn("status", status).Error
+	if err != nil {
+		return r.Error(err)
+	}
+	return nil
+}
+
+func (r SystemRole) Delete(ids []string) *result.Error {
+	err := r.repo.NewQueryBuilder().Delete(&model.SystemUser{}, ids).Error
+	if err != nil {
+		return r.Error(err)
+	}
+	return nil
 }

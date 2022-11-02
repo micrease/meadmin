@@ -21,5 +21,7 @@ func GiftCardRouter(systemApiGroup *api.RouterGroup) {
 		giftcardGroup.POST("/save", giftcard.Save)
 		giftcardGroup.PUT("/change_status", giftcard.ChangeStatus)
 		giftcardGroup.GET("/detail/:id", giftcard.Detail)
+		giftcardGroup.DELETE("/delete/:id", giftcard.Delete)
+
 	}
 }

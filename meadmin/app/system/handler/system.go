@@ -46,10 +46,7 @@ func (this *System) GetInfo(ctx *api.Context) *result.Result {
 
 //PageList
 func (this *System) PageList(ctx *api.Context) *result.Result {
-	var req dto.SystemLoginReq
-	validate.BindWithPanic(ctx, &req)
-
-	resp, respErr := service.NewSystemUser(ctx).PageList(req)
+	resp, respErr := service.NewSystemUser(ctx).PageList(ctx)
 	if respErr != nil {
 		return result.ErrorResult(respErr)
 	}

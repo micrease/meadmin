@@ -272,11 +272,14 @@
           let ids = []
           this.selection.map(item => ids.push(item.id))
           if (this.isRecycle) {
-            this.$API.role.realDeletes(ids.join(',')).then()
+            this.$API.role.realDeletes(ids.join(',')).then(() => {
+							this.$refs.table.upData(this.queryParams)
+						})
           } else {
-            this.$API.role.deletes(ids.join(',')).then()
+            this.$API.role.deletes(ids.join(',')).then(() => {
+							this.$refs.table.upData(this.queryParams)
+						})
           }
-          this.$refs.table.upData(this.queryParams)
           loading.close();
           this.$message.success("操作成功")
         })

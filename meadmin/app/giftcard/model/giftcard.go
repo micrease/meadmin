@@ -14,11 +14,12 @@ type GiftCard struct {
 	FundPassword string    `json:"fund_password"`
 	Password     string    `json:"password"`
 	Phone        string    `json:"phone"`
-	Remark       string    `json:"remark"`     //备注
-	CreatedBy    uint64    `json:"created_by"` // 创建者
-	UpdatedBy    uint64    `json:"updated_by"` // 更新者
-	CreatedAt    time.Time `json:"created_at"` // 创建时间
-	UpdatedAt    time.Time `json:"updated_at"` // 更新时间
+	Remark       string    `json:"remark"`      //备注
+	CreatedBy    uint64    `json:"created_by"`  // 创建者
+	UpdatedBy    uint64    `json:"updated_by"`  // 更新者
+	CreatedAt    time.Time `json:"created_at"`  // 创建时间
+	UpdatedAt    time.Time `json:"updated_at"`  // 更新时间
+	ExpireTime   time.Time `json:"expire_time"` // 过期时间
 }
 
 func (model GiftCard) GetID() any {

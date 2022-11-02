@@ -45,7 +45,8 @@ CREATE TABLE `giftcard` (
   `updated_by` bigint(20) DEFAULT NULL COMMENT '更新者',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间'
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `expire_time` timestamp NULL DEFAULT NULL COMMENT '过期时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --

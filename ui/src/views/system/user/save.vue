@@ -1,11 +1,12 @@
 <template>
   <el-dialog
     :title="titleMap[mode]"
-    v-model="visible" 
+    v-model="visible"
     append-to-body
     :width="800"
     destroy-on-close
     @closed="$emit('closed')"
+		:close-on-click-modal="false"
   >
     <el-form
       :model="form"
@@ -129,8 +130,8 @@
           phone: '',
           password: '123456',
           dept_id: null,
-          role_ids: '',
-          post_ids: '',
+          role_ids: [],
+          post_ids: [],
           email: '',
           status: '0',
           remark: ''

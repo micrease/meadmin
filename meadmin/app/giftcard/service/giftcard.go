@@ -26,7 +26,38 @@ func NewGiftCard(ctx *api.Context) *GiftCard {
 }
 
 func (this *GiftCard) PageList(req dto.GiftCardPageListReq) (*gorme.PageResult[model.GiftCard], error) {
-	pageList, err := this.repo.Paginate(req.PageNo, req.PageSize)
+	builder := this.repo.NewQueryBuilder()
+	withBuilder := this.repo.QueryWithBuilder(builder)
+	if req.CardNo != "" {
+		withBuilder.Where("card_no=?", req.CardNo)
+	}
+	if req.Currency != "" {
+		withBuilder.Where("currency=?", req.Currency)
+	}
+	if req.Status != 0 {
+		withBuilder.Where("status=?", req.Status)
+	}
+	if req.MinDate != "" {
+		location, err := time.Parse("2006-01-02", req.MinDate)
+		if err == nil {
+			withBuilder.Where("created_at>?", location)
+		}
+	}
+	if req.MaxDate != "" {
+		location, err := time.Parse("2006-01-02", req.MaxDate)
+		if err == nil {
+			withBuilder.Where("created_at<?", location)
+		}
+	}
+	withBuilder.Where("deleted_at is null")
+	if req.OrderBy != "" {
+		OrderType := "DESC"
+		if req.OrderType == "ascending" {
+			OrderType = "ASC"
+		}
+		withBuilder.Order(req.OrderBy + " " + OrderType)
+	}
+	pageList, err := withBuilder.Paginate(req.PageNo, req.PageSize)
 	return pageList, err
 }
 
@@ -45,10 +76,7 @@ func (this *GiftCard) ChangeStatus(req dto.GiftCardStatusReq) *result.Error {
 		return this.Message("礼品卡不存在")
 	}
 
-	if req.Status != enum.StatusEnable {
-		req.Status = enum.StatusDisable
-	}
-
+	model.Status = req.Status
 	err = this.repo.Select("status").Save(model).Error
 	if err != nil {
 		return this.Error(err)
@@ -81,6 +109,14 @@ func (this *GiftCard) Save(req dto.GiftCardSaveReq) *result.Error {
 	err = this.repo.Save(&model).Error
 	if err != nil {
 		return this.Error(err)
+	}
+	return nil
+}
+
+func (g *GiftCard) Delete(ids []string) *result.Error {
+	err := g.repo.NewQueryBuilder().Delete(&model.GiftCard{}, ids).Error
+	if err != nil {
+		return g.Error(err)
 	}
 	return nil
 }

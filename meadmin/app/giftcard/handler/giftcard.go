@@ -7,9 +7,11 @@ import (
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
 	"meadmin/library/validate"
+	"strings"
 )
 
-//giftcard
+// GiftCard
+// @Description:
 type GiftCard struct {
 }
 
@@ -79,4 +81,19 @@ func (this GiftCard) Detail(ctx *api.Context) *result.Result {
 		return result.ErrorMessage(err)
 	}
 	return result.Success(model)
+}
+
+// Delete
+// @Description: 删除礼品卡
+// @receiver g
+// @param ctx
+// @return *result.Result
+func (g GiftCard) Delete(ctx *api.Context) *result.Result {
+	id := ctx.GinCtx.Param("id")
+	ids := strings.Split(id, ",")
+	err := service.NewGiftCard(ctx).Delete(ids)
+	if err != nil {
+		return result.ErrorResult(err)
+	}
+	return result.Success()
 }

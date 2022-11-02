@@ -49,8 +49,8 @@
 
 					<el-form-item label="状态" prop="status">
 						<el-select  v-model="queryParams.status" clearable placeholder="状态">
-							<el-option label="启用" value="0">启用</el-option>
-							<el-option label="停用" value="1">停用</el-option>
+							<el-option label="启用" value="1">启用</el-option>
+							<el-option label="停用" value="2">停用</el-option>
 						</el-select>
 					</el-form-item>
 
@@ -120,8 +120,8 @@
 				</el-table-column>
 
 				<el-table-column
-					label="最后登录时间"
-					prop="login_time"
+					label="过期时间"
+					prop="expire_time"
 					width="260"
 				></el-table-column>
 
@@ -146,12 +146,12 @@
 						<el-button
 							type="primary" link
 							@click="edit(scope.row, scope.$index)"
-							v-if="$AUTH('system:role:update')"
+							v-if="$AUTH('giftcard:update')"
 						>编辑</el-button>
 
 						<el-button
 							type="primary" link
-							v-if="$AUTH('system:role:delete')"
+							v-if="$AUTH('giftcard:delete')"
 							@click="deletes(scope.row.id)"
 						>删除</el-button>
 
@@ -164,13 +164,13 @@
 
 						<el-button
 							type="primary" link
-							v-auth="['system:role:recovery']"
+							v-auth="['giftcard:recovery']"
 							@click="recovery(scope.row.id)"
 						>恢复</el-button>
 
 						<el-button
 							type="primary" link
-							v-auth="['system:role:realDelete']"
+							v-auth="['giftcard:realDelete']"
 							@click="deletes(scope.row.id)"
 						>删除</el-button>
 
@@ -213,7 +213,7 @@ export default {
 			dept: [],
 			api: {
 				list: this.$API.giftcard.pageList,
-				recycleList: this.$API.role.getRecyclePageList,
+				recycleList: this.$API.giftcard.getRecyclePageList,
 			},
 			selection: [],
 			queryParams: {
@@ -259,11 +259,14 @@ export default {
 				let ids = []
 				this.selection.map(item => ids.push(item.id))
 				if (this.isRecycle) {
-					this.$API.role.realDeletes(ids.join(',')).then()
+					this.$API.giftcard.realDeletes(ids.join(',')).then(() => {
+						this.$refs.table.upData(this.queryParams)
+					})
 				} else {
-					this.$API.role.deletes(ids.join(',')).then()
+					this.$API.giftcard.deletes(ids.join(',')).then(() => {
+						this.$refs.table.upData(this.queryParams)
+					})
 				}
-				this.$refs.table.upData(this.queryParams)
 				loading.close();
 				this.$message.success("操作成功")
 			})
@@ -278,11 +281,11 @@ export default {
 			}).then(() => {
 				const loading = this.$loading();
 				if (this.isRecycle) {
-					this.$API.role.realDeletes(id).then(() => {
+					this.$API.giftcard.realDeletes(id).then(() => {
 						this.$refs.table.upData(this.queryParams)
 					})
 				} else {
-					this.$API.role.deletes(id).then(() => {
+					this.$API.giftcard.deletes(id).then(() => {
 						this.$refs.table.upData(this.queryParams)
 					})
 				}
@@ -293,7 +296,7 @@ export default {
 
 		// 恢复数据
 		async recovery (id) {
-			await this.$API.role.recoverys(id).then(res => {
+			await this.$API.giftcard.recoverys(id).then(res => {
 				this.$message.success(res.message)
 				this.$refs.table.upData(this.queryParams)
 			})
@@ -336,7 +339,7 @@ export default {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消'
 			}).then(() => {
-				this.$API.merchant.changeStatus({ id: row.id, status }).then(() => {
+				this.$API.giftcard.changeStatus({ id: row.id, status }).then(() => {
 					this.$message.success(text + '成功')
 				})
 			}).catch(() => {
