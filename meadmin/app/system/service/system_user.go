@@ -232,7 +232,7 @@ func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Er
 	roleRepo := repo.NewSystemUserRole()
 	for _, id := range req.RoleIds {
 		roleModel := roleRepo.NewModel()
-		roleModel.UserId = userId
+		roleModel.UserId = cast.ToUint64(userId)
 		roleModel.RoleId = id
 		err = roleRepo.NewQueryBuilder().Save(&roleModel).Error
 		if err != nil {
@@ -244,7 +244,7 @@ func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Er
 	postRepo := repo.NewSystemUserPost()
 	for _, id := range req.PostIds {
 		postModel := postRepo.NewModel()
-		postModel.UserId = userId
+		postModel.UserId = cast.ToUint64(userId)
 		postModel.PostId = id
 		err = postRepo.NewQueryBuilder().Save(&postModel).Error
 		if err != nil {

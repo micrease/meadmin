@@ -6,7 +6,7 @@ type SystemUserPost struct {
 	PostId uint64 `json:"post_id"` // 岗位主键
 }
 
-func (model SystemUserPost) GetID() uint64 {
+func (model SystemUserPost) GetID() any {
 	return model.ID
 }
 
