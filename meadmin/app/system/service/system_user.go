@@ -66,7 +66,7 @@ func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *resu
 	return resp, nil
 }
 
-func (this SystemUser) GetIInfo() (dto.SystemInfoResp, *result.Error) {
+func (this SystemUser) GetInfo() (dto.SystemInfoResp, *result.Error) {
 	resp := dto.SystemInfoResp{}
 
 	userId := this.ctx.JwtClaimData.UserId
@@ -83,7 +83,10 @@ func (this SystemUser) GetIInfo() (dto.SystemInfoResp, *result.Error) {
 		return resp, this.Error(err)
 	}
 
-	roleIds, _ := repo.NewSystemUserRole().Where("user_id=?", userId).Values("role_id")
+	roleIds, err := repo.NewSystemUserRole().Where("user_id", userId).Values("role_id")
+	if err != nil {
+		return resp, this.Error(err)
+	}
 	var roles []string
 	if len(roleIds) > 0 {
 		roleRepo := repo.NewSystemRole()

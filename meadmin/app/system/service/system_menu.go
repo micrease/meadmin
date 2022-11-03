@@ -13,13 +13,13 @@ type SystemMenu struct {
 	repo *repo.SystemMenu
 }
 
-func NewSystemMenu() SystemMenu {
-	service := SystemMenu{}
+func NewSystemMenu() *SystemMenu {
+	service := &SystemMenu{}
 	service.repo = repo.NewSystemMenu()
 	return service
 }
 
-func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
+func (this *SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
 	var menuList []model.SystemMenu
 	var err error
 	if ctx.JwtClaimData.IsSuperAdmin {
@@ -52,7 +52,7 @@ func (this SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
 	return this.ToMenuTree(menuTreeList, 0), nil
 }
 
-func (this SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.MenuTree {
+func (this *SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.MenuTree {
 	var tree []dto.MenuTree
 	if len(data) == 0 {
 		return tree
@@ -71,7 +71,7 @@ func (this SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.Me
 	return tree
 }
 
-func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
+func (this *SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
 		Where("status", model.StatusEnable).
 		List()
@@ -81,7 +81,7 @@ func (this SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
 	return this.SysMenuToRouterTree(list), nil
 }
 
-func (this SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) {
+func (this *SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
 		Where("status", model.StatusEnable).
 		WhereIn("id", menuIds).
@@ -93,7 +93,7 @@ func (this SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) 
 }
 
 // getMenuCode
-func (this SystemMenu) GetMenuCode(menuIds []any) []any {
+func (this *SystemMenu) GetMenuCode(menuIds []any) []any {
 	if len(menuIds) == 0 {
 		return []any{}
 	}
@@ -101,7 +101,7 @@ func (this SystemMenu) GetMenuCode(menuIds []any) []any {
 	return ids
 }
 
-func (this SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.RouterTree {
+func (this *SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.RouterTree {
 	var routerTree []dto.RouterTree
 	if len(menuList) == 0 {
 		return routerTree
@@ -114,7 +114,7 @@ func (this SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.Ro
 	return this.ToTree(routers, 0)
 }
 
-func (this SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
+func (this *SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
 	if len(roleIds) == 0 {
 		return []any{}
 	}
@@ -124,7 +124,7 @@ func (this SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
 	return ids
 }
 
-func (this SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.RouterTree {
+func (this *SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.RouterTree {
 	var tree []dto.RouterTree
 	if len(data) == 0 {
 		return tree
@@ -144,7 +144,7 @@ func (this SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.Router
 	return tree
 }
 
-func (this SystemMenu) SetRouter(menu model.SystemMenu) dto.RouterTree {
+func (this *SystemMenu) SetRouter(menu model.SystemMenu) dto.RouterTree {
 	route := "/" + menu.Route
 	if menu.Type == "L" {
 		route = menu.Route

@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemUploadfile struct {
@@ -11,6 +10,6 @@ type SystemUploadfile struct {
 
 func NewSystemUploadfile() *SystemUploadfile {
 	repo := &SystemUploadfile{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

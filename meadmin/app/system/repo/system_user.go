@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemUser struct {
@@ -11,6 +10,6 @@ type SystemUser struct {
 
 func NewSystemUser() *SystemUser {
 	repo := &SystemUser{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemRole struct {
@@ -11,6 +10,6 @@ type SystemRole struct {
 
 func NewSystemRole() *SystemRole {
 	repo := &SystemRole{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

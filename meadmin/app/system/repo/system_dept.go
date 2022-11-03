@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemDept struct {
@@ -11,6 +10,6 @@ type SystemDept struct {
 
 func NewSystemDept() *SystemDept {
 	repo := &SystemDept{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

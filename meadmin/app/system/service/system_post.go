@@ -12,13 +12,13 @@ type SystemPost struct {
 	repo *repo.SystemPost
 }
 
-func NewSystemPost() SystemPost {
-	service := SystemPost{}
+func NewSystemPost() *SystemPost {
+	service := &SystemPost{}
 	service.repo = repo.NewSystemPost()
 	return service
 }
 
-func (this SystemPost) PageList() (*dto.SystemPageListResp[model.SystemPost], error) {
+func (this *SystemPost) PageList() (*dto.SystemPageListResp[model.SystemPost], error) {
 	postPageList, err := this.repo.Where("status=?", model.StatusEnable).Paginate(1, 10)
 	if err != nil {
 		return nil, err
@@ -27,12 +27,12 @@ func (this SystemPost) PageList() (*dto.SystemPageListResp[model.SystemPost], er
 	return &respPage, nil
 }
 
-func (this SystemPost) PostList() ([]model.SystemPost, error) {
+func (this *SystemPost) PostList() ([]model.SystemPost, error) {
 	postList, err := this.repo.Where("status=?", model.StatusEnable).List()
 	return postList, err
 }
 
-func (this SystemPost) Save(ctx *api.Context, req dto.SystemPostSaveReq) error {
+func (this *SystemPost) Save(ctx *api.Context, req dto.SystemPostSaveReq) error {
 	model := this.repo.NewModel()
 	var err error
 	if req.ID > 0 {

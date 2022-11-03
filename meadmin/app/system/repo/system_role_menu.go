@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemRoleMenu struct {
@@ -11,6 +10,6 @@ type SystemRoleMenu struct {
 
 func NewSystemRoleMenu() *SystemRoleMenu {
 	repo := &SystemRoleMenu{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

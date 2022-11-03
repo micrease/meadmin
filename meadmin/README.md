@@ -64,7 +64,7 @@ doc_enable = true
 ### 相关库
 
 * web路由框架gin  
-* orm框架gorm  
+* orm框架gorme:  
 * 时间库carbon  
 * 类型转换库cast  
 * 前端UI框架SCUI: https://lolicode.gitee.io/scui-doc/  

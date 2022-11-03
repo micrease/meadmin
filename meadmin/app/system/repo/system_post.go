@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemPost struct {
@@ -11,6 +10,6 @@ type SystemPost struct {
 
 func NewSystemPost() *SystemPost {
 	repo := &SystemPost{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

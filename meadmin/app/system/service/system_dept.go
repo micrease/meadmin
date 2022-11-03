@@ -11,13 +11,13 @@ type SystemDept struct {
 	repo *repo.SystemDept
 }
 
-func NewSystemDept() SystemDept {
-	service := SystemDept{}
+func NewSystemDept() *SystemDept {
+	service := &SystemDept{}
 	service.repo = repo.NewSystemDept()
 	return service
 }
 
-func (this SystemDept) GetListTree() ([]dto.DeptTree, error) {
+func (this *SystemDept) GetListTree() ([]dto.DeptTree, error) {
 	deptList, err := this.repo.Where("status=?", model.StatusEnable).List()
 	if err != nil {
 		return nil, err
@@ -35,7 +35,7 @@ func (this SystemDept) GetListTree() ([]dto.DeptTree, error) {
 	return this.ToTree(treeList, 0), nil
 }
 
-func (this SystemDept) GetModelListTree() ([]dto.DeptModelTree, error) {
+func (this *SystemDept) GetModelListTree() ([]dto.DeptModelTree, error) {
 	deptList, err := this.repo.Where("status=?", model.StatusEnable).List()
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (this SystemDept) GetModelListTree() ([]dto.DeptModelTree, error) {
 	return this.ToModelTree(treeList, 0), nil
 }
 
-func (this SystemDept) ToModelTree(data []dto.DeptModelTree, parentId uint64) []dto.DeptModelTree {
+func (this *SystemDept) ToModelTree(data []dto.DeptModelTree, parentId uint64) []dto.DeptModelTree {
 	var tree []dto.DeptModelTree
 	if len(data) == 0 {
 		return tree
@@ -70,7 +70,7 @@ func (this SystemDept) ToModelTree(data []dto.DeptModelTree, parentId uint64) []
 	return tree
 }
 
-func (this SystemDept) ToTree(data []dto.DeptTree, parentId uint64) []dto.DeptTree {
+func (this *SystemDept) ToTree(data []dto.DeptTree, parentId uint64) []dto.DeptTree {
 	var tree []dto.DeptTree
 	if len(data) == 0 {
 		return tree

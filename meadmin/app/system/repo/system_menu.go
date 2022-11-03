@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemMenu struct {
@@ -11,6 +10,6 @@ type SystemMenu struct {
 
 func NewSystemMenu() *SystemMenu {
 	repo := &SystemMenu{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemConfig struct {
@@ -11,6 +10,6 @@ type SystemConfig struct {
 
 func NewSystemConfig() *SystemConfig {
 	repo := &SystemConfig{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

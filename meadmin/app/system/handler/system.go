@@ -8,12 +8,12 @@ import (
 	"meadmin/library/validate"
 )
 
-//系统管理
+// 系统管理
 type System struct {
 	Handler
 }
 
-//管理员登录
+// 管理员登录
 func (this *System) Login(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
@@ -32,19 +32,19 @@ func (this *System) Logout(ctx *api.Context) *result.Result {
 	return result.Success()
 }
 
-//获取管理员信息
+// 获取管理员信息
 func (this *System) GetInfo(ctx *api.Context) *result.Result {
 	var req dto.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
 
-	resp, respErr := service.NewSystemUser(ctx).GetIInfo()
+	resp, respErr := service.NewSystemUser(ctx).GetInfo()
 	if respErr != nil {
 		return result.ErrorResult(respErr)
 	}
 	return result.Success(resp)
 }
 
-//PageList
+// PageList
 func (this *System) PageList(ctx *api.Context) *result.Result {
 	resp, respErr := service.NewSystemUser(ctx).PageList(ctx)
 	if respErr != nil {

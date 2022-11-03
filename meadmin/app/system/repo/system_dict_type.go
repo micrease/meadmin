@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/system/model"
-	"meadmin/system/datasource"
 )
 
 type SystemDictType struct {
@@ -11,6 +10,6 @@ type SystemDictType struct {
 
 func NewSystemDictType() *SystemDictType {
 	repo := &SystemDictType{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }
