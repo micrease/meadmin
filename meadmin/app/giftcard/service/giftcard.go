@@ -26,38 +26,37 @@ func NewGiftCard(ctx *api.Context) *GiftCard {
 }
 
 func (this *GiftCard) PageList(req dto.GiftCardPageListReq) (*gorme.PageResult[model.GiftCard], error) {
-	builder := this.repo.NewQueryBuilder()
-	withBuilder := this.repo.QueryWithBuilder(builder)
 	if req.CardNo != "" {
-		withBuilder.Where("card_no=?", req.CardNo)
+		this.repo.Where("card_no", req.CardNo)
 	}
 	if req.Currency != "" {
-		withBuilder.Where("currency=?", req.Currency)
+		this.repo.Where("currency", req.Currency)
 	}
 	if req.Status != 0 {
-		withBuilder.Where("status=?", req.Status)
+		this.repo.Where("status", req.Status)
 	}
 	if req.MinDate != "" {
 		location, err := time.Parse("2006-01-02", req.MinDate)
 		if err == nil {
-			withBuilder.Where("created_at>?", location)
+			this.repo.Where("created_at", ">", location)
 		}
 	}
 	if req.MaxDate != "" {
 		location, err := time.Parse("2006-01-02", req.MaxDate)
 		if err == nil {
-			withBuilder.Where("created_at<?", location)
+			this.repo.Where("created_at", "<", location)
 		}
 	}
-	withBuilder.Where("deleted_at is null")
+
+	this.repo.Where("deleted_at is null")
 	if req.OrderBy != "" {
 		OrderType := "DESC"
 		if req.OrderType == "ascending" {
 			OrderType = "ASC"
 		}
-		withBuilder.Order(req.OrderBy + " " + OrderType)
+		this.repo.Order(req.OrderBy + " " + OrderType)
 	}
-	pageList, err := withBuilder.Paginate(req.PageNo, req.PageSize)
+	pageList, err := this.repo.Paginate(req.PageNo, req.PageSize)
 	return pageList, err
 }
 

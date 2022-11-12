@@ -18,7 +18,7 @@ func NewSystemDept() *SystemDept {
 }
 
 func (this *SystemDept) GetListTree() ([]dto.DeptTree, error) {
-	deptList, err := this.repo.Where("status=?", model.StatusEnable).List()
+	deptList, err := this.repo.Where("status", model.StatusEnable).List()
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func (this *SystemDept) GetListTree() ([]dto.DeptTree, error) {
 }
 
 func (this *SystemDept) GetModelListTree() ([]dto.DeptModelTree, error) {
-	deptList, err := this.repo.Where("status=?", model.StatusEnable).List()
+	deptList, err := this.repo.Where("status", model.StatusEnable).List()
 	if err != nil {
 		return nil, err
 	}

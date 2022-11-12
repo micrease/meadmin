@@ -306,8 +306,8 @@ github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m
 github.com/mattn/go-sqlite3 v1.11.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 github.com/mattn/go-sqlite3 v1.14.6 h1:dNPt6NO46WmLVt2DLNpwczCmdV5boIZ6g/tlDrlRUbg=
 github.com/mattn/go-sqlite3 v1.14.6/go.mod h1:NyWgC/yNuGj7Q9rpYnZvas74GogHl5/Z4A/KQRfk6bU=
-github.com/micrease/gorme v1.1.1 h1:XJElcT9lA4QVIu9C5QIzVM5jTzwIuJnHaIYKFnZ10bU=
-github.com/micrease/gorme v1.1.1/go.mod h1:CGE5+hhrmsDgPnYeKwnDvLBKqxD+C7c+hBEz0U7qp5c=
+github.com/micrease/gorme v1.1.3 h1:3o8VKNjPDOwb5ofERSCDttpDtjyX8Uxo74OQI/BRjaI=
+github.com/micrease/gorme v1.1.3/go.mod h1:t3gMZ8OLwjupN6fOZbcukxR5cr/hLutqYe8mNI92Dww=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
 github.com/mitchellh/cli v1.0.0/go.mod h1:hNIlj7HEI86fIcpObd7a0FcrxTWetlwJDGcceTlRvqc=
 github.com/mitchellh/cli v1.1.2/go.mod h1:6iaV0fGdElS6dPBx0EApTxHrcWvmJphyh2n8YBLPPZ4=
