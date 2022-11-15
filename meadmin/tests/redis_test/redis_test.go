@@ -48,7 +48,7 @@ func TestRedisClientSet(t *testing.T) {
 	fmt.Println("过期后Get", val)
 }
 
-//弄了一天
+// 弄了一天
 func TestRedisClientHSet(t *testing.T) {
 	redisClient.Connect("127.0.0.1:6379")
 	type TestRedis struct {
@@ -102,7 +102,7 @@ func ExampleClient() {
 func TestMain(m *testing.M) {
 	fmt.Println("run main")
 	//解析配置文件
-	config.InitConfig("../../resources/config-dev.ini")
+	config.InitConfig("../../resources/config-dev.yaml")
 	//Log初始化
 	logger.InitLog()
 	m.Run()

@@ -17,15 +17,15 @@ func TestSendMessage(t *testing.T) {
 	time.Sleep(time.Second * 2)
 	for i := 0; i < 10000; i++ {
 		now := carbon.Now().ToDateTimeString()
-		msg := fmt.Sprintf("发送消息_%s_%d", now, i)
+		msg := fmt.Sprintf("我是消息_%s_%d", now, i)
 		producer.PushMessage("test", msg)
-		fmt.Println(msg)
+		fmt.Println("发送消息:" + msg)
 		time.Sleep(time.Second)
 	}
 }
 
 func MessageHandle(message *sarama.ConsumerMessage) {
-	msg := fmt.Sprintf("Message claimed: value = %s, timestamp = %v, topic = %s, partions = %d, offset = %d", string(message.Value), message.Timestamp, message.Topic, message.Partition, message.Offset)
+	msg := fmt.Sprintf("接收消息: value = %s, timestamp = %v, topic = %s, partions = %d, offset = %d", string(message.Value), message.Timestamp, message.Topic, message.Partition, message.Offset)
 	fmt.Println(msg)
 }
 

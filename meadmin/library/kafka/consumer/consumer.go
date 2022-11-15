@@ -14,19 +14,6 @@ import (
 	"time"
 )
 
-/**
-KAFKA_BROKER_LIST=172.20.1.248:9092
-KAFKA_BROKER_VERSION=1.0.0
-//存款topic固定
-KAFKA_DEPOSIT_TOPIC=deposit
-//组id 自定义
-KAFKA_DEPOSIT_GROUP_ID=laborday
-//投注topic固定
-KAFKA_BET_TOPIC=order
-//组id 自定义
-KAFKA_BET_GROUP_ID=laborday
-*/
-
 func ShowMetadata(addrs []string) {
 	config := sarama.NewConfig()
 	config.Producer.Partitioner = sarama.NewRandomPartitioner
@@ -85,14 +72,14 @@ func NewKafkaConsumerGroupAction(brokers []string, groupId string) *KafkaConsume
 	return &KafkaConsumerGroupAction{group: consumerGroup}
 }
 
-func (K *KafkaConsumerGroupAction) Consume(topics []string, handle_func func(message *sarama.ConsumerMessage)) {
+func (K *KafkaConsumerGroupAction) Consume(topics []string, handleFunc func(message *sarama.ConsumerMessage)) {
 
 	if K == nil {
 		return
 	}
 	var wg sync.WaitGroup
 	ctx := context.Background()
-	var consumer = KafkaConsumerGroupHandler{ready: make(chan bool), handle: handle_func}
+	var consumer = KafkaConsumerGroupHandler{ready: make(chan bool), handle: handleFunc}
 	go func() {
 		defer wg.Done()
 		for {
@@ -133,13 +120,13 @@ func (K *KafkaConsumerGroupHandler) Setup(sarama.ConsumerGroupSession) error {
 func (K *KafkaConsumerGroupHandler) Cleanup(sarama.ConsumerGroupSession) error {
 	return nil
 }
+
 func (K *KafkaConsumerGroupHandler) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for message := range claim.Messages() {
 		K.handle(message)
-		lag := claim.HighWaterMarkOffset() - message.Offset
-		fmt.Println(lag)
+		//lag := claim.HighWaterMarkOffset() - message.Offset
+		//fmt.Printf("有%d条消息待消费", lag)
 		session.MarkMessage(message, "")
 	}
-
 	return nil
 }

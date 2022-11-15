@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-//基于go-redis v8封装
+// 基于go-redis v8封装
 type RedisClient struct {
 	rdb *redis.Client
 	ctx context.Context
@@ -36,12 +36,12 @@ func Connect(addr string) *RedisClient {
 	return redisClient
 }
 
-//不过期
+// 不过期
 func SetForever(key string, value any) error {
 	return redisClient.rdb.Set(redisClient.ctx, key, value, 0).Err()
 }
 
-//设置过期时间,为了防把过期时间误传,如果不到1秒的,会当成秒处理
+// 设置过期时间,为了防把过期时间误传,如果不到1秒的,会当成秒处理
 func Set(key string, value any, expiration time.Duration) error {
 	if expiration < time.Second {
 		expiration = expiration * time.Second
@@ -61,7 +61,7 @@ func Lock(key string, value any, expiration time.Duration) bool {
 	return cmd.Val()
 }
 
-//GET
+// GET
 func Get(key string) *redis.StringCmd {
 	return redisClient.rdb.Get(redisClient.ctx, key)
 }
@@ -110,7 +110,12 @@ func Scan(cmd *redis.StringStringMapCmd, dest interface{}, tag ...string) error 
 	if cmd.Err() != nil {
 		return cmd.Err()
 	}
-	strct, err := structs.Struct(dest, tag[0])
+
+	fieldTag := "json"
+	if tag != nil && len(tag) > 0 {
+		fieldTag = tag[0]
+	}
+	strct, err := structs.Struct(dest, fieldTag)
 	if err != nil {
 		return err
 	}
