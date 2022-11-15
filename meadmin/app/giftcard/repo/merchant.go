@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/giftcard/model"
-	"meadmin/system/datasource"
 )
 
 type Merchant struct {
@@ -11,6 +10,6 @@ type Merchant struct {
 
 func NewMerchant() *Merchant {
 	repo := &Merchant{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

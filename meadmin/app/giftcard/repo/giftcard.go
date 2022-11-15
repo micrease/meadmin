@@ -2,7 +2,6 @@ package repo
 
 import (
 	"meadmin/app/giftcard/model"
-	"meadmin/system/datasource"
 )
 
 type GiftCard struct {
@@ -11,6 +10,6 @@ type GiftCard struct {
 
 func NewGiftcard() *GiftCard {
 	repo := &GiftCard{}
-	repo.SetDB(datasource.GetDB())
+	repo.initialize()
 	return repo
 }

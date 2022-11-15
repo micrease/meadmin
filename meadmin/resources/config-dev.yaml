@@ -5,6 +5,7 @@ env: dev
 # 服务版本
 version: 1.0.0
 jwt_secret: ewerwerwerwerwer
+kafka_broker: 60.164.247.74:9092
 database:
   # 数据库-主库
   driver: mysql
