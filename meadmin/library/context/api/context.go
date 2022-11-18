@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -11,32 +12,37 @@ import (
 	"meadmin/library/astparser"
 	"meadmin/library/context/result"
 	"meadmin/library/logger"
+	"meadmin/library/rpc/protocol"
 	"meadmin/library/strings"
 	"meadmin/system/config"
 	"meadmin/system/consts"
 )
 
-//这里我们用自己的context包对gin进行包装。
-//目的是我们可以动态向请求体中植入自定义的变量或方法,来扩展业务逻辑中的通用方法
-//不同于middleware作用于请求上下文, context作用于框架上下文
-//如果需要使用gin的原生方法,可以router.GinEngin获取,
-//但是建议你通过包装一层。尽量使用library下的context访问
-//原生方法:
-//router.GinEngin.GET("/gin",nil)
+type ResultHandleFunc func(ctx *Context) *result.Result
 type Context struct {
 	TraceId      string
 	ProjectPath  string
 	ApiDoc       astparser.ApiDoc //文档生成信息
-	GinCtx       *gin.Context     //gin的Context,定时任务或kafka消费中是没有的。
+	GinCtx       *gin.Context     //gin的Context,只有在gin接口调用时有值
+	RpcCtx       context.Context  //rpc 的Context,只有在rpc调用时有值
+	RpcArgs      *protocol.Args   //rpc 的参数,只有在rpc调用时有值
 	Log          logger.Log
 	JwtClaimData consts.JwtClaimData
 	error        error
+	IsRpcRequest bool //是否rpc请求
 }
 
 type HandleFunc func(ctx *Context)
-type ResultHandleFunc func(ctx *Context) *result.Result
 
-//与gin兼容
+// 这里我们用自己的context包对gin进行包装。
+// 目的是我们可以动态向请求体中植入自定义的变量或方法,来扩展业务逻辑中的通用方法
+// 不同于middleware作用于请求上下文, context作用于框架上下文
+// 如果需要使用gin的原生方法,可以router.GinEngin获取,
+// 但是建议你通过包装一层。尽量使用library下的context访问
+// 原生方法:
+// router.GinEngin.GET("/gin",nil)
+
+// 与gin兼容
 func Handle(fn HandleFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx := NewContext(c)
@@ -60,7 +66,7 @@ func ResultHandle(fn ResultHandleFunc) gin.HandlerFunc {
 	}
 }
 
-//每个请求一个Context
+// 每个请求一个Context
 func NewContext(ginCtx *gin.Context) *Context {
 	ctx := new(Context)
 	ctx.GinCtx = ginCtx
@@ -98,6 +104,29 @@ func NewContext(ginCtx *gin.Context) *Context {
 			ctx.JwtClaimData = jwtData
 		}
 	}
+	return ctx
+}
+
+// 每个请求一个Context
+func NewRPCContext(rpcCtx context.Context, args *protocol.Args) *Context {
+	ctx := new(Context)
+	conf := config.GetConfig()
+	if conf.IsDocEnable() {
+		ctx.ApiDoc.Enable = true
+	}
+
+	ctx.IsRpcRequest = true
+	ctx.RpcCtx = rpcCtx
+	ctx.RpcArgs = args
+
+	traceId := ""
+	ctx.ProjectPath = conf.ProjectPath
+	if len(traceId) <= 0 {
+		traceId = fmt.Sprintf("R%d", rand.Int63())
+	}
+
+	ctx.TraceId = traceId
+	ctx.Log.TraceId = ctx.TraceId
 	return ctx
 }
 

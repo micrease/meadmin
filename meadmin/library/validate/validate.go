@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
+	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"meadmin/library/astparser"
@@ -14,14 +15,20 @@ import (
 )
 
 func BindWithPanic(ctx *api.Context, obj interface{}) error {
-	return bind(ctx, obj, true)
+	if ctx.IsRpcRequest {
+		return bindRpc(ctx, obj, true)
+	}
+	return bindGin(ctx, obj, true)
 }
 
 func Bind(ctx *api.Context, obj interface{}) error {
-	return bind(ctx, obj, false)
+	if ctx.IsRpcRequest {
+		return bindRpc(ctx, obj, false)
+	}
+	return bindGin(ctx, obj, false)
 }
 
-func bind(ctx *api.Context, obj interface{}, withPanic bool) error {
+func bindGin(ctx *api.Context, obj interface{}, withPanic bool) error {
 	//绑定参数
 	err := ctx.GinCtx.ShouldBind(obj)
 	if err != nil {
@@ -48,6 +55,31 @@ func bind(ctx *api.Context, obj interface{}, withPanic bool) error {
 			//这里的panic将会被中间件捕获
 			panic(errors.WithMessage(err, "参数验证失败"))
 		}
+		return err
+	}
+
+	bindTraceId(ctx, obj)
+	if ctx.ApiDoc.Enable {
+		ctx.ApiDoc.ParamAst, err = astparser.ParseStruct(ctx.ProjectPath, obj)
+		paramJson, err := json.MarshalIndent(obj, "", "\t")
+		if err != nil {
+			ctx.Log.Error("参数错误", zap.Any("json error", obj))
+		}
+		ctx.ApiDoc.ParamExample = string(paramJson)
+	}
+	return nil
+}
+
+// 绑定RPC参数
+func bindRpc(ctx *api.Context, obj interface{}, withPanic bool) error {
+	//绑定参数
+	err := mapstructure.Decode(ctx.RpcArgs.Data, &obj)
+	if err != nil && withPanic {
+		//这里的panic将会被中间件捕获
+		panic(errors.WithMessage(err, "参数验证失败"))
+	}
+
+	if err != nil {
 		return err
 	}
 

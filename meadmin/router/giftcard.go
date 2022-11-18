@@ -2,11 +2,11 @@ package router
 
 import (
 	"meadmin/app/giftcard/handler"
-	"meadmin/library/context/api"
+	"meadmin/library/context/router"
 	"meadmin/system/middleware"
 )
 
-func GiftCardRouter(systemApiGroup *api.RouterGroup) {
+func GiftCardRouter(systemApiGroup *router.RouterGroup) {
 	giftcardGroup := systemApiGroup.Use(middleware.JWTAuth()).Group("/giftcard")
 	{
 		merchant := handler.Merchant{}

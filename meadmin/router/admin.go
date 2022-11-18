@@ -1,9 +1,9 @@
 package router
 
 import (
-	"meadmin/library/context/api"
+	"meadmin/library/context/router"
 )
 
-func AdminApiRouter(router *api.Router) {
+func AdminApiRouter(router *router.Router) {
 
 }

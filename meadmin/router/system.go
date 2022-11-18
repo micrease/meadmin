@@ -2,11 +2,11 @@ package router
 
 import (
 	"meadmin/app/system/handler"
-	"meadmin/library/context/api"
+	"meadmin/library/context/router"
 	"meadmin/system/middleware"
 )
 
-func SystemApiRouter(router *api.Router) *api.RouterGroup {
+func SystemApiRouter(router *router.Router) *router.RouterGroup {
 	//管理后台接口
 	systemApiGroup := router.Group("/api")
 	{
@@ -35,7 +35,7 @@ func SystemApiRouter(router *api.Router) *api.RouterGroup {
 				systemAuthGroup.PUT("/user/changeStatus", SystemUser.ChangeStatus)
 				systemAuthGroup.POST("/user/save", SystemUser.SaveUser)
 				systemAuthGroup.DELETE("/user/delete/:id", SystemUser.DeleteUser)
-				systemAuthGroup.PUT("/user/initUserPassword/:id",SystemUser.InitUserPassword)
+				systemAuthGroup.PUT("/user/initUserPassword/:id", SystemUser.InitUserPassword)
 				systemAuthGroup.POST("/user/setHomePage", SystemUser.SetHomePage)
 				systemAuthGroup.PUT("/user/update/:id", SystemUser.Update)
 

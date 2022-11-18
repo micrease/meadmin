@@ -3,7 +3,7 @@ package router
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"meadmin/library/context/api"
+	"meadmin/library/context/router"
 	"meadmin/system/config"
 	"meadmin/system/middleware"
 	"net/http"
@@ -24,7 +24,7 @@ func InitGinRouter() *gin.Engine {
 	//不同于middleware仅作用于请求上下文, context作用于框架上下文
 	//如果需要使用gin的原生方法,可以router.GinEngin获取,
 	//但是建议你通过包装一层。尽量使用library下的context访问
-	router := api.NewRouter(ginRouter)
+	router := router.NewRouter(ginRouter)
 	//原生方法:
 	//router.GinEngin.GET("/gin", func(context *gin.Context) {
 	//})
@@ -41,7 +41,7 @@ func InitGinRouter() *gin.Engine {
 	return router.GinEngin
 }
 
-func staticRouter(router *api.Router) {
+func staticRouter(router *router.Router) {
 	router.GinEngin.LoadHTMLGlob("templates/*.html")
 	staticGroup := router.GinEngin.Group("/")
 	staticGroup.GET("/index", func(ginCtx *gin.Context) {

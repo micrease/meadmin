@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"meadmin/app/schedule"
-	"meadmin/library/context/api"
+	meRouter "meadmin/library/context/router"
 	"meadmin/library/logger"
 	"meadmin/library/migrate"
 	redisClient "meadmin/library/redis"
+	"meadmin/library/rpc"
 	"meadmin/library/validate"
 	"meadmin/router"
 	"meadmin/system/config"
@@ -15,7 +16,7 @@ import (
 	"meadmin/system/middleware"
 )
 
-//1,初始化服务
+// 1,初始化服务
 func ServerInit(configPath string) {
 	fmt.Println("configPath:", configPath)
 	//1,解析配置文件
@@ -30,22 +31,26 @@ func ServerInit(configPath string) {
 	redisClient.Connect(conf.Redis.Addr)
 	//6,启动时自动执行migrate
 	migrate.Install()
+
+	rpc.CreateRpcServer()
 	//7,业务初始化
 	appInit()
 }
 
-//2,业务应用初始化
+// 2,业务应用初始化
 func appInit() {
 
 }
 
-//3,启动服务
+// 3,启动服务
 func ServerRun() {
 	conf := config.GetConfig()
 	fmt.Println("Server Run Start")
 	logger.Info("Server Run Start")
 	//1,Gin框架初始化
 	route := router.InitGinRouter()
+
+	go rpc.GetRpcServer().Start()
 	//2,启动定时任务
 	schedule.Start()
 	if route.Run(":"+conf.Port) != nil {
@@ -53,12 +58,13 @@ func ServerRun() {
 	}
 }
 
-//测试用例的入口
+// 测试用例的入口
 func SetupTestRouter() *gin.Engine {
 	//设为release,要不然输出的东西太多，影响视线
 	gin.SetMode(gin.ReleaseMode)
 	ginRouter := gin.Default()
-	ctxRouter := api.NewRouter(ginRouter)
+
+	ctxRouter := meRouter.NewRouter(ginRouter)
 	ctxRouter.Use(middleware.Recover())
 	ctxRouter.Use(middleware.Cors())
 	ctxRouter.Use(middleware.RequestLog())
