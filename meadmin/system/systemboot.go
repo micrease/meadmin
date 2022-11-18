@@ -32,7 +32,7 @@ func ServerInit(configPath string) {
 	//6,启动时自动执行migrate
 	migrate.Install()
 
-	rpc.CreateRpcServer()
+	rpc.CreateRpcServer(conf.ServiceName, conf.Rpcx)
 	//7,业务初始化
 	appInit()
 }

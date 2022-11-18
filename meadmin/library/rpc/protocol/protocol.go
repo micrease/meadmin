@@ -1,13 +1,5 @@
 package protocol
 
-type Config struct {
-	Network        string //tcp,http
-	Listen         string //ip:port
-	BasePath       string
-	ServiceName    string
-	DiscoveryAddrs []string
-}
-
 type Args struct {
 	Data        any               //任意类型
 	HandlerName string            //回调方法名

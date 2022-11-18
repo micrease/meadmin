@@ -9,6 +9,7 @@ import (
 	"github.com/smallnest/rpcx/server"
 	"log"
 	"meadmin/library/context/api"
+	"meadmin/library/rpc/config"
 	"meadmin/library/rpc/protocol"
 	"sync"
 	"time"
@@ -16,7 +17,7 @@ import (
 
 type RPCServer struct {
 	Server   *server.Server
-	Config   protocol.Config
+	Config   config.Config
 	Handlers map[string]api.ResultHandleFunc
 }
 
@@ -27,23 +28,38 @@ func GetRpcServer() *RPCServer {
 	if rpcServer != nil {
 		return rpcServer
 	}
-	return CreateRpcServer()
+	return nil
 }
 
-func CreateRpcServer() *RPCServer {
+func CreateRpcServer(serviceName string, conf config.Config) *RPCServer {
 	once.Do(func() {
 		s := server.NewServer()
 		rpcServer = &RPCServer{
 			Server: s,
-			Config: protocol.Config{
-				Network:        "tcp",
-				Listen:         "127.0.0.1:8007",
-				DiscoveryAddrs: []string{"60.164.247.74:8500"},
-				BasePath:       "/meadmin",
-				ServiceName:    "meadmin",
+			Config: config.Config{
+				Network: "tcp",
+				Listen:  "127.0.0.1:8007",
 			},
 			Handlers: map[string]api.ResultHandleFunc{},
 		}
+
+		if len(serviceName) > 0 {
+			rpcServer.Config.BasePath = "/" + serviceName
+			rpcServer.Config.ServiceName = serviceName
+		}
+
+		if len(conf.Network) > 0 {
+			rpcServer.Config.Network = conf.Network
+		}
+
+		if len(conf.Listen) > 0 {
+			rpcServer.Config.Listen = conf.Listen
+		}
+
+		if len(conf.DiscoveryAddrs) > 0 {
+			rpcServer.Config.DiscoveryAddrs = conf.DiscoveryAddrs
+		}
+
 		addRegistryPlugin(rpcServer)
 	})
 	return rpcServer

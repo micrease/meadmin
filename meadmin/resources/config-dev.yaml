@@ -1,3 +1,5 @@
+
+service_name: meadmin
 # 服务端口
 port: 8005
 # 运行环境
@@ -6,6 +8,11 @@ env: dev
 version: 1.0.0
 jwt_secret: ewerwerwerwerwer
 kafka_broker: 60.164.247.74:9092
+rpcx:
+  network: tcp
+  listen: 127.0.0.1:8009
+  discovery_addrs :
+    - 60.164.247.74:8500
 database:
   # 数据库-主库
   driver: mysql

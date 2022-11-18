@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"meadmin/library/files"
+	rpcx "meadmin/library/rpc/config"
 	"path"
 )
 
@@ -34,17 +35,19 @@ type Redis struct {
 	Password string `yaml:"password"`
 }
 
-//服务端配置
+// 服务端配置
 type ServiceConfig struct {
-	Port        string   `yaml:"port"`
-	Mode        string   `yaml:"mode"`
-	Env         string   `yaml:"env"`
-	Version     string   `yaml:"version"`
-	KafkaBroker string   `yaml:"kafka_broker"`
-	DocEnable   bool     `yaml:"doc_enable"`
-	Database    Database `yaml:"database"`
-	JwtSecret   string   `yaml:"jwt_secret"`
-	Redis       Redis    `yaml:"redis"`
+	ServiceName string      `yaml:"service_name"`
+	Port        string      `yaml:"port"`
+	Mode        string      `yaml:"mode"`
+	Env         string      `yaml:"env"`
+	Version     string      `yaml:"version"`
+	KafkaBroker string      `yaml:"kafka_broker"`
+	DocEnable   bool        `yaml:"doc_enable"`
+	Database    Database    `yaml:"database"`
+	JwtSecret   string      `yaml:"jwt_secret"`
+	Redis       Redis       `yaml:"redis"`
+	Rpcx        rpcx.Config `yaml:"rpcx"`
 	ProjectPath string
 }
 
