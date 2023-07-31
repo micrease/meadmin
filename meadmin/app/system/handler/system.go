@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"meadmin/app/system/dto"
 	"meadmin/app/system/service"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
 	"meadmin/library/validate"
@@ -15,7 +15,7 @@ type System struct {
 
 // 管理员登录
 func (this *System) Login(ctx *api.Context) *result.Result {
-	var req dto.SystemLoginReq
+	var req vo.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
 	resp, respErr := service.NewSystemUser(ctx).Login(req)
 	if respErr != nil {
@@ -34,7 +34,7 @@ func (this *System) Logout(ctx *api.Context) *result.Result {
 
 // 获取管理员信息
 func (this *System) GetInfo(ctx *api.Context) *result.Result {
-	var req dto.SystemLoginReq
+	var req vo.SystemLoginReq
 	validate.BindWithPanic(ctx, &req)
 
 	resp, respErr := service.NewSystemUser(ctx).GetInfo()

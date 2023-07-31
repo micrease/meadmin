@@ -3,9 +3,9 @@ package service
 import (
 	"fmt"
 	"github.com/spf13/cast"
-	"meadmin/app/system/dto"
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 	"meadmin/library/files"
 	"meadmin/system/config"
@@ -18,13 +18,13 @@ type SystemUploadfile struct {
 	repo *repo.SystemUploadfile
 }
 
-func NewSystemUploadFile() SystemUploadfile {
-	service := SystemUploadfile{}
+func NewSystemUploadFile() *SystemUploadfile {
+	service := &SystemUploadfile{}
 	service.repo = repo.NewSystemUploadfile()
 	return service
 }
 
-func (this SystemUploadfile) GetPageList(ctx *api.Context) (*dto.SystemPageListResp[model.SystemUploadfile], error) {
+func (this *SystemUploadfile) GetPageList(ctx *api.Context) (*vo.SystemPageListResp[model.SystemUploadfile], error) {
 	pageList, err := this.repo.Paginate(1, 10)
 	if err != nil {
 		return nil, err
@@ -33,9 +33,9 @@ func (this SystemUploadfile) GetPageList(ctx *api.Context) (*dto.SystemPageListR
 	return &resp, nil
 }
 
-func (this SystemUploadfile) Uploadfile(ctx *api.Context, file *multipart.FileHeader) (model.SystemUploadfile, error) {
+func (this *SystemUploadfile) Uploadfile(ctx *api.Context, file *multipart.FileHeader) (model.SystemUploadfile, error) {
 
-	model := this.repo.NewModel()
+	model := model.SystemUploadfile{}
 	model.MimeType = file.Header.Get("Content-Type")
 	model.OriginName = file.Filename
 

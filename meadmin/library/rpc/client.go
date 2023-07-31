@@ -3,6 +3,7 @@ package rpc
 import (
 	"context"
 	"flag"
+	"github.com/mitchellh/mapstructure"
 	dclient "github.com/rpcxio/rpcx-consul/client"
 	"github.com/smallnest/rpcx/client"
 	"meadmin/library/rpc/protocol"
@@ -30,14 +31,27 @@ func NewRemoteService(basePath, serviceName string) *RemoteService {
 	}
 }
 
-func (this *RemoteService) Call(funcName string, args any) error {
+func (this *RemoteService) Call(funcName string, args any) (*protocol.Reply, error) {
 	var remoteArgs protocol.Args
 	remoteArgs.Data = args
 	remoteArgs.HandlerName = funcName
 	reply := &protocol.Reply{}
 	err := this.Client.Call(context.Background(), funcName, remoteArgs, reply)
 	if err != nil {
-		return err
+		return reply, err
 	}
-	return nil
+	return reply, nil
+}
+
+func CallRemoteService[T any](service *RemoteService, funcName string, args any) (*protocol.RpcResult[T], error) {
+	reply, err := service.Call(funcName, args)
+	if err != nil {
+		return nil, err
+	}
+	var t protocol.RpcResult[T]
+	err = mapstructure.Decode(reply.Data, &t)
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
 }

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/spf13/cast"
-	"meadmin/app/system/dto"
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
 	"meadmin/library/validate"
@@ -22,16 +22,16 @@ type SystemUser struct {
 	repo *repo.SystemUser
 }
 
-func NewSystemUser(ctx *api.Context) SystemUser {
-	service := SystemUser{}
+func NewSystemUser(ctx *api.Context) *SystemUser {
+	service := &SystemUser{}
 	service.Init(ctx)
 	service.repo = repo.NewSystemUser()
 	return service
 }
 
-func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *result.Error) {
+func (this *SystemUser) Login(req vo.SystemLoginReq) (vo.SystemLoginResp, *result.Error) {
 	model, err := this.repo.Where("username=?", req.Username).First()
-	resp := dto.SystemLoginResp{}
+	resp := vo.SystemLoginResp{}
 	if err != nil {
 		return resp, this.Error(err)
 	}
@@ -66,8 +66,8 @@ func (this SystemUser) Login(req dto.SystemLoginReq) (dto.SystemLoginResp, *resu
 	return resp, nil
 }
 
-func (this SystemUser) GetInfo() (dto.SystemInfoResp, *result.Error) {
-	resp := dto.SystemInfoResp{}
+func (this *SystemUser) GetInfo() (vo.SystemInfoResp, *result.Error) {
+	resp := vo.SystemInfoResp{}
 
 	userId := this.ctx.JwtClaimData.UserId
 	IsSuperAdmin := this.ctx.JwtClaimData.IsSuperAdmin
@@ -77,7 +77,7 @@ func (this SystemUser) GetInfo() (dto.SystemInfoResp, *result.Error) {
 		return resp, this.Error(err)
 	}
 
-	resp.User = dto.User{}
+	resp.User = vo.User{}
 	err = copier.Copy(&resp.User, &user)
 	if err != nil {
 		return resp, this.Error(err)
@@ -117,51 +117,59 @@ func (this SystemUser) GetInfo() (dto.SystemInfoResp, *result.Error) {
 }
 
 // 登出
-func (this SystemUser) Logout() error {
-
+func (this *SystemUser) Logout() error {
 	return nil
 }
 
-func (this SystemUser) PageList(ctx *api.Context) (*dto.SystemPageListResp[model.SystemUser], *result.Error) {
-	var req dto.SystemUserListReq
+func (this *SystemUser) PageList(ctx *api.Context) (*vo.SystemPageListResp[model.SystemUser], *result.Error) {
+	var req vo.SystemUserListReq
 	validate.BindWithPanic(ctx, &req)
-	if req.UserName != "" {
-		this.repo.Where("username", req.UserName)
-	}
-	if req.NickName != "" {
-		this.repo.Where("nickname", req.NickName)
-	}
-	if req.Phone != "" {
-		this.repo.Where("phone", req.Phone)
-	}
-	if req.Email != "" {
-		this.repo.Where("email", req.Email)
-	}
-	if req.Status != "" {
-		this.repo.Where("status", req.Status)
+
+	query := this.repo.NewQuery()
+	if len(req.UserName) > 0 {
+		query.Where("username", req.UserName)
 	}
 
-	if req.MinDate != "" {
+	if len(req.NickName) > 0 {
+		query.Where("nickname", req.NickName)
+	}
+
+	if len(req.Phone) > 0 {
+		query.Where("phone", req.Phone)
+	}
+
+	if len(req.Email) > 0 {
+		query.Where("email", req.Email)
+	}
+
+	if len(req.Status) > 0 {
+		query.Where("status", req.Status)
+	}
+
+	if len(req.MinDate) > 0 {
 		location, err := time.Parse("2006-01-02", req.MinDate)
 		if err == nil {
-			this.repo.Where("created_at", ">", location)
+			query.Where("created_at", ">", location)
 		}
 	}
-	if req.MaxDate != "" {
+
+	if len(req.MaxDate) > 0 {
 		location, err := time.Parse("2006-01-02", req.MaxDate)
 		if err == nil {
-			this.repo.Where("created_at", "<", location)
+			query.Where("created_at", "<", location)
 		}
 	}
-	this.repo.IsNull("deleted_at")
-	if req.OrderBy != "" {
+
+	query.IsNull("deleted_at")
+	if len(req.OrderBy) > 0 {
 		OrderType := "DESC"
 		if req.OrderType == "ascending" {
 			OrderType = "ASC"
 		}
-		this.repo.Order(req.OrderBy + " " + OrderType)
+		query.Order(req.OrderBy + " " + OrderType)
 	}
-	pageList, err := this.repo.Paginate(req.PageNo, req.PageSize)
+
+	pageList, err := query.Paginate(req.PageNo, req.PageSize)
 	if err != nil {
 		return nil, this.Error(err)
 	}
@@ -169,8 +177,8 @@ func (this SystemUser) PageList(ctx *api.Context) (*dto.SystemPageListResp[model
 	return &page, nil
 }
 
-func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.SystemUserInfoResp, *result.Error) {
-	resp := dto.SystemUserInfoResp{}
+func (this *SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (vo.SystemUserInfoResp, *result.Error) {
+	resp := vo.SystemUserInfoResp{}
 	user, err := this.repo.GetById(cast.ToUint(userId))
 	if err != nil {
 		return resp, this.Error(err)
@@ -187,22 +195,23 @@ func (this SystemUser) ReadInfoById(ctx *api.Context, userId uint64) (dto.System
 }
 
 // ChangeStatus 设置用户状态
-func (u SystemUser) ChangeStatus(userId uint64, status string) *result.Error {
-	builder := u.repo.NewQueryBuilder().Where("id=?", userId)
+func (this *SystemUser) ChangeStatus(userId uint64, status string) *result.Error {
+	builder := this.repo.NewQueryBuilder().Where("id=?", userId)
 	err := builder.UpdateColumn("status", status).Error
 	if err != nil {
-		return u.Error(err)
+		return this.Error(err)
 	}
 	return nil
 }
 
-func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Error {
-	userModel := u.repo.NewModel()
+func (this *SystemUser) Save(ctx *api.Context, req vo.SystemUserSaveReq) *result.Error {
+
+	userModel := model.SystemUser{}
 	var err error
 	if req.ID > 0 {
-		userModel, err = u.repo.GetById(cast.ToUint(req.ID))
+		userModel, err := this.repo.GetById(cast.ToUint(req.ID))
 		if err != nil {
-			return u.Error(err)
+			return this.Error(err)
 		}
 		userModel.UpdatedBy = ctx.JwtClaimData.UserId
 	} else {
@@ -222,9 +231,9 @@ func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Er
 	userModel.Status = req.Status
 	userModel.Remark = req.Remark
 	userModel.LoginTime = time.Now()
-	err = u.repo.Save(&userModel).Error
+	err = this.repo.Save(&userModel).Error
 	if err != nil {
-		return u.Error(err)
+		return this.Error(err)
 	}
 
 	userId := userModel.GetID()
@@ -237,7 +246,7 @@ func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Er
 		roleModel.RoleId = id
 		err = roleRepo.NewQueryBuilder().Save(&roleModel).Error
 		if err != nil {
-			return u.Error(err)
+			return this.Error(err)
 		}
 	}
 
@@ -249,37 +258,36 @@ func (u SystemUser) Save(ctx *api.Context, req dto.SystemUserSaveReq) *result.Er
 		postModel.PostId = id
 		err = postRepo.NewQueryBuilder().Save(&postModel).Error
 		if err != nil {
-			return u.Error(err)
+			return this.Error(err)
 		}
 	}
 
 	return nil
 }
 
-func (u SystemUser) Delete(ids []string) *result.Error {
-	err := u.repo.NewQueryBuilder().Delete(&model.SystemUser{}, ids).Error
+func (this *SystemUser) Delete(ids []string) *result.Error {
+	err := this.repo.NewQueryBuilder().Delete(&model.SystemUser{}, ids).Error
 	if err != nil {
-		return u.Error(err)
+		return this.Error(err)
 	}
 	return nil
 }
 
-func (u SystemUser) ResetPassword(id uint64) *result.Error {
+func (this *SystemUser) ResetPassword(id uint64) *result.Error {
 	password := md5.Sum([]byte("123456"))
-	builder := u.repo.NewQueryBuilder().Where("id=?", id)
+	builder := this.repo.NewQueryBuilder().Where("id=?", id)
 	err := builder.UpdateColumn("password", fmt.Sprintf("%x", password)).Error
-
 	if err != nil {
-		return u.Error(err)
+		return this.Error(err)
 	}
 	return nil
 }
 
-func (u SystemUser) SetHomePage(req dto.SystemUserSetHomePageReq) *result.Error {
-	builder := u.repo.NewQueryBuilder().Where("id=?", req.ID)
+func (this *SystemUser) SetHomePage(req vo.SystemUserSetHomePageReq) *result.Error {
+	builder := this.repo.NewQueryBuilder().Where("id=?", req.ID)
 	err := builder.UpdateColumn("dashboard", req.Dashboard).Error
 	if err != nil {
-		return u.Error(err)
+		return this.Error(err)
 	}
 	return nil
 }

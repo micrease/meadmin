@@ -2,9 +2,9 @@ package service
 
 import (
 	"github.com/spf13/cast"
-	"meadmin/app/system/dto"
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
 )
@@ -20,8 +20,8 @@ func NewSystemRole() *SystemRole {
 	return service
 }
 
-func (this *SystemRole) Save(ctx *api.Context, req dto.SystemRoleSaveReq) error {
-	model := this.repo.NewModel()
+func (this *SystemRole) Save(ctx *api.Context, req vo.SystemRoleSaveReq) error {
+	model := model.SystemRole{}
 	var err error
 	if req.ID > 0 {
 		model, err = this.repo.GetById(cast.ToUint(req.ID))
@@ -43,7 +43,7 @@ func (this *SystemRole) Save(ctx *api.Context, req dto.SystemRoleSaveReq) error 
 	return this.repo.Save(&model).Error
 }
 
-func (this *SystemRole) GetPageList(ctx *api.Context) (*dto.SystemPageListResp[model.SystemRole], error) {
+func (this *SystemRole) GetPageList(ctx *api.Context) (*vo.SystemPageListResp[model.SystemRole], error) {
 	pageList, err := this.repo.Paginate(1, 10)
 	if err != nil {
 		return nil, err

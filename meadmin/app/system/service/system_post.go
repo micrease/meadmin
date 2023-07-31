@@ -2,9 +2,9 @@ package service
 
 import (
 	"github.com/spf13/cast"
-	"meadmin/app/system/dto"
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 )
 
@@ -18,7 +18,7 @@ func NewSystemPost() *SystemPost {
 	return service
 }
 
-func (this *SystemPost) PageList() (*dto.SystemPageListResp[model.SystemPost], error) {
+func (this *SystemPost) PageList() (*vo.SystemPageListResp[model.SystemPost], error) {
 	postPageList, err := this.repo.Where("status=?", model.StatusEnable).Paginate(1, 10)
 	if err != nil {
 		return nil, err
@@ -32,11 +32,11 @@ func (this *SystemPost) PostList() ([]model.SystemPost, error) {
 	return postList, err
 }
 
-func (this *SystemPost) Save(ctx *api.Context, req dto.SystemPostSaveReq) error {
+func (this *SystemPost) Save(ctx *api.Context, req vo.SystemPostSaveReq) error {
 	model := this.repo.NewModel()
 	var err error
 	if req.ID > 0 {
-		model, err = this.repo.GetById(cast.ToUint(req.ID))
+		*model, err = this.repo.GetById(cast.ToUint(req.ID))
 		if err != nil {
 			return err
 		}
@@ -51,5 +51,5 @@ func (this *SystemPost) Save(ctx *api.Context, req dto.SystemPostSaveReq) error 
 	model.Code = req.Code
 	model.Remark = req.Remark
 	model.Status = req.Status
-	return this.repo.Save(&model).Error
+	return this.repo.Save(model).Error
 }

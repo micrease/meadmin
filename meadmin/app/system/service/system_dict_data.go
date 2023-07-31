@@ -1,9 +1,9 @@
 package service
 
 import (
-	"meadmin/app/system/dto"
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 )
 
@@ -18,7 +18,7 @@ func NewSystemDictData() *SystemDictData {
 }
 
 // 查询列表
-func (this *SystemDictData) List(ctx *api.Context, req dto.SystemDictDataListReq) ([]model.SystemDictData, error) {
+func (this *SystemDictData) List(ctx *api.Context, req vo.SystemDictDataListReq) ([]model.SystemDictData, error) {
 	list, err := this.repo.Where("code", req.Code).List()
 	return list, err
 }

@@ -3,9 +3,9 @@ package service
 import (
 	"github.com/jinzhu/copier"
 	"github.com/spf13/cast"
-	"meadmin/app/system/dto"
 	"meadmin/app/system/model"
 	"meadmin/app/system/repo"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 )
 
@@ -19,7 +19,7 @@ func NewSystemMenu() *SystemMenu {
 	return service
 }
 
-func (this *SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
+func (this *SystemMenu) GetMenuList(ctx *api.Context) ([]vo.MenuTree, error) {
 	var menuList []model.SystemMenu
 	var err error
 	if ctx.JwtClaimData.IsSuperAdmin {
@@ -40,9 +40,9 @@ func (this *SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
 		}
 	}
 
-	var menuTreeList []dto.MenuTree
+	var menuTreeList []vo.MenuTree
 	for _, menu := range menuList {
-		var menuTree dto.MenuTree
+		var menuTree vo.MenuTree
 		err = copier.Copy(&menuTree, &menu)
 		if err != nil {
 			return nil, err
@@ -52,8 +52,8 @@ func (this *SystemMenu) GetMenuList(ctx *api.Context) ([]dto.MenuTree, error) {
 	return this.ToMenuTree(menuTreeList, 0), nil
 }
 
-func (this *SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.MenuTree {
-	var tree []dto.MenuTree
+func (this *SystemMenu) ToMenuTree(data []vo.MenuTree, parentId uint64) []vo.MenuTree {
+	var tree []vo.MenuTree
 	if len(data) == 0 {
 		return tree
 	}
@@ -63,7 +63,7 @@ func (this *SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.M
 			if len(child) > 0 {
 				value.Children = child
 			} else {
-				value.Children = []dto.MenuTree{}
+				value.Children = []vo.MenuTree{}
 			}
 			tree = append(tree, value)
 		}
@@ -71,7 +71,7 @@ func (this *SystemMenu) ToMenuTree(data []dto.MenuTree, parentId uint64) []dto.M
 	return tree
 }
 
-func (this *SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
+func (this *SystemMenu) GetSuperAdminRouters() ([]vo.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
 		Where("status", model.StatusEnable).
 		List()
@@ -81,7 +81,7 @@ func (this *SystemMenu) GetSuperAdminRouters() ([]dto.RouterTree, error) {
 	return this.SysMenuToRouterTree(list), nil
 }
 
-func (this *SystemMenu) GetRoutersByIds(menuIds []any) ([]dto.RouterTree, error) {
+func (this *SystemMenu) GetRoutersByIds(menuIds []any) ([]vo.RouterTree, error) {
 	list, err := this.repo.Order("sort desc").
 		Where("status", model.StatusEnable).
 		WhereIn("id", menuIds).
@@ -101,12 +101,12 @@ func (this *SystemMenu) GetMenuCode(menuIds []any) []any {
 	return ids
 }
 
-func (this *SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []dto.RouterTree {
-	var routerTree []dto.RouterTree
+func (this *SystemMenu) SysMenuToRouterTree(menuList []model.SystemMenu) []vo.RouterTree {
+	var routerTree []vo.RouterTree
 	if len(menuList) == 0 {
 		return routerTree
 	}
-	routers := []dto.RouterTree{}
+	routers := []vo.RouterTree{}
 	for _, menu := range menuList {
 		router := this.SetRouter(menu)
 		routers = append(routers, router)
@@ -124,8 +124,8 @@ func (this *SystemMenu) GetMenuIdsByRoleIds(roleIds []any) []any {
 	return ids
 }
 
-func (this *SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.RouterTree {
-	var tree []dto.RouterTree
+func (this *SystemMenu) ToTree(data []vo.RouterTree, parentId uint) []vo.RouterTree {
+	var tree []vo.RouterTree
 	if len(data) == 0 {
 		return tree
 	}
@@ -136,7 +136,7 @@ func (this *SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.Route
 			if len(child) > 0 {
 				value.Children = child
 			} else {
-				value.Children = []dto.RouterTree{}
+				value.Children = []vo.RouterTree{}
 			}
 			tree = append(tree, value)
 		}
@@ -144,19 +144,19 @@ func (this *SystemMenu) ToTree(data []dto.RouterTree, parentId uint) []dto.Route
 	return tree
 }
 
-func (this *SystemMenu) SetRouter(menu model.SystemMenu) dto.RouterTree {
+func (this *SystemMenu) SetRouter(menu model.SystemMenu) vo.RouterTree {
 	route := "/" + menu.Route
 	if menu.Type == "L" {
 		route = menu.Route
 	}
-	router := dto.RouterTree{
+	router := vo.RouterTree{
 		ID:        cast.ToUint(menu.ID),
 		ParentId:  cast.ToUint(menu.ParentId),
 		Name:      menu.Code,
 		Component: menu.Component,
 		Path:      route,
 		Redirect:  menu.Redirect,
-		Meta: dto.RouterMeta{
+		Meta: vo.RouterMeta{
 			Type:             menu.Type,
 			Icon:             menu.Icon,
 			Title:            menu.Name,

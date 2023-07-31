@@ -110,10 +110,7 @@ export default {
     //全局代码错误捕捉
     app.config.errorHandler = errorHandler
 
-    tool.capsule('MineAdmin', `v${config.APP_VER}`)
-    console.log('MineAdmin 官网  https://www.mineadmin.com')
-    console.log('MineAdmin 文档  https://doc.mineadmin.com')
-    console.log('MineAdmin Gitee https://gitee.com/xmo/MineAdmin')
+    tool.capsule('MeAdmin', `v${config.APP_VER}`)
     console.log('请不要吝啬您的 star，谢谢 ~')
   }
 }

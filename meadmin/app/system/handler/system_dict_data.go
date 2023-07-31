@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"meadmin/app/system/dto"
 	"meadmin/app/system/service"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
 	"meadmin/library/validate"
@@ -14,7 +14,7 @@ type SystemDictData struct {
 
 func (this *SystemDictData) List(ctx *api.Context) *result.Result {
 
-	var req dto.SystemDictDataListReq
+	var req vo.SystemDictDataListReq
 	validate.BindWithPanic(ctx, &req)
 
 	service := service.NewSystemDictData()

@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"meadmin/app/system/dto"
 	"meadmin/app/system/service"
+	"meadmin/app/system/vo"
 	"meadmin/library/context/api"
 	"meadmin/library/context/result"
 	"meadmin/library/validate"
@@ -14,7 +14,7 @@ type SystemRole struct {
 }
 
 func (this SystemRole) Save(ctx *api.Context) *result.Result {
-	var req dto.SystemRoleSaveReq
+	var req vo.SystemRoleSaveReq
 	validate.BindWithPanic(ctx, &req)
 	service := service.NewSystemRole()
 	err := service.Save(ctx, req)
@@ -25,7 +25,7 @@ func (this SystemRole) Save(ctx *api.Context) *result.Result {
 }
 
 func (this SystemRole) Update(ctx *api.Context) *result.Result {
-	var req dto.SystemRoleSaveReq
+	var req vo.SystemRoleSaveReq
 	validate.BindWithPanic(ctx, &req)
 	service := service.NewSystemRole()
 	err := service.Save(ctx, req)
@@ -52,7 +52,7 @@ func (this SystemRole) List(ctx *api.Context) *result.Result {
 }
 
 func (r SystemRole) ChangeStatus(ctx *api.Context) *result.Result {
-	var req dto.SystemUserChangeStatusReq
+	var req vo.SystemUserChangeStatusReq
 	validate.BindWithPanic(ctx, &req)
 	err := service.NewSystemRole().ChangeStatus(req.ID, req.Status)
 	if err != nil {

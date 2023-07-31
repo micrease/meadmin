@@ -35,7 +35,39 @@
       <el-select v-model="layout" placeholder="请选择">
         <el-option label="默认" value="default"></el-option>
         <el-option label="通栏" value="header"></el-option>
-        <el-option label="经典" value="menu"></el-option>
+        <el-option label="经典" value="menu"></el-option>node.js:381Browserslist: caniuse-lite is outdated. Please run: npx browserslist@latest --update-db Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+				logger.js:36 INFO  Starting development server...
+				output.js:82
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				output.js:102 DONE  Compiled successfully in 119994ms                                                                        22:51:10
+				serve.js:262  App running at:
+				serve.js:263  - Local:   http://localhost:8005
+				serve.js:265  - Network: http://192.168.1.7:8005
+				serve.js:287  Note that the development build is not optimized.
+				serve.js:288  To create a production build, run yarn build.
         <el-option label="功能坞" value="dock"></el-option>
       </el-select>
     </el-form-item>

@@ -17,6 +17,6 @@ func (this *Repository[T]) initialize() *Repository[T] {
 }
 
 // 默认不使用缓存
-func (this *Repository[T]) GetById(id uint) (T, error) {
+func (this *Repository[T]) GetById(id any) (T, error) {
 	return this.Where("id=?", id).First()
 }
